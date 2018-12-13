@@ -6,14 +6,21 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:26:55 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/07 18:33:20 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/13 16:28:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include "read_42.h"
-#include "lem_in.h"
 
+#include "string_42.h"
+#include "read_42.h"
+#include "write_42.h"
+#include "conv_42.h"
+
+#include "parser.h"
+#include "anthill.h"
+
+#include <stdio.h>
 bool    parser_ant(t_anthill *anthill, char **line, int *ants)
 {
 	if (get_next_line(0, line) != 1)
@@ -23,7 +30,7 @@ bool    parser_ant(t_anthill *anthill, char **line, int *ants)
 	}
 	while (*line[0] == '#')
 	{
-		add_line(anthill, line);
+		anthill_add(anthill, line);
 		if (get_next_line(0, line) != 1)
 		{
 			ft_putstr("No number of ants.\n");
@@ -35,6 +42,6 @@ bool    parser_ant(t_anthill *anthill, char **line, int *ants)
 		ft_putstr("Wrong number of ants: value must be an int.\n");
 		ft_strdel(line);
 	}
-	add_line(anthill, line);   
+	anthill_add(anthill, line);
 	return (true);
 }

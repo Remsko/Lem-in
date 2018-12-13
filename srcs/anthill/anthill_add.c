@@ -1,44 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   anthill_add.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/13 16:47:08 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/12/07 17:23:52 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/12/13 16:44:05 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include <stdlib.h>
 
-#include "memory_42.h"
 #include "array_42.h"
-#include "write_42.h"
 #include "error_42.h"
 
-#include "parser.h"
-#include "anthill.h"
+#include "types.h"
 
-int		main(void)
+void    anthill_add(t_anthill *anthill, char **line)
 {
-	t_env env;
-
-	ft_bzero(&env, sizeof(t_env));
-	if ((env.anthill = (t_anthill *)array_create(sizeof(char *))) == NULL)
-		error_malloc();
-	if (parser_all(&env) == true)
-	{
-		anthill_print(env.anthill);
-		//algo
-		//printer
-		//free
-	}
-	else
-	{
-		ft_putstr("ERROR\n");
-		//free
-		return (1);
-	}
-	return (0);
+    array_append((t_array *)anthill, (void *)line);
+    if (anthill->lines == NULL)
+        error_malloc();
 }

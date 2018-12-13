@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_line.c                                         :+:      :+:    :+:   */
+/*   anthill.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/07 17:23:52 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/07 17:37:12 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/12/13 14:39:50 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/12/13 16:26:10 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-#include "list_42.h"
+#ifndef ANTHILL_H
+#define ANTHILL_H
 
-void    add_line(t_anthill *anthill, char **line)
-{
-    t_anthill *new;
+#include "types.h"
 
-    if ((new = (t_anthill *)malloc(sizeof(t_anthill))) == NULL)
-        error_malloc();
-    new->line = *line;
-    list_add(&new->list, &anthill->list));
-}
+void anthill_add(t_anthill *anthill, char **line);
+
+void anthill_print(t_anthill *anthill);
+
+#endif
