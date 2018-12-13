@@ -1,0 +1,3 @@
+[submodule "Libc"]
+	path = Libc
+	url = https://github.com/Remsko/Libc.git
