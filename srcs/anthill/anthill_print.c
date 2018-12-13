@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:54:28 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/13 16:41:22 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/13 17:06:32 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void anthill_print(t_anthill *anthill)
     i = 0;
     while (i < anthill->length)
     {
-        ft_putendl(anthill->lines[i]);
+        if (anthill->lines[i] != NULL)
+            ft_putendl(anthill->lines[i]);
         ++i;
     }
 }

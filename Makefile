@@ -6,6 +6,7 @@ INC_PATH += ./incs
 INC_NAME += types.h
 INC_NAME += parser.h
 INC_NAME += anthill.h
+INC_NAME += garbage.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
@@ -23,13 +24,16 @@ SRC_SUB += anthill
 SRC_NAME += anthill_add.c
 SRC_NAME += anthill_print.c
 
+SRC_SUB += garbage
+SRC_NAME += garbage_all.c
+
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:%.c=%.o)
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME)) 
 
-LIB_PATH = libc
+LIB_PATH = Libc
 LIB = $(LIB_PATH)/libft.a
 CFLAGS += -I$(LIB_PATH)/incs
 LDFLAGS += -L $(LIB_PATH) -lft

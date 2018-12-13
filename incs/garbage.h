@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_add.c                                      :+:      :+:    :+:   */
+/*   garbage.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/07 17:23:52 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/13 17:40:07 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/12/13 17:12:48 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/12/13 17:23:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef GARBAGE_H
+# define GARBAGE_H
 
-#include "string_42.h"
-#include "array_42.h"
-#include "error_42.h"
+void    garbage_all(t_env *e);
 
-#include "types.h"
-
-void    anthill_add(t_anthill *anthill, char **line)
-{
-    array_append((t_array *)anthill, (void *)line);
-    if (anthill->lines == NULL)
-        error_malloc();
-}
+#endif

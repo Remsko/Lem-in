@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:26:55 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/13 16:28:50 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/13 17:47:10 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@
 #include "parser.h"
 #include "anthill.h"
 
-#include <stdio.h>
 bool    parser_ant(t_anthill *anthill, char **line, int *ants)
 {
 	if (get_next_line(0, line) != 1)
 	{
-		ft_putstr("Problem with anthill: file doesn't exist or path is wrong.\n");
+		ft_putstr("Problem with anthill: file is empty.\n");
 		return (false);
 	}
 	while (*line[0] == '#')
@@ -39,8 +38,9 @@ bool    parser_ant(t_anthill *anthill, char **line, int *ants)
 	}
 	if (ft_isatoi(*line, ants) == false)
 	{
-		ft_putstr("Wrong number of ants: value must be an int.\n");
+		ft_putstr("Wrong number of ants: value must be at least an int.\n");
 		ft_strdel(line);
+		return (false);
 	}
 	anthill_add(anthill, line);
 	return (true);

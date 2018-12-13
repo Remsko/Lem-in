@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/13 16:47:08 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/13 17:47:14 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 #include "parser.h"
 #include "anthill.h"
+#include "garbage.h"
 
 int		main(void)
 {
@@ -38,7 +39,7 @@ int		main(void)
 	{
 		ft_putstr("ERROR\n");
 		//free
-		return (1);
 	}
+	garbage_all(&env);
 	return (0);
 }
