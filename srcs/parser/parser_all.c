@@ -2,7 +2,7 @@
 #include "string_42.h"
 #include "lem_in.h"
 
-bool    parser_all()
+bool    parser_all(t_env *e)
 {
     char *line;
 
