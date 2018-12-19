@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/19 11:32:50 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/19 16:47:35 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@
 
 int		main(void)
 {
-	t_env env;
+	t_env	env;
+	t_error	*err;
 
 	ft_bzero(&env, sizeof(t_env));
 	if ((env.anthill = (t_anthill *)array_create(sizeof(char *))) == NULL)
-		error_malloc("main line 30.");
-	if (parser_all(&env) == true)
+		error_malloc("in main for env.anthill .");
+	err = parser_all(&env);
+	if (err != NULL)
 	{
 		anthill_print(env.anthill);
 		//algo
@@ -38,6 +40,7 @@ int		main(void)
 	else
 	{
 		ft_putstr("ERROR\n");
+		error_throw(err, NULL, false);
 		//free
 	}
 	garbage_all(&env);
