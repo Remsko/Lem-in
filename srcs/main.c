@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/19 16:47:35 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/20 18:04:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,35 @@
 #include "anthill.h"
 #include "garbage.h"
 
+t_env	*env_new(void)
+{
+	t_env *env;
+
+	malloc_or_die((void **)&env, sizeof(t_env), "main");
+	ft_bzero((void *)env, sizeof(t_env));
+	env->anthill = (t_anthill *)array_create(sizeof(char *));
+	if (env->anthill == NULL)
+		error_malloc("main");
+	return (env);
+}
+
 int		main(void)
 {
-	t_env	env;
+	t_env	*env;
 	t_error	*err;
 
-	ft_bzero(&env, sizeof(t_env));
-	if ((env.anthill = (t_anthill *)array_create(sizeof(char *))) == NULL)
-		error_malloc("in main for env.anthill .");
-	err = parser_all(&env);
-	if (err != NULL)
+	env = env_new();
+	err = parser_all(env);
+	if (err == NULL)
 	{
-		anthill_print(env.anthill);
-		//algo
-		//printer
-		//free
+		anthill_print(env->anthill);
 	}
 	else
 	{
 		ft_putstr("ERROR\n");
 		error_throw(err, NULL, false);
-		//free
+		return (1);
 	}
-	garbage_all(&env);
+	garbage_all(env);
 	return (0);
 }
