@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:24:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/19 15:59:21 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/21 20:22:02 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,20 @@ t_error *parser_all(t_env *e)
         ft_putstr("Parsing finish while reading ants...\n");
         return (err);
     }
-    /*if (parser_room(, &line) == false)
+    err = parser_room(e->map, e->anthill, &line);
+    if (err != NULL)
     {
         ft_putstr("Parsing finish while reading rooms...\n");
         return (false);
     }
+    /*
     if (parser_pipe(, &line) == false)
     {
         ft_putstr("Parsing finish while reading pipes...\n");
         return (false);
     }
     */
+    array_fit((t_array *)e->map);
     array_fit((t_array *)e->anthill);
     return (NULL);
 }

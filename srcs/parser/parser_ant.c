@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:26:55 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/20 14:37:05 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/21 20:21:20 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 #include "string_42.h"
 #include "read_42.h"
-#include "write_42.h"
 #include "conv_42.h"
 #include "error_42.h"
 
-#include "parser.h"
+#include "types.h"
 #include "anthill.h"
 
 t_error	*parser_ant(t_anthill *anthill, char **line, int *ants)

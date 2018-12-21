@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/13 16:33:34 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/21 20:21:35 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define TYPES_H
 
 #include <stddef.h>
-#include "list_42.h"
 
 typedef enum t_room_type
 {
@@ -33,18 +32,26 @@ typedef struct s_room
 
 typedef struct s_anthill
 {
+    char **lines;
     size_t length;
     size_t capacity;
     size_t size;
-    char **lines;
 } t_anthill;
+
+typedef struct s_map
+{
+    t_room **rooms;
+    size_t length;
+    size_t capacity;
+    size_t size;
+} t_map;
 
 typedef struct s_env
 {
-    //	int			**graph;
     //	t_room		*start;
     //	t_room		*end;
-    t_anthill *anthill;
+    t_map     *map;
+    t_anthill   *anthill;
     int ants;
 } t_env;
 

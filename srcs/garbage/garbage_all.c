@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:12:27 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/20 17:54:25 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/21 12:19:29 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 
 #include "types.h"
 
-void    garbage_all(t_env *e)
+void    garbage_all(t_env *env)
 {
-    array_dispose((t_array *)e->anthill, free_2d_char);
+    if (env != NULL)
+    {
+        if (env->anthill != NULL)
+            array_dispose((t_array *)env->anthill, free_2d_char);
+        free(env);
+    }
 }

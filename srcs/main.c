@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/20 18:04:48 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/21 20:23:57 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,33 @@ t_env	*env_new(void)
 	env->anthill = (t_anthill *)array_create(sizeof(char *));
 	if (env->anthill == NULL)
 		error_malloc("main");
+	env->map = (t_map *)array_create(sizeof(t_room *));
+	if (env->map == NULL)
+		error_malloc("main");
 	return (env);
 }
 
-int		main(void)
+int		main(int ac, char **av)
 {
 	t_env	*env;
 	t_error	*err;
 
-	env = env_new();
-	err = parser_all(env);
-	if (err == NULL)
+	(void)av;
+	if (ac == 1)
 	{
+		env = env_new();
+		err = parser_all(env);
+		if (err != NULL)
+		{
+			garbage_all(env);
+			ft_putstr_fd("ERROR\n", 2);
+			error_throw(err, NULL, false);
+			return (1);
+		}
 		anthill_print(env->anthill);
+		garbage_all(env);
 	}
 	else
-	{
-		ft_putstr("ERROR\n");
-		error_throw(err, NULL, false);
-		return (1);
-	}
-	garbage_all(env);
+		ft_putstr("usage: ./lem-in < map\n");
 	return (0);
 }
