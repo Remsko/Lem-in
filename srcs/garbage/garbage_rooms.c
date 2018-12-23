@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage_all.c                                      :+:      :+:    :+:   */
+/*   garbage_rooms.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 17:12:27 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/23 21:28:40 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/12/22 18:00:20 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/12/23 21:43:57 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "array_42.h"
-#include "free_42.h"
-
 #include "types.h"
-#include "garbage.h"
 
-void    garbage_all(t_env *env)
+void    garbage_rooms(void *ptr, size_t size)
 {
-    if (env != NULL)
+    t_room **rooms;
+    size_t  i;
+
+    i = 0;
+    rooms = (t_room **)ptr;
+    if (rooms != NULL)
     {
-        if (env->anthill != NULL)
-            array_dispose((t_array *)env->anthill, &free_2d_char);
-        if (env->map != NULL)
-            array_dispose((t_array *)env->map, &garbage_rooms);
-        free(env);
+        while (i < size)
+        {
+            if (rooms[i] != NULL)
+            {
+                if (rooms[i]->name != NULL)
+                    free(rooms[i]->name);
+                free(rooms[i]);
+            }
+            ++i;
+        }
+        free(rooms);
     }
 }

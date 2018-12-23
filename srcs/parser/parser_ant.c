@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:26:55 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/21 20:21:20 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/22 17:51:45 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 t_error	*parser_ant(t_anthill *anthill, char **line, int *ants)
 {
 	if (get_next_line(0, line) != 1)
-		return (error_create("Problem with anthill: file is empty.", NULL, 0));
+		return (error_create("File is empty.", NULL, 0));
 	while (*line[0] == '#')
 	{
 		anthill_add(anthill, line);

@@ -7,10 +7,12 @@ INC_NAME += types.h
 INC_NAME += parser.h
 INC_NAME += anthill.h
 INC_NAME += garbage.h
+INC_NAME += room.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
 CFLAGS = -Wall -Werror -Wextra
+CFLAGS += -g3
 CPPFLAGS = $(addprefix -I,$(INC_PATH))
 
 SRC_PATH = srcs
@@ -19,6 +21,7 @@ SRC_NAME += main.c
 SRC_SUB += parser
 SRC_NAME += parser_all.c
 SRC_NAME += parser_ant.c
+SRC_NAME += parser_room.c
 
 SRC_SUB += anthill
 SRC_NAME += anthill_add.c
@@ -26,6 +29,14 @@ SRC_NAME += anthill_print.c
 
 SRC_SUB += garbage
 SRC_NAME += garbage_all.c
+SRC_NAME += garbage_rooms.c
+
+SRC_SUB += room
+SRC_NAME += room_add.c
+SRC_NAME += room_create.c
+SRC_NAME += room_index.c
+SRC_NAME += room_check.c
+SRC_NAME += room_print.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 

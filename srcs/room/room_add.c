@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   room_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:20:42 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/22 17:22:46 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/12/23 12:29:54 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/12/23 21:44:31 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-#define PARSER_H
-
+#include "array_42.h"
 #include "error_42.h"
+
 #include "types.h"
 
-t_error *parser_all(t_env *e);
+#include <stdio.h>
+void    room_add(t_map *map, t_room **room)
+{
+    static int index = 0;
 
-t_error *parser_ant(t_anthill *anthill, char **line, int *ants);
-
-t_error *parser_room(t_map *map, t_anthill *anthill, char **line);
-
-#endif
+    (*room)->self_index = index++;
+    array_append((t_array *)map, (void *)room);
+    if (map->rooms == NULL)
+        error_malloc("room_add");
+}

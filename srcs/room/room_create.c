@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   room_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:20:42 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/22 17:22:46 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/12/23 12:30:58 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/12/23 13:58:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-#define PARSER_H
+#include <stdlib.h>
 
-#include "error_42.h"
+#include "string_42.h"
+
 #include "types.h"
 
-t_error *parser_all(t_env *e);
+t_room  *room_create(char *name, t_room_type type)
+{
+    t_room *new;
 
-t_error *parser_ant(t_anthill *anthill, char **line, int *ants);
-
-t_error *parser_room(t_map *map, t_anthill *anthill, char **line);
-
-#endif
+    if ((new = (t_room *)malloc(sizeof(t_room))) != NULL)
+    {
+        new->name = ft_strdup(name);
+        new->type = type;
+    }
+    return (new);
+}

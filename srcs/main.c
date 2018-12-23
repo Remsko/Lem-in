@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/21 20:23:57 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/23 21:49:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,33 @@ t_env	*env_new(void)
 	return (env);
 }
 
+static void	print_usage(char *bin)
+{
+	ft_putstr("usage: ");
+	ft_putstr(bin);
+	ft_putstr(" < map\n");
+}
+
 int		main(int ac, char **av)
 {
 	t_env	*env;
 	t_error	*err;
 
-	(void)av;
 	if (ac == 1)
 	{
 		env = env_new();
 		err = parser_all(env);
 		if (err != NULL)
 		{
-			garbage_all(env);
 			ft_putstr_fd("ERROR\n", 2);
 			error_throw(err, NULL, false);
+			garbage_all(env);
 			return (1);
 		}
 		anthill_print(env->anthill);
 		garbage_all(env);
 	}
 	else
-		ft_putstr("usage: ./lem-in < map\n");
+		print_usage(av[0]);
 	return (0);
 }

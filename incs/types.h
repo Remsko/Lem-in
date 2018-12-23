@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/21 20:21:35 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/22 17:26:38 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 #include <stddef.h>
 
-typedef enum t_room_type
+typedef enum e_room_type
 {
-    basic = 0,
-    start = 1,
-    end = 2,
+    BASIC = 0,
+    START = 1,
+    END = 2,
 } t_room_type;
 
 typedef struct s_room

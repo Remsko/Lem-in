@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:24:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/21 20:22:02 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/22 17:48:54 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_error *parser_all(t_env *e)
     if (err != NULL)
     {
         ft_putstr("Parsing finish while reading rooms...\n");
-        return (false);
+        return (err);
     }
     /*
     if (parser_pipe(, &line) == false)

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   room_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:20:42 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/22 17:22:46 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/12/23 21:33:08 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/12/23 21:41:28 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-#define PARSER_H
+#include "write_42.h"
 
-#include "error_42.h"
 #include "types.h"
 
-t_error *parser_all(t_env *e);
+void    room_print(t_map *map)
+{
+    t_room **rooms;
+    size_t  index;
 
-t_error *parser_ant(t_anthill *anthill, char **line, int *ants);
-
-t_error *parser_room(t_map *map, t_anthill *anthill, char **line);
-
-#endif
+    rooms = map->rooms;
+    index = 0;
+    while (index < map->length)
+    {
+        if (rooms[index] != NULL && rooms[index]->name != NULL)
+            ft_putendl(rooms[index]->name);
+        ++index;
+    }
+}
