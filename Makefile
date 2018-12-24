@@ -38,6 +38,7 @@ SRC_NAME += room_create.c
 SRC_NAME += room_index.c
 SRC_NAME += room_check.c
 SRC_NAME += room_print.c
+SRC_NAME += room_byname.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 

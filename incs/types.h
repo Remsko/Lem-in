@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/22 17:26:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/24 17:40:40 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,17 @@ typedef enum e_room_type
     END = 2,
 } t_room_type;
 
+typedef struct s_index
+{
+    size_t  *tab;
+    size_t  length;
+}               t_index;
+
 typedef struct s_room
 {
+    t_index pipes;
     char *name;
-    int *pipe_index;
-    int self_index;
+    size_t self_index;
     t_room_type type;
 } t_room;
 
