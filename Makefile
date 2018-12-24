@@ -22,6 +22,7 @@ SRC_SUB += parser
 SRC_NAME += parser_all.c
 SRC_NAME += parser_ant.c
 SRC_NAME += parser_room.c
+SRC_NAME += parser_pipe.c
 
 SRC_SUB += anthill
 SRC_NAME += anthill_add.c

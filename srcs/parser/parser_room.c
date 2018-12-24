@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:17:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/23 21:56:47 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/24 12:24:49 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,15 @@ t_error *parser_room(t_map *map, t_anthill *anthill, char **line)
         if (get_next_line(0, line) != 1)
         {
             ft_strdel(line);
-            err = error_create("No pipes, no paths.", NULL, 3);
-            return (err);
+            return (error_create("No pipes, no paths.", NULL, 3));
         }
         anthill_add(anthill, line);
         if (*line[0] == '#')
             type_change(line, &type);
-        else
-        {
-            err = room_parse(map, line, type);
-            if (err != NULL)
-                return (err);
+        else if ((err = room_parse(map, line, type)) == NULL)
             type = BASIC;
-        }
+        else
+            break ;
     }
     return (NULL);
 }
