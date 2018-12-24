@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/24 14:26:07 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/24 14:45:14 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ t_error     *pipe_parse(t_map *map, char **line)
     split = ft_strsplit(*line, '-');
     length = ft_splitlen(split);
     err = pipe_check(split, length);
-    if (err != NULL)
-        return (NULL);
+    //if (err == NULL)
+    //    add_pipe;
     free_2d_char(split, length);
-    return (NULL);
+    return (err);
 }
 
 t_error     *parser_pipe(t_map *map, t_anthill *anthill, char **line)
@@ -59,5 +59,6 @@ t_error     *parser_pipe(t_map *map, t_anthill *anthill, char **line)
         if (err != NULL)
             return (err);
     }
+    ft_strdel(line);
     return (NULL);
 }

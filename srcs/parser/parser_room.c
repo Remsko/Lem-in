@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:17:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/24 12:24:49 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/24 14:43:09 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ t_error *parser_room(t_map *map, t_anthill *anthill, char **line)
         else if ((err = room_parse(map, line, type)) == NULL)
             type = BASIC;
         else
-            break ;
+        {
+            error_throw(err, NULL, false);
+            break ; // leaks and error handling more intel plz
+        }
     }
     return (NULL);
 }
