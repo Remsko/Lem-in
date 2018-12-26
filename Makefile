@@ -33,6 +33,7 @@ SRC_NAME += garbage_all.c
 SRC_NAME += garbage_rooms.c
 
 SRC_SUB += room
+SRC_NAME += room_parse.c
 SRC_NAME += room_add.c
 SRC_NAME += room_create.c
 SRC_NAME += room_index.c

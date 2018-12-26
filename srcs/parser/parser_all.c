@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:24:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/24 12:23:13 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/26 13:52:08 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 t_error *parser_all(t_env *e)
 {
     t_error *err;
-    char *line;
+    char    *line;
 
     err = parser_ant(e->anthill, &line, &e->ants);
     if (err != NULL)
@@ -39,7 +39,5 @@ t_error *parser_all(t_env *e)
         ft_putstr("Parsing finish while reading pipes...\n");
         return (err);
     }
-    //array_fit((t_array *)e->map);
-    //array_fit((t_array *)e->anthill);
     return (NULL);
 }

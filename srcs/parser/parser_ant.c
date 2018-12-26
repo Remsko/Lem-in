@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:26:55 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/22 17:51:45 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/26 11:47:40 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,23 @@
 
 t_error	*parser_ant(t_anthill *anthill, char **line, int *ants)
 {
-	if (get_next_line(0, line) != 1)
-		return (error_create("File is empty.", NULL, 0));
-	while (*line[0] == '#')
+	t_error	*err;
+	int		ret;
+
+	err = NULL;
+    while ((ret = get_next_line(0, line)) == 1)
 	{
 		anthill_add(anthill, line);
-		if (get_next_line(0, line) != 1)
-			return (error_create("No number of ants.", NULL, 1));
+		if (*line[0] != '#')
+			break ;
 	}
-	if (ft_isatoi(*line, ants) == false)
+	if (ret != 1)
 	{
-		ft_strdel(line);
-		return (error_create("Wrong number of ants: value must be at least an int.", NULL, 2));
+		if (ret == 0)
+			ft_strdel(line);
+		err = error_create("File doesn't exist or is empty.", NULL, 1);
 	}
-	anthill_add(anthill, line);
-	return (NULL);
+	else if (ft_isatoi(*line, ants) == false)
+		err = error_create("Wrong number of ants.", NULL, 2);
+	return (err);
 }

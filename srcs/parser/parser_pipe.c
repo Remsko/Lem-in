@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/24 18:08:53 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/26 13:52:34 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,62 +48,57 @@ void index_add(t_index *pipes, size_t index)
         sizeof(size_t) * (pipes->length + 1),
         sizeof(size_t) * pipes->length);
     if (pipes->tab == NULL)
-        return ft_putstr("Warning: index_add fails\n");
+        return (ft_putstr("Warning: index_add fails.\n"));
     pipes->tab[pipes->length] = index;
     pipes->length += 1;
 }
 
-void        pipe_add(t_room *room1, t_room *room2)
+void    pipe_add(t_room *room1, t_room *room2)
 {
     if (room1 == NULL || room2 == NULL)
-        return ;
+        return (ft_putstr("Warning: pipe_add fails.\n"));
     index_add(&room1->pipes, room2->self_index);
     index_add(&room2->pipes, room1->self_index);
 }
 
-t_error     *pipe_check(char **split, size_t length)
+bool    pipe_check(char **split, size_t length)
 {
     if (length != 2)
-        return (error_create("Wrong pipe format.", NULL, 6));
+        return (false);
     else if (ft_strequ(split[0], split[1]))
-        return (error_create("Pipe connect the same room.", NULL, 7));
-    return (NULL);
+        return (false);
+    return (true);
 }
 
-t_error     *pipe_parse(t_map *map, char **line)
+bool    pipe_parse(t_map *map, char **line)
 {
-    t_error     *err;
     char        **split;
     size_t      length;
+    bool        pass;
 
     split = ft_strsplit(*line, '-');
     length = ft_splitlen(split);
-    err = pipe_check(split, length);
-    if (err == NULL)
-    {
+    if ((pass = pipe_check(split, length)))
         pipe_add(room_byname(map, split[0]), room_byname(map, split[1]));
-    }
     free_2d_char(split, length);
-    return (err);
+    return (pass);
 }
 
-t_error     *parser_pipe(t_map *map, t_anthill *anthill, char **line)
+t_error *parser_pipe(t_map *map, t_anthill *anthill, char **line)
 {
-    t_error *err;
+    int ret;
 
-    err = pipe_parse(map, line);
-    if (err != NULL)
-        return (err);
-    while (get_next_line(0, line) == 1)
+    if (pipe_parse(map, line) == false)
+        return (error_create("No pipes: no solution.", NULL, 3));
+    while ((ret = get_next_line(0, line)) == 1)
     {
         anthill_add(anthill, line);
         if (*line[0] == '#')
             continue ;
-        err = pipe_parse(map , line);
-        if (err != NULL)
-            return (err);
+        else if (pipe_parse(map , line) == false)
+            break ;
     }
-    ft_strdel(line);
-    pipe_print(map);
+    if (ret == 0)
+        ft_strdel(line);
     return (NULL);
 }
