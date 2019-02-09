@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/29 19:14:30 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 18:06:13 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include "room.h"
 
 #include "write_42.h"
+
+/*
 #include <stdio.h>
 void pipe_print(t_map *map)
 {
@@ -60,6 +62,12 @@ void    pipe_add(t_room *room1, t_room *room2)
     index_add(&room1->pipes, room2->self_index);
     index_add(&room2->pipes, room1->self_index);
 }
+*/
+
+//
+// graph->flow[room1_index][room2_index] = 1
+// graph->flow[room2_index][room1_index] = 1
+//
 
 bool    pipe_check(char **split, size_t length)
 {

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 11:09:12 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 17:57:14 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "parser.h"
 #include "anthill.h"
 #include "garbage.h"
+#include "room.h"
 
 t_env	*env_new(void)
 {
@@ -59,8 +60,8 @@ int		main(int ac, char **av)
 			garbage_all(env);
 			return (1);
 		}
-		//room_print(env->map);
-		anthill_print(env->anthill);
+		room_print(env->map);
+		//anthill_print(env->anthill);
 		garbage_all(env);
 	}
 	else
