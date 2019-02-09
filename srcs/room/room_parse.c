@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 13:35:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/26 13:38:17 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/12/26 14:34:06 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ bool    room_parse(t_map *map, char *line, t_room_type type)
     t_room  *room;
     char    **split;
     size_t  length;
-    bool    noproblem;
+    bool    pass;
 
     split = ft_strsplit(line, ' ');
     length = ft_splitlen(split);
-    if ((noproblem = room_check(split, length)))
+    if ((pass = room_check(split, length)))
     {
         if (room_index(map, split[0]) != (size_t)-1)
             ft_putstr("Warning: room already exist.\n");
@@ -38,5 +38,5 @@ bool    room_parse(t_map *map, char *line, t_room_type type)
             ft_putstr("Warning: room_create fails.\n");
     }
     free_2d_char(split, length);
-    return (noproblem);
+    return (pass);
 }

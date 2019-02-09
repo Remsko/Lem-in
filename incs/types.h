@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/24 17:40:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 11:15:17 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ typedef struct s_map
     size_t capacity;
     size_t size;
 } t_map;
+
+typedef struct s_graph
+{
+
+} t_graph;
 
 typedef struct s_env
 {
