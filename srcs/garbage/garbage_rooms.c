@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 18:00:20 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/24 18:08:16 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 18:14:32 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void    garbage_rooms(void *ptr, size_t size)
             {
                 if (rooms[i]->name != NULL)
                     free(rooms[i]->name);
-                if (rooms[i]->pipes.tab != NULL)
-                    free(rooms[i]->pipes.tab);
+                //if (rooms[i]->pipes.tab != NULL)
+                    //free(rooms[i]->pipes.tab);
                 free(rooms[i]);
             }
             ++i;

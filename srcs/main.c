@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 17:57:14 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 18:29:02 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		main(int ac, char **av)
 			return (1);
 		}
 		room_print(env->map);
+		algorithm_launch(env);
 		//anthill_print(env->anthill);
 		garbage_all(env);
 	}

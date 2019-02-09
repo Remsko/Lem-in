@@ -11,7 +11,7 @@ INC_NAME += room.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -Wconversion
 CPPFLAGS = $(addprefix -I,$(INC_PATH))
 
 SRC_PATH = srcs

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_create.c                                      :+:      :+:    :+:   */
+/*   algorithm_launch.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 12:30:58 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 18:13:26 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/09 18:23:17 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/09 18:27:40 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-#include "string_42.h"
-
 #include "types.h"
 
-t_room  *room_create(char *name, t_room_type type)
+int get_start(t_map *map)
 {
-    t_room *new;
+    return (room_bytype(map, START));
+}
 
-    if ((new = (t_room *)malloc(sizeof(t_room))) != NULL)
-    {
-        //new->pipes.tab = NULL;
-        //new->pipes.length = 0;
-        new->name = ft_strdup(name);
-        new->type = type;
-    }
-    return (new);
+int get_end(t_map *map)
+{
+    return (room_bytype(map, END));
+}
+
+void    alogirthm_launch(t_env *env)
+{
+    int max_flow;
+
+    env->start = get_start(env->map);
+    env->end = get_end(env->map);
+    max_flow = edmonds_karp(env->graph, env->start, env->end);
 }

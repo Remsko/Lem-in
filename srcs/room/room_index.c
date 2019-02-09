@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 12:27:25 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/23 14:56:10 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 18:12:56 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ size_t  room_index(t_map *map, char *search)
     t_room **rooms;
     size_t index;
 
-    index = 0;
     if (map != NULL)
     {
         rooms = map->rooms;
         if (rooms != NULL)
         {
+            index = 0;
             while (index < map->length)
             {
                 if (rooms[index] != NULL && rooms[index]->name != NULL

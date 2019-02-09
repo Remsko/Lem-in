@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 18:06:13 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 18:14:14 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ void    pipe_add(t_room *room1, t_room *room2)
 */
 
 //
+// size_t room1_index;
+// size_t room2_index;
+//
+// room1_index = room1->self_index;
+// room2_index = room2->self_index;
 // graph->flow[room1_index][room2_index] = 1
 // graph->flow[room2_index][room1_index] = 1
 //
@@ -87,7 +92,8 @@ bool    pipe_parse(t_map *map, char **line)
     split = ft_strsplit(*line, '-');
     length = ft_splitlen(split);
     if ((pass = pipe_check(split, length)))
-        pipe_add(room_byname(map, split[0]), room_byname(map, split[1]));
+        map++;
+        //pipe_add(room_byname(map, split[0]), room_byname(map, split[1]));
     free_2d_char(split, length);
     return (pass);
 }
