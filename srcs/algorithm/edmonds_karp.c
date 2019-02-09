@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 14:52:53 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 15:41:53 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ bool bfs(t_graph *graph, t_room *s, t_room *t, void *parent)
     int value;
     int index;
 
-    visited = (bool *)malloc(sizeof(bool * graph->row));
-    ft_bzero((void *)visited, sizeof(bool) * row);
+    visited = (bool *)malloc(sizeof(bool) * graph->row);
+    ft_bzero((void *)visited, sizeof(bool) * graph->row);
     queue = new_queue();
     en_queue(queue, s); // s as index plz
     visited[s] = true;
