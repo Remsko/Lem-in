@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 11:33:23 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 13:24:28 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,35 @@ int min(int a, int b)
         return (b);
 }
 
-bool bfs(t_room *start, t_room *end, void *parent);
+bool bfs(t_graph *graph, t_room *s, t_room *t, void *parent)
+{
+    t_queue *queue;
+    bool *visited;
+    int value;
+    int index;
+
+    visited = (bool *)malloc(sizeof(bool * graph->row));
+    ft_bzero((void *)visited, sizeof(bool) * row);
+    queue = new_queue();
+    queue_append(queue, s);
+    visited[s] = true;
+    while (queue != NULL)
+    {
+        u = pop_left(queue);
+        index = 0;
+        while (index < graph->row)
+        {
+            value = graph[u][index];
+            if (value > 0 && visited[index] == false)
+            {
+                queue_append(queue, index);
+                visited[index] = true;
+                parent[index] = u;
+            }
+        }
+    }
+    return (visited[t]);
+}
 
 int edmonds_karp(t_graph *graph, t_room *source, t_room *sink)
 {
