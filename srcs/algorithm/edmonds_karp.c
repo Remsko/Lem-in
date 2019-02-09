@@ -6,13 +6,14 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 17:11:10 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 17:49:38 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include <limit.h>
+#include <limits.h>
 #include "types.h"
+#include "queue_42.h"
 
 int min(int a, int b)
 {
@@ -30,25 +31,30 @@ bool bfs(t_graph *graph, int *parent, int s, int t)
     int value;
     int index;
 
-    visited = (bool *)memalloc(sizeof(bool) * graph->row);
-    queue = create_queue();
+    if ((visited = (bool *)memalloc(sizeof(bool) * graph->row)) == NULL)
+        return (false);
+    if ((queue = create_queue()) == NULL)
+        return (false);
     en_queue(queue, s);
     visited[s] = true;
-    while (queue != NULL)
+    while ((u = de_queue(queue)) != NULL)
     {
-        u = de_queue(queue);
         index = 0;
         while (index < graph->row)
         {
-            value = graph[u->key][index];
+            value = graph->flow[u->key][index];
             if (value > 0 && visited[index] == false)
             {
                 en_queue(queue, index);
                 visited[index] = true;
                 parent[index] = u->key;
             }
+            ++index;
         }
+        free(u);
     }
+    free(visited);
+    free(queue);
     return (visited[t]);
 }
 
@@ -61,26 +67,28 @@ int edmonds_karp(t_graph *graph, int source, int sink)
     int path_flow;
     int max_flow;
 
-    parent = (int *)malloc(sizeof(int) * graph->row);
+    if ((parent = (int *)malloc(sizeof(int) * graph->row)) == NULL)
+        return (0);
     max_flow = 0;
-    while (bfs(graph, start, end, parent))
+    while (bfs(graph, parent, source, sink))
     {
         path_flow = 0x7fffffff;
         s = sink;
         while (s != source)
         {
-            path_flow = min(path_flow, graph[parent[s]][s]);
-            s = parent[s]);
+            path_flow = min(path_flow, graph->flow[parent[s]][s]);
+            s = parent[s];
         }
         v = sink;
         while (v != source)
         {
             u = parent[v];
-            graph[u][v] -= path_flow;
-            graph[v][u] += path_flow;
+            graph->flow[u][v] -= path_flow;
+            graph->flow[v][u] += path_flow;
             v = parent[v];
         }
         max_flow += path_flow;
     }
+    free(parent);
     return (max_flow);
 }
