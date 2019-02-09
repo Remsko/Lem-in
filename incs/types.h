@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 11:41:06 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 14:48:42 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_room
     char *name;
     size_t self_index;
     t_room_type type;
-    bool visited;
 } t_room;
 
 typedef struct s_anthill

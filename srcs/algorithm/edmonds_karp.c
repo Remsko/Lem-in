@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 13:24:28 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 14:52:53 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int min(int a, int b)
 bool bfs(t_graph *graph, t_room *s, t_room *t, void *parent)
 {
     t_queue *queue;
+    t_qnode *u;
     bool *visited;
     int value;
     int index;
@@ -32,18 +33,18 @@ bool bfs(t_graph *graph, t_room *s, t_room *t, void *parent)
     visited = (bool *)malloc(sizeof(bool * graph->row));
     ft_bzero((void *)visited, sizeof(bool) * row);
     queue = new_queue();
-    queue_append(queue, s);
+    en_queue(queue, s); // s as index plz
     visited[s] = true;
     while (queue != NULL)
     {
-        u = pop_left(queue);
+        u = de_queue(queue);
         index = 0;
         while (index < graph->row)
         {
-            value = graph[u][index];
+            value = graph[u->key][index];
             if (value > 0 && visited[index] == false)
             {
-                queue_append(queue, index);
+                en_queue(queue, index);
                 visited[index] = true;
                 parent[index] = u;
             }
