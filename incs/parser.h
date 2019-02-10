@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:20:42 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/26 10:59:36 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/09 23:52:02 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ t_error *parser_ant(t_anthill *anthill, char **line, int *ants);
 
 t_error *parser_room(t_map *map, t_anthill *anthill, char **line);
 
-t_error *parser_pipe(t_map *map, t_anthill *anthill, char **line);
+t_error *parser_pipe(t_graph *graph, t_map *map, t_anthill *anthill, char **line);
 
 #endif

@@ -8,6 +8,7 @@ INC_NAME += parser.h
 INC_NAME += anthill.h
 INC_NAME += garbage.h
 INC_NAME += room.h
+INC_NAME += graph.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
@@ -30,6 +31,10 @@ SRC_NAME += anthill_print.c
 SRC_SUB += garbage
 SRC_NAME += garbage_all.c
 SRC_NAME += garbage_rooms.c
+
+SRC_SUB += graph
+SRC_NAME += free_graph.c
+SRC_NAME += new_graph.c
 
 SRC_SUB += room
 SRC_NAME += room_parse.c

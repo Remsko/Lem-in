@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_graph.c                                       :+:      :+:    :+:   */
+/*   graph.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/09 15:52:51 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 23:55:58 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/09 23:54:06 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/09 23:54:58 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include "types.h"
 
-void free_graph(t_graph *graph)
-{
-    size_t index;
+t_graph *new_graph(size_t size);
 
-    if (graph == NULL)
-        return ;
-    if (graph->flow != NULL)
-    {
-        index = 0;
-        while (index < graph->row)
-        {
-            if (graph->flow[index] != NULL)
-                free(graph->flow[index]);
-            ++index;
-        }
-        free(graph->flow);
-    }
-    free(graph);
-}
+void free_graph(t_graph *graph);
+
+#endif
