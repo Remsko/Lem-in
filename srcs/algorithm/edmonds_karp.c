@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 13:00:37 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 18:03:19 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ bool bfs(t_graph *graph, int *parent, int s, int t)
         return (false);
     en_queue(queue, s);
     visited[s] = true;
+    parent[s] = -1;
     while ((u = de_queue(queue)) != NULL)
     {
         index = 0;
         while (index < graph->row)
         {
             value = graph->flow[u->key][index];
-            if (value > 0 && visited[index] == false)
+            if (value > 0 && visited[index] == false && index != u->key)
             {
                 en_queue(queue, index);
                 visited[index] = true;
@@ -71,10 +72,11 @@ int edmonds_karp(t_graph *graph, int source, int sink)
 
     if ((parent = (int *)malloc(sizeof(int) * (size_t)graph->row)) == NULL)
         return (0);
+    ft_memset(parent, -1, sizeof(int) * (size_t)graph->row);
     max_flow = 0;
     while (bfs(graph, parent, source, sink))
     {
-        path_flow = 0x7fffffff;
+        path_flow = INT_MAX;
         s = sink;
         while (s != source)
         {

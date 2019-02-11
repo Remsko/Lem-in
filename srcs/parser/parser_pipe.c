@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 13:23:41 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 13:57:42 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ bool    pipe_parse(t_graph *graph, t_map *map, char **line)
     split = ft_strsplit(*line, '-');
     length = ft_splitlen(split);
     if ((pass = pipe_check(split, length)))
+    {
         pipe_add(graph, room_index(map, split[0]), room_index(map, split[1]));
+        printf("%s pipe with %s\n", map->rooms[room_index(map, split[0])]->name, map->rooms[room_index(map, split[1])]->name);
+    }
     free_2d_char(split, length);
     return (pass);
 }
