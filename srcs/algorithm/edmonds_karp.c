@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 18:03:19 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 21:46:03 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,43 @@ int min(int a, int b)
         return (b);
 }
 
+bool ret(bool *visited, int t)
+{
+    bool r;
+
+    r = visited[t];
+    free(visited);
+    return (r);
+}
+
 bool bfs(t_graph *graph, int *parent, int s, int t)
 {
-    t_queue *queue;
-    t_qnode *u;
+    t_queue queue;
     bool *visited;
-    int value;
-    int index;
+    int u;
+    int v;
 
     if ((visited = (bool *)ft_memalloc(sizeof(bool) * (size_t)graph->row)) == NULL)
         return (false);
-    if ((queue = create_queue()) == NULL)
-        return (false);
-    en_queue(queue, s);
+    ft_bzero((void *)&queue, sizeof(t_queue));
+    en_queue(&queue, s);
     visited[s] = true;
-    parent[s] = -1;
-    while ((u = de_queue(queue)) != NULL)
+    while (is_queue(&queue))
     {
-        index = 0;
-        while (index < graph->row)
+        u = de_queue(&queue);
+        v = 0;
+        while (v < graph->row)
         {
-            value = graph->flow[u->key][index];
-            if (value > 0 && visited[index] == false && index != u->key)
+            if (visited[v] == false && graph->flow[u][v] > 0)
             {
-                en_queue(queue, index);
-                visited[index] = true;
-                parent[index] = u->key;
+                en_queue(&queue, v);
+                visited[v] = true;
+                parent[v] = u;
             }
-            ++index;
+            ++v;
         }
-        free(u);
     }
-    free(visited);
-    free(queue);
-    return (visited[t]);
+    return (ret(visited, t));
 }
 
 int edmonds_karp(t_graph *graph, int source, int sink)
@@ -66,22 +69,22 @@ int edmonds_karp(t_graph *graph, int source, int sink)
     int *parent;
     int v;
     int u;
-    int s;
     int path_flow;
     int max_flow;
 
     if ((parent = (int *)malloc(sizeof(int) * (size_t)graph->row)) == NULL)
         return (0);
-    ft_memset(parent, -1, sizeof(int) * (size_t)graph->row);
+    //ft_memset(parent, -1, sizeof(int) * (size_t)graph->row);
     max_flow = 0;
     while (bfs(graph, parent, source, sink))
     {
         path_flow = INT_MAX;
-        s = sink;
-        while (s != source)
+        v = sink;
+        while (v != source)
         {
-            path_flow = min(path_flow, graph->flow[parent[s]][s]);
-            s = parent[s];
+            u = parent[v];
+            path_flow = min(path_flow, graph->flow[u][v]);
+            v = parent[v];
         }
         v = sink;
         while (v != source)
