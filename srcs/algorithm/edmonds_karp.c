@@ -6,14 +6,16 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 17:49:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 13:00:37 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <limits.h>
+#include <stdlib.h>
 #include "types.h"
 #include "queue_42.h"
+#include "memory_42.h"
 
 int min(int a, int b)
 {
@@ -31,7 +33,7 @@ bool bfs(t_graph *graph, int *parent, int s, int t)
     int value;
     int index;
 
-    if ((visited = (bool *)memalloc(sizeof(bool) * graph->row)) == NULL)
+    if ((visited = (bool *)ft_memalloc(sizeof(bool) * (size_t)graph->row)) == NULL)
         return (false);
     if ((queue = create_queue()) == NULL)
         return (false);
@@ -67,7 +69,7 @@ int edmonds_karp(t_graph *graph, int source, int sink)
     int path_flow;
     int max_flow;
 
-    if ((parent = (int *)malloc(sizeof(int) * graph->row)) == NULL)
+    if ((parent = (int *)malloc(sizeof(int) * (size_t)graph->row)) == NULL)
         return (0);
     max_flow = 0;
     while (bfs(graph, parent, source, sink))

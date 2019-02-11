@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_print.c                                       :+:      :+:    :+:   */
+/*   print_graph.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 21:33:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 13:14:06 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/11 13:09:37 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/11 13:16:46 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "write_42.h"
-
 #include "types.h"
 
-void    room_print(t_map *map)
+void    print_graph(t_graph *graph)
 {
-    t_room **rooms;
-    size_t  index;
+    int x;
+    int y;
 
-    if (map == NULL)
-        return ;
-    rooms = map->rooms;
-    if (rooms == NULL)
-        return ;
-    index = 0;
-    while (index < map->length)
+    y = 0;
+    if (graph == NULL)
+        return (ft_putstr("GRAPH IS EMPTY\n"));
+    if (graph->flow == NULL)
+        return (ft_putstr("FLOW IS EMPTY\n"));
+    while (y < graph->row)
     {
-        if (rooms[index] != NULL && rooms[index]->name != NULL)
+        x = 0;
+        while (x < graph->row)
         {
-            ft_putnbr((int)rooms[index]->self_index);
-            ft_putstr(" : ");
-            ft_putendl(rooms[index]->name);
+            ft_putnbr(graph->flow[y][x]);
+            ++x;
         }
-        ++index;
+        ft_putchar('\n');
+        ++y;
     }
 }

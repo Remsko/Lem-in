@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 12:28:45 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/26 13:37:29 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 12:50:42 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ t_room  *room_create(char *name, t_room_type type);
 void    room_print(t_map *map);
 
 t_room *room_byname(t_map *map, char *name);
+
+size_t room_bytype(t_map *map, t_room_type type);
 
 #endif

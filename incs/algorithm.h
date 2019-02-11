@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_graph.c                                       :+:      :+:    :+:   */
+/*   algorithm.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/09 15:52:51 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 13:27:13 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/11 12:56:22 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef ALGORITHM_H
+#define ALGORITHM_H
+
 #include "types.h"
 
-void free_graph(t_graph *graph)
-{
-    int index;
+void    algorithm_launch(t_env *env);
 
-    if (graph == NULL)
-        return ;
-    if (graph->flow != NULL)
-    {
-        index = 0;
-        while (index < graph->row)
-        {
-            if (graph->flow[index] != NULL)
-                free(graph->flow[index]);
-            ++index;
-        }
-        free(graph->flow);
-    }
-    free(graph);
-}
+int edmonds_karp(t_graph *graph, int source, int sink);
+
+#endif

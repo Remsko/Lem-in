@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 23:52:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 13:21:40 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include "anthill.h"
 #include "garbage.h"
 #include "room.h"
+#include "algorithm.h"
+#include "graph.h"
 
 t_env	*env_new(void)
 {
@@ -61,8 +63,9 @@ int		main(int ac, char **av)
 			return (1);
 		}
 		room_print(env->map);
-		//algorithm_launch(env);
-		//anthill_print(env->anthill);
+		anthill_print(env->anthill);
+		print_graph(env->graph);
+		algorithm_launch(env);
 		garbage_all(env);
 	}
 	else

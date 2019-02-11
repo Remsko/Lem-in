@@ -35,6 +35,7 @@ SRC_NAME += garbage_rooms.c
 SRC_SUB += graph
 SRC_NAME += free_graph.c
 SRC_NAME += new_graph.c
+SRC_NAME += print_graph.c
 
 SRC_SUB += room
 SRC_NAME += room_parse.c
@@ -44,6 +45,11 @@ SRC_NAME += room_index.c
 SRC_NAME += room_check.c
 SRC_NAME += room_print.c
 SRC_NAME += room_byname.c
+SRC_NAME += room_bytype.c
+
+SRC_SUB += algorithm
+SRC_NAME += algorithm_launch.c
+SRC_NAME += edmonds_karp.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 

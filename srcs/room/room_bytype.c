@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_graph.c                                        :+:      :+:    :+:   */
+/*   room_bytype.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/09 15:37:38 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 13:18:15 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/11 12:43:49 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/11 12:51:52 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "graph.h"
 #include "types.h"
-#include "memory_42.h"
 
-t_graph *new_graph(size_t size)
+size_t  room_bytype(t_map *map, t_room_type type)
 {
-    t_graph *graph;
+    t_room **rooms;
     size_t index;
 
-    if ((graph = (t_graph *)malloc(sizeof(t_graph))) == NULL)
-        return (NULL);
-    graph->row = (int)size;
-    graph->flow = (int **)ft_memalloc(sizeof(int *) * size);
-    index = 0;
-    while (index < size)
+    if (map != NULL)
     {
-        graph->flow[index] = (int *)ft_memalloc(sizeof(int) * size);
-        ++index;
+        rooms = map->rooms;
+        if (rooms != NULL)
+        {
+            index = map->length - 1;
+            while (index != (size_t)-1)
+            {
+                if (rooms[index] != NULL && rooms[index]->type == type)
+                    return (index);
+                --index;
+            }
+        }
     }
-    return (graph);
+    return ((size_t)-1);
 }

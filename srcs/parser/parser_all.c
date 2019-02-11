@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:24:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 23:55:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 13:26:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 t_error *parser_all(t_env *e)
 {
-    t_graph *graph;
     t_error *err;
     char    *line;
 
@@ -28,14 +27,14 @@ t_error *parser_all(t_env *e)
         ft_putstr("Parsing finish while reading ants...\n");
         return (err);
     }
-    if ((parser_room(e->map, e->anthill, &line)) != NULL)
+    if ((err = parser_room(e->map, e->anthill, &line)) != NULL)
     {
         ft_putstr("Parsing finish while reading rooms...\n");
         return (err);
     }
-    if ((graph = new_graph(e->map->length)) == NULL)
+    if ((e->graph = new_graph(e->map->length)) == NULL)
         return (error_create("Graph malloc failed.", NULL, 9));
-    if ((err = parser_pipe(graph, e->map, e->anthill, &line)) != NULL)
+    if ((err = parser_pipe(e->graph, e->map, e->anthill, &line)) != NULL)
     {
         ft_putstr("Parsing finish while reading pipes...\n");
         return (err);

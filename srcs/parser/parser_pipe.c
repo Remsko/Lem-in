@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 23:50:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 13:23:41 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include "anthill.h"
 #include "room.h"
 
+
+#include <stdio.h>
 void pipe_add(t_graph *graph, size_t room1_index, size_t room2_index)
 {
     if (room1_index == (size_t)-1 || room2_index == (size_t)-1)

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/09 18:21:54 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/11 12:58:36 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_map
 typedef struct s_graph
 {
     int **flow;
-    size_t row;
+    int row;
 } t_graph;
 
 typedef struct s_env
