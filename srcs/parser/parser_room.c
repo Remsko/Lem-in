@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:17:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/26 13:38:53 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/13 17:07:41 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void    type_change(char *line, t_room_type *type)
     }
 }
 
-t_error *parser_room(t_map *map, t_anthill *anthill, char **line)
+t_error *parser_room(t_rb_tree **root, t_map *map, t_anthill *anthill, char **line)
 {
     t_error *err;
     int     ret;
@@ -44,7 +44,7 @@ t_error *parser_room(t_map *map, t_anthill *anthill, char **line)
         anthill_add(anthill, line);
         if (*line[0] == '#')
             type_change(*line, &type);
-        else if (room_parse(map, *line, type))
+        else if (room_parse(root, map, *line, type))
             type = BASIC;
         else
             break ;

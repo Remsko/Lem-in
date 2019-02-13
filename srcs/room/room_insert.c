@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_add.c                                         :+:      :+:    :+:   */
+/*   room_insert.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 12:29:54 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 16:18:53 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/13 16:19:01 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/13 17:22:46 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_42.h"
-#include "error_42.h"
-
+#include "string_42.h"
+#include "rb_tree_42.h"
 #include "types.h"
 
-void    room_add(t_map *map, t_room *room)
+int     cmp_room1(void *data1, void *data2)
 {
-    static int index = 0;
+    t_room *room1;
+    t_room *room2;
+    
+    room1 = (t_room *)data1;
+    room2 = (t_room *)data2;
+    return (ft_strcmp(room1->name, room2->name));
+}
 
-    room->self_index = index++;
-    array_append((t_array *)map, (void *)&room);
-    if (map->rooms == NULL)
-        error_malloc("room_add");
+bool    room_insert(t_rb_tree **root, t_room *room)
+{
+    return (rb_tree_insert(root, (void *)room, &cmp_room1));
 }

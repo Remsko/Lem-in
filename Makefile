@@ -48,6 +48,8 @@ SRC_NAME += room_check.c
 SRC_NAME += room_print.c
 SRC_NAME += room_byname.c
 SRC_NAME += room_bytype.c
+SRC_NAME += room_insert.c
+SRC_NAME += room_search.c
 
 SRC_SUB += algorithm
 SRC_NAME += algorithm_launch.c

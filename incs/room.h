@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 12:28:45 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 12:50:42 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/13 17:19:36 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "types.h"
 
-bool    room_parse(t_map *map, char *line, t_room_type type);
+bool    room_parse(t_rb_tree **root, t_map *map, char *line, t_room_type type);
 
 bool    room_check(char **split, size_t length);
 
@@ -32,5 +32,9 @@ void    room_print(t_map *map);
 t_room *room_byname(t_map *map, char *name);
 
 size_t room_bytype(t_map *map, t_room_type type);
+
+bool    room_insert(t_rb_tree **root, t_room *room);
+
+t_room *room_search(t_rb_tree *root, char *name);
 
 #endif

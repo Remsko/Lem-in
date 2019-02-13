@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 10:30:42 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/13 17:52:35 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,38 @@ bool    pipe_check(char **split, size_t length)
     return (true);
 }
 
-bool    pipe_parse(t_graph *graph, t_map *map, char **line)
+bool    pipe_parse(t_rb_tree *root, t_graph *graph, t_map *map, char **line)
 {
     char        **split;
     size_t      length;
     bool        pass;
 
+    (void)root;
+    (void)graph;
+    (void)map;
     split = ft_strsplit(*line, '-');
     length = ft_splitlen(split);
     if ((pass = pipe_check(split, length)))
     {
-        pipe_add(graph, room_byname(map, split[0]), room_byname(map, split[1]));
-        printf("%s pipe with %s\n", map->rooms[room_index(map, split[0])]->name, map->rooms[room_index(map, split[1])]->name);
+        pipe_add(graph, room_search(root, split[0]), room_search(root, split[1]));
+        //printf("%s pipe with %s\n", map->rooms[room_index(map, split[0])]->name, map->rooms[room_index(map, split[1])]->name);
     }
     free_2d_char(split, length);
     return (pass);
 }
 
-t_error *parser_pipe(t_graph *graph, t_map *map, t_anthill *anthill, char **line)
+t_error *parser_pipe(t_rb_tree *root, t_graph *graph, t_map *map, t_anthill *anthill, char **line)
 {
     int ret;
 
-    if (pipe_parse(graph, map, line) == false)
+    if (pipe_parse(root, graph, map, line) == false)
         return (error_create("No pipes: no solution.", NULL, 3));
     while ((ret = get_next_line(0, line)) == 1)
     {
         anthill_add(anthill, line);
         if (*line[0] == '#')
             continue ;
-        else if (pipe_parse(graph, map , line) == false)
+        else if (pipe_parse(root, graph, map , line) == false)
             break ;
     }
     if (ret == 0)

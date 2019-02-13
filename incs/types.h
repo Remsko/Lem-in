@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 10:05:41 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/13 16:19:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define TYPES_H
 
 #include <stddef.h>
+#include "rb_tree_42.h"
 
 typedef enum e_room_type
 {
@@ -60,9 +61,10 @@ typedef struct s_graph
 
 typedef struct s_env
 {
+    t_rb_tree *root;
+    t_map *map;
     t_graph *graph;
     t_adjacency *adj;
-    t_map *map;
     t_anthill *anthill;
     int start;
     int end;
