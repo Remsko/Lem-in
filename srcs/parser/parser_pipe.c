@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 13:57:42 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/13 10:30:42 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@
 
 
 #include <stdio.h>
-void pipe_add(t_graph *graph, size_t room1_index, size_t room2_index)
+void pipe_add(t_graph *graph, t_room *room1, t_room *room2)
 {
-    if (room1_index == (size_t)-1 || room2_index == (size_t)-1)
+    if (room1 == NULL || room2 == NULL)
         return (ft_putstr("Warning: pipe_add fails.\n"));
-    graph->flow[room1_index][room2_index] = 1;
-    graph->flow[room2_index][room1_index] = 1;
+    graph->flow[room1->self_index][room2->self_index] = 1;
+    graph->flow[room2->self_index][room1->self_index] = 1;
+    room1->pipes += 1;
+    room2->pipes += 1;
 }
 
 bool    pipe_check(char **split, size_t length)
@@ -50,7 +52,7 @@ bool    pipe_parse(t_graph *graph, t_map *map, char **line)
     length = ft_splitlen(split);
     if ((pass = pipe_check(split, length)))
     {
-        pipe_add(graph, room_index(map, split[0]), room_index(map, split[1]));
+        pipe_add(graph, room_byname(map, split[0]), room_byname(map, split[1]));
         printf("%s pipe with %s\n", map->rooms[room_index(map, split[0])]->name, map->rooms[room_index(map, split[1])]->name);
     }
     free_2d_char(split, length);

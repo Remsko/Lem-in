@@ -9,6 +9,8 @@ INC_NAME += anthill.h
 INC_NAME += garbage.h
 INC_NAME += room.h
 INC_NAME += graph.h
+INC_NAME += algorithm.h
+INC_NAME += adjacency.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
@@ -50,6 +52,10 @@ SRC_NAME += room_bytype.c
 SRC_SUB += algorithm
 SRC_NAME += algorithm_launch.c
 SRC_NAME += edmonds_karp.c
+
+SRC_SUB += adjacency
+SRC_NAME += new_adjacency.c
+SRC_NAME += free_adjacency.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 

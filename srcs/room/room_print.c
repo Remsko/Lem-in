@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 21:33:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 13:14:06 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/13 11:24:51 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    room_print(t_map *map)
     {
         if (rooms[index] != NULL && rooms[index]->name != NULL)
         {
-            ft_putnbr((int)rooms[index]->self_index);
+            ft_putnbr(rooms[index]->self_index);
             ft_putstr(" : ");
             ft_putendl(rooms[index]->name);
         }

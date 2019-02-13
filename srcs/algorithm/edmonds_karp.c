@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 21:46:03 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/13 11:16:28 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ bool ret(bool *visited, int t)
     return (r);
 }
 
-bool bfs(t_graph *graph, int *parent, int s, int t)
+bool bfs(t_graph *graph, t_adjacency *adj, int *parent, int s, int t)
 {
     t_queue queue;
     bool *visited;
     int u;
     int v;
+    int link;
 
     if ((visited = (bool *)ft_memalloc(sizeof(bool) * (size_t)graph->row)) == NULL)
         return (false);
@@ -49,22 +50,23 @@ bool bfs(t_graph *graph, int *parent, int s, int t)
     while (is_queue(&queue))
     {
         u = de_queue(&queue);
-        v = 0;
-        while (v < graph->row)
+        link = 0;
+        while (link < adj[u].length)
         {
+            v = adj[u].list[link];
             if (visited[v] == false && graph->flow[u][v] > 0)
             {
                 en_queue(&queue, v);
                 visited[v] = true;
                 parent[v] = u;
             }
-            ++v;
+            ++link;
         }
     }
     return (ret(visited, t));
 }
 
-int edmonds_karp(t_graph *graph, int source, int sink)
+int edmonds_karp(t_graph *graph, t_adjacency *adj, int source, int sink)
 {
     int *parent;
     int v;
@@ -76,7 +78,7 @@ int edmonds_karp(t_graph *graph, int source, int sink)
         return (0);
     //ft_memset(parent, -1, sizeof(int) * (size_t)graph->row);
     max_flow = 0;
-    while (bfs(graph, parent, source, sink))
+    while (bfs(graph, adj, parent, source, sink))
     {
         path_flow = INT_MAX;
         v = sink;

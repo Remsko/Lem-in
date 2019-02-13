@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:24:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/11 13:26:30 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/13 11:18:59 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "error_42.h"
 #include "parser.h"
 #include "graph.h"
+#include "adjacency.h"
 
 t_error *parser_all(t_env *e)
 {
@@ -39,5 +40,7 @@ t_error *parser_all(t_env *e)
         ft_putstr("Parsing finish while reading pipes...\n");
         return (err);
     }
+    if ((e->adj = new_adjacency(e->map->rooms, e->graph)) == NULL)
+        return (error_create("Adjacency-list malloc failed.", NULL, 10));
     return (NULL);
 }

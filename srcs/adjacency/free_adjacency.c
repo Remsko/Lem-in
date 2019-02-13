@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_create.c                                      :+:      :+:    :+:   */
+/*   free_adjacency.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 12:30:58 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 11:24:14 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/13 11:10:17 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/13 11:19:38 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
-#include "string_42.h"
-
 #include "types.h"
 
-t_room  *room_create(char *name, t_room_type type)
+void free_adjacency(t_adjacency *adj, int size)
 {
-    t_room *new;
+    int index;
 
-    if ((new = (t_room *)malloc(sizeof(t_room))) != NULL)
+    if (adj == NULL)
+        return ;
+    index = 0;
+    while (index < size)
     {
-        new->pipes = 0;
-        new->name = ft_strdup(name);
-        new->type = type;
+        if (adj[index].list != NULL)
+            free(adj[index].list);
+        ++index;
     }
-    return (new);
+    free(adj);
 }
