@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 17:52:35 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/18 21:22:22 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ bool    pipe_parse(t_rb_tree *root, t_graph *graph, t_map *map, char **line)
     return (pass);
 }
 
-t_error *parser_pipe(t_rb_tree *root, t_graph *graph, t_map *map, t_anthill *anthill, char **line)
+t_error *parser_pipe(t_env *e, char **line)
 {
     int ret;
 
-    if (pipe_parse(root, graph, map, line) == false)
+    if (pipe_parse(e->root, e->graph, e->map, line) == false)
         return (error_create("No pipes: no solution.", NULL, 3));
     while ((ret = get_next_line(0, line)) == 1)
     {
-        anthill_add(anthill, line);
+        anthill_add(e->anthill, line);
         if (*line[0] == '#')
             continue ;
-        else if (pipe_parse(root, graph, map , line) == false)
+        else if (pipe_parse(e->root, e->graph, e->map , line) == false)
             break ;
     }
     if (ret == 0)

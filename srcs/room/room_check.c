@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 12:39:29 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/26 13:36:47 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/18 19:09:24 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ bool room_check(char **split, size_t length)
 
     if (length != 3)
         return (false);
-    else if (ft_isatoi(split[1], &useless) == false || ft_isatoi(split[2], &useless) == false)
+    else if (ft_isatoi(split[1], &useless) == false
+        || ft_isatoi(split[2], &useless) == false)
         return (false);
     return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 16:19:01 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 17:22:46 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/18 21:34:55 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "rb_tree_42.h"
 #include "types.h"
 
-int     cmp_room1(void *data1, void *data2)
+int     cmp_room(void *data1, void *data2)
 {
     t_room *room1;
     t_room *room2;
@@ -26,5 +26,5 @@ int     cmp_room1(void *data1, void *data2)
 
 bool    room_insert(t_rb_tree **root, t_room *room)
 {
-    return (rb_tree_insert(root, (void *)room, &cmp_room1));
+    return (rb_tree_insert(root, (void *)room, &cmp_room));
 }

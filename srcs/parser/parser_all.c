@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:24:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 17:51:58 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/18 21:19:49 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,19 @@
 #include "graph.h"
 #include "adjacency.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-void printer(void *data)
-{
-    t_room *room;
-
-    room = (t_room *)data;
-    ft_putendl(room->name);
-}
-
 t_error *parser_all(t_env *e)
 {
     t_error *err;
     char    *line;
 
-    if ((err = parser_ant(e->anthill, &line, &e->ants)) != NULL)
-    {
-        ft_putstr("Parsing finish while reading ants...\n");
+    if ((err = parser_ant(e, &line)) != NULL)
         return (err);
-    }
-    if ((err = parser_room(&e->root, e->map, e->anthill, &line)) != NULL)
-    {
-        ft_putstr("Parsing finish while reading rooms...\n");
+    if ((err = parser_room(e, &line)) != NULL)
         return (err);
-    }
-    //rb_tree_print_inorder(e->root, printer);
     if ((e->graph = new_graph(e->map->length)) == NULL)
         return (error_create("Graph malloc failed.", NULL, 9));
-    if ((err = parser_pipe(e->root, e->graph, e->map, e->anthill, &line)) != NULL)
-    {
-        ft_putstr("Parsing finish while reading pipes...\n");
+    if ((err = parser_pipe(e, &line)) != NULL)
         return (err);
-    }
     if ((e->adj = new_adjacency(e->map->rooms, e->graph)) == NULL)
         return (error_create("Adjacency-list malloc failed.", NULL, 10));
     return (NULL);

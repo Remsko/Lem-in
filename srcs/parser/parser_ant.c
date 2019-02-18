@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:26:55 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/26 11:47:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/18 21:21:20 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "types.h"
 #include "anthill.h"
 
-t_error	*parser_ant(t_anthill *anthill, char **line, int *ants)
+t_error	*parser_ant(t_env *e, char **line)
 {
 	t_error	*err;
 	int		ret;
@@ -28,7 +28,7 @@ t_error	*parser_ant(t_anthill *anthill, char **line, int *ants)
 	err = NULL;
     while ((ret = get_next_line(0, line)) == 1)
 	{
-		anthill_add(anthill, line);
+		anthill_add(e->anthill, line);
 		if (*line[0] != '#')
 			break ;
 	}
@@ -38,7 +38,7 @@ t_error	*parser_ant(t_anthill *anthill, char **line, int *ants)
 			ft_strdel(line);
 		err = error_create("File doesn't exist or is empty.", NULL, 1);
 	}
-	else if (ft_isatoi(*line, ants) == false)
+	else if (ft_isatoi(*line, &e->ants) == false)
 		err = error_create("Wrong number of ants.", NULL, 2);
 	return (err);
 }

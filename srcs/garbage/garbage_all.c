@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:12:27 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 11:23:29 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/17 19:20:39 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void    garbage_all(t_env *env)
         if (env->graph != NULL)
             free_adjacency(env->adj, env->graph->row);
         free_graph(env->graph);
+        rb_tree_delete(env->root);
         free(env);
     }
 }

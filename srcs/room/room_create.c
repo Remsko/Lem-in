@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 12:30:58 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 11:24:14 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/18 19:12:33 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 t_room  *room_create(char *name, t_room_type type)
 {
     t_room *new;
-
+    
     if ((new = (t_room *)malloc(sizeof(t_room))) != NULL)
     {
-        new->pipes = 0;
         new->name = ft_strdup(name);
+        new->pipes = 0;
+        new->self_index = -1;
         new->type = type;
     }
     return (new);

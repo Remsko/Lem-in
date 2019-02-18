@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 11:16:28 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/18 21:10:37 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int edmonds_karp(t_graph *graph, t_adjacency *adj, int source, int sink)
 
     if ((parent = (int *)malloc(sizeof(int) * (size_t)graph->row)) == NULL)
         return (0);
-    //ft_memset(parent, -1, sizeof(int) * (size_t)graph->row);
+    ft_memset(parent, -1, sizeof(int) * (size_t)graph->row);
     max_flow = 0;
     while (bfs(graph, adj, parent, source, sink))
     {
