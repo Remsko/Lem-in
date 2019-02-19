@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 12:29:54 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/18 19:12:49 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 10:48:22 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void    room_add(t_map *map, t_room *room)
 {
-    static int index = 0;
+    static unsigned int index = 0;
 
     room->self_index = index;
     array_append((t_array *)map, (void *)&room);

@@ -6,13 +6,14 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 18:23:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:12:11 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 10:50:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "room.h"
 #include "types.h"
 #include "algorithm.h"
+#include "write_42.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -26,15 +27,16 @@ static void free_karp(t_karp *karp)
 
 static bool new_karp(t_env *e, t_karp *karp)
 {
-    if ((karp->visited = (bool *)malloc(sizeof(bool) * (size_t)e->graph->row)) == NULL)
+    if ((karp->visited = (bool *)malloc(sizeof(bool) * e->graph->size)) == NULL)
         return (false);
-    if ((karp->parent = (int *)malloc(sizeof(int) * (size_t)e->graph->row)) == NULL)
+    if ((karp->parent = (unsigned int *)malloc(sizeof(int) * e->graph->size)) == NULL)
     {
         free_karp(karp);
         return (false);
     }
     karp->source = e->start;
     karp->sink = e->end;
+    return (true);
 }
 
 void algorithm_launch(t_env *env)

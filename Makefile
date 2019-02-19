@@ -14,7 +14,7 @@ INC_NAME += adjacency.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
-CFLAGS = -Wall -Werror -Wextra -Wconversion
+CFLAGS = -Wall -Werror -Wextra -Wconversion -g3
 CPPFLAGS = $(addprefix -I,$(INC_PATH))
 
 SRC_PATH = srcs

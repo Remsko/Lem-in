@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 12:30:58 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/18 19:12:33 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 10:49:37 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_room  *room_create(char *name, t_room_type type)
     {
         new->name = ft_strdup(name);
         new->pipes = 0;
-        new->self_index = -1;
+        new->self_index = 0;
         new->type = type;
     }
     return (new);

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:12:27 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/17 19:20:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 10:37:53 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    garbage_all(t_env *env)
         if (env->map != NULL)
             array_dispose((t_array *)env->map, &garbage_rooms);
         if (env->graph != NULL)
-            free_adjacency(env->adj, env->graph->row);
+            free_adjacency(env->adj, env->graph->size);
         free_graph(env->graph);
         rb_tree_delete(env->root);
         free(env);

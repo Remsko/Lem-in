@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:13:10 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 10:51:55 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,24 @@ int min(int a, int b)
 bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
     t_queue queue;
-    int u;
-    int v;
-    int link;
+    size_t link;
+    unsigned int u;
+    unsigned int v;
 
-    ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)graph->row);
+    ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)graph->size);
     ft_bzero((void *)&queue, sizeof(t_queue));
-    en_queue(&queue, karp->source);
+    en_queue(&queue, (int)karp->source);
     karp->visited[karp->source] = true;
     while (is_queue(&queue))
     {
-        u = de_queue(&queue);
+        u = (unsigned int)de_queue(&queue);
         link = 0;
         while (link < adj[u].length)
         {
             v = adj[u].list[link];
             if (karp->visited[v] == false && graph->flow[u][v] > 0)
             {
-                en_queue(&queue, v);
+                en_queue(&queue, (int)v);
                 karp->visited[v] = true;
                 karp->parent[v] = u;
             }
@@ -56,12 +56,12 @@ bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
 
 int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
-    int v;
-    int u;
+    unsigned int v;
+    unsigned int u;
     int path_flow;
     int max_flow;
 
-    ft_memset(karp->parent, -1, sizeof(int) * (size_t)graph->row);
+    ft_memset(karp->parent, -1, sizeof(int) * (size_t)graph->size);
     max_flow = 0;
     while (bfs(graph, adj, karp))
     {

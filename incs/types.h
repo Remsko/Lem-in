@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 09:47:28 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 10:54:25 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,21 @@ typedef enum e_room_type
 
 typedef struct s_adjacency
 {
-    int *list;
-    int length;
+    unsigned int *list;
+    size_t length;
 } t_adjacency;
 
 typedef struct s_graph
 {
     int **flow;
-    int row;
+    size_t size;
 } t_graph;
 
 typedef struct s_room
 {
     char *name;
-    int pipes;
-    int self_index;
+    size_t pipes;
+    unsigned int self_index;
     t_room_type type;
 } t_room;
 
@@ -66,17 +66,17 @@ typedef struct s_env
     t_graph *graph;
     t_adjacency *adj;
     t_anthill *anthill;
-    int start;
-    int end;
+    unsigned int start;
+    unsigned int end;
     int ants;
 } t_env;
 
 typedef struct s_karp
 {
-    int *parent;
     bool *visited;
-    int source;
-    int sink;
+    unsigned int *parent;
+    unsigned int source;
+    unsigned int sink;
 } t_karp;
 
 #endif
