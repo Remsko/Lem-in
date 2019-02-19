@@ -6,12 +6,13 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 18:00:20 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/24 18:08:16 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/18 21:36:44 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
+#include "room.h"
 #include "types.h"
 
 void    garbage_rooms(void *ptr, size_t size)
@@ -25,14 +26,7 @@ void    garbage_rooms(void *ptr, size_t size)
     {
         while (i < size)
         {
-            if (rooms[i] != NULL)
-            {
-                if (rooms[i]->name != NULL)
-                    free(rooms[i]->name);
-                if (rooms[i]->pipes.tab != NULL)
-                    free(rooms[i]->pipes.tab);
-                free(rooms[i]);
-            }
+            room_free(rooms[i]);
             ++i;
         }
         free(rooms);

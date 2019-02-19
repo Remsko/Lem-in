@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_add.c                                         :+:      :+:    :+:   */
+/*   free_graph.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 12:29:54 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:48:22 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/09 15:52:51 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/19 10:42:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_42.h"
-#include "error_42.h"
-
+#include <stdlib.h>
 #include "types.h"
 
-void    room_add(t_map *map, t_room *room)
+void free_graph(t_graph *graph)
 {
-    static unsigned int index = 0;
+    size_t index;
 
-    room->self_index = index;
-    array_append((t_array *)map, (void *)&room);
-    if (map->rooms == NULL)
-        error_malloc("room_add");
-    ++index;
+    if (graph == NULL)
+        return ;
+    if (graph->flow != NULL)
+    {
+        index = 0;
+        while (index < graph->size)
+        {
+            if (graph->flow[index] != NULL)
+                free(graph->flow[index]);
+            ++index;
+        }
+        free(graph->flow);
+    }
+    free(graph);
 }

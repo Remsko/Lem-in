@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/24 17:40:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 10:54:25 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define TYPES_H
 
 #include <stddef.h>
+#include "rb_tree_42.h"
 
 typedef enum e_room_type
 {
@@ -22,17 +23,23 @@ typedef enum e_room_type
     END = 2,
 } t_room_type;
 
-typedef struct s_index
+typedef struct s_adjacency
 {
-    size_t  *tab;
-    size_t  length;
-}               t_index;
+    unsigned int *list;
+    size_t length;
+} t_adjacency;
+
+typedef struct s_graph
+{
+    int **flow;
+    size_t size;
+} t_graph;
 
 typedef struct s_room
 {
-    t_index pipes;
     char *name;
-    size_t self_index;
+    size_t pipes;
+    unsigned int self_index;
     t_room_type type;
 } t_room;
 
@@ -54,11 +61,22 @@ typedef struct s_map
 
 typedef struct s_env
 {
-    //	t_room		*start;
-    //	t_room		*end;
-    t_map     *map;
-    t_anthill   *anthill;
+    t_rb_tree *root;
+    t_map *map;
+    t_graph *graph;
+    t_adjacency *adj;
+    t_anthill *anthill;
+    unsigned int start;
+    unsigned int end;
     int ants;
 } t_env;
+
+typedef struct s_karp
+{
+    bool *visited;
+    unsigned int *parent;
+    unsigned int source;
+    unsigned int sink;
+} t_karp;
 
 #endif

@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_add.c                                         :+:      :+:    :+:   */
+/*   adjacency.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 12:29:54 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:48:22 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/13 11:13:08 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/19 10:42:32 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_42.h"
-#include "error_42.h"
+#ifndef ADJACENCY_H
+#define ADJACENCY_H
 
 #include "types.h"
 
-void    room_add(t_map *map, t_room *room)
-{
-    static unsigned int index = 0;
+t_adjacency *new_adjacency(t_room **rooms, t_graph *graph);
 
-    room->self_index = index;
-    array_append((t_array *)map, (void *)&room);
-    if (map->rooms == NULL)
-        error_malloc("room_add");
-    ++index;
-}
+void free_adjacency(t_adjacency *adj, size_t size);
+
+#endif

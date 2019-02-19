@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_add.c                                         :+:      :+:    :+:   */
+/*   algorithm.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 12:29:54 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:48:22 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/19 11:09:47 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_42.h"
-#include "error_42.h"
+#ifndef ALGORITHM_H
+#define ALGORITHM_H
 
 #include "types.h"
 
-void    room_add(t_map *map, t_room *room)
-{
-    static unsigned int index = 0;
+void    algorithm_launch(t_env *env);
 
-    room->self_index = index;
-    array_append((t_array *)map, (void *)&room);
-    if (map->rooms == NULL)
-        error_malloc("room_add");
-    ++index;
-}
+int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp);
+
+void graph_consumer(t_graph *graph, t_adjacency *adj, t_karp *karp);
+
+#endif

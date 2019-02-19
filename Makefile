@@ -8,11 +8,13 @@ INC_NAME += parser.h
 INC_NAME += anthill.h
 INC_NAME += garbage.h
 INC_NAME += room.h
+INC_NAME += graph.h
+INC_NAME += algorithm.h
+INC_NAME += adjacency.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
-CFLAGS = -Wall -Werror -Wextra
-CFLAGS += -g3
+CFLAGS = -Wall -Werror -Wextra -Wconversion -g3
 CPPFLAGS = $(addprefix -I,$(INC_PATH))
 
 SRC_PATH = srcs
@@ -32,14 +34,29 @@ SRC_SUB += garbage
 SRC_NAME += garbage_all.c
 SRC_NAME += garbage_rooms.c
 
+SRC_SUB += graph
+SRC_NAME += free_graph.c
+SRC_NAME += new_graph.c
+SRC_NAME += print_graph.c
+
 SRC_SUB += room
 SRC_NAME += room_parse.c
 SRC_NAME += room_add.c
 SRC_NAME += room_create.c
-SRC_NAME += room_index.c
 SRC_NAME += room_check.c
 SRC_NAME += room_print.c
-SRC_NAME += room_byname.c
+SRC_NAME += room_insert.c
+SRC_NAME += room_search.c
+SRC_NAME += room_free.c
+
+SRC_SUB += algorithm
+SRC_NAME += algorithm_launch.c
+SRC_NAME += edmonds_karp.c
+SRC_NAME += graph_consumer.c
+
+SRC_SUB += adjacency
+SRC_NAME += new_adjacency.c
+SRC_NAME += free_adjacency.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 

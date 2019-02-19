@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_index.c                                       :+:      :+:    :+:   */
+/*   free_adjacency.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 12:27:25 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/23 14:56:10 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/13 11:10:17 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/19 10:42:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string_42.h"
-
+#include <stdlib.h>
 #include "types.h"
 
-size_t  room_index(t_map *map, char *search)
+void free_adjacency(t_adjacency *adj, size_t size)
 {
-    t_room **rooms;
     size_t index;
 
+    if (adj == NULL)
+        return ;
     index = 0;
-    if (map != NULL)
+    while (index < size)
     {
-        rooms = map->rooms;
-        if (rooms != NULL)
-        {
-            while (index < map->length)
-            {
-                if (rooms[index] != NULL && rooms[index]->name != NULL
-                    && ft_strequ(rooms[index]->name, search))
-                    return (index);
-                ++index;
-            }
-        }
+        if (adj[index].list != NULL)
+            free(adj[index].list);
+        ++index;
     }
-    return ((size_t)-1);
+    free(adj);
 }
