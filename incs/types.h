@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:54:25 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 16:09:37 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ typedef struct s_anthill
     size_t capacity;
     size_t size;
 } t_anthill;
+
+typedef struct s_cycle
+{
+    char *line;
+    size_t length;
+    size_t capacity;
+    size_t size;
+} t_cycle;
 
 typedef struct s_map
 {
