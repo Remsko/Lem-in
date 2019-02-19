@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 16:19:50 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 09:47:28 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ typedef struct s_adjacency
     int *list;
     int length;
 } t_adjacency;
+
+typedef struct s_graph
+{
+    int **flow;
+    int row;
+} t_graph;
 
 typedef struct s_room
 {
@@ -53,12 +59,6 @@ typedef struct s_map
     size_t size;
 } t_map;
 
-typedef struct s_graph
-{
-    int **flow;
-    int row;
-} t_graph;
-
 typedef struct s_env
 {
     t_rb_tree *root;
@@ -70,5 +70,13 @@ typedef struct s_env
     int end;
     int ants;
 } t_env;
+
+typedef struct s_karp
+{
+    int *parent;
+    bool *visited;
+    int source;
+    int sink;
+} t_karp;
 
 #endif

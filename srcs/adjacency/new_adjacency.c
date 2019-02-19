@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:13:25 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/13 11:17:31 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/19 09:44:19 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_adjacency *new_adjacency(t_room **rooms, t_graph *graph)
     t_adjacency *new;
     int x;
     int y;
-    int index;
+    int link;
 
     if ((new = (t_adjacency *)ft_memalloc(sizeof(t_adjacency) * (size_t)graph->row)) == NULL)
         return (NULL);
@@ -34,13 +34,13 @@ t_adjacency *new_adjacency(t_room **rooms, t_graph *graph)
         }
         new[y].length = rooms[y]->pipes;
         x = 0;
-        index = 0;
+        link = 0;
         while (x < graph->row)
         {
             if (graph->flow[y][x] > 0)
             {
-                new[y].list[index] = x;
-                ++index;
+                new[y].list[link] = x;
+                ++link;
             }
             ++x;
         }
