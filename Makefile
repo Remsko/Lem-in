@@ -58,6 +58,10 @@ SRC_SUB += adjacency
 SRC_NAME += new_adjacency.c
 SRC_NAME += free_adjacency.c
 
+SRC_SUB += cycle
+SRC_NAME += cycle_print.c
+SRC_NAME += cycle_pattern_add.c
+
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 
 OBJ_PATH = obj
