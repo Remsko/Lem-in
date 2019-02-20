@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:52:51 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:42:50 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 20:05:51 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void free_graph(t_graph *graph)
 
     if (graph == NULL)
         return ;
-    if (graph->flow != NULL)
+    if (graph->edge != NULL)
     {
         index = 0;
         while (index < graph->size)
         {
-            if (graph->flow[index] != NULL)
-                free(graph->flow[index]);
+            if (graph->edge[index] != NULL)
+                free(graph->edge[index]);
             ++index;
         }
-        free(graph->flow);
+        free(graph->edge);
     }
     free(graph);
 }

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 16:09:37 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 20:03:06 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ typedef struct s_adjacency
     size_t length;
 } t_adjacency;
 
+typedef struct s_edge
+{
+    int flow;
+    int capacity;
+} t_edge;
+
 typedef struct s_graph
 {
-    int **flow;
+    t_edge **edge;
     size_t size;
 } t_graph;
 

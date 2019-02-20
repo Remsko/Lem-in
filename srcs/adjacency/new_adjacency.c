@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:13:25 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:52:58 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 20:45:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_adjacency *new_adjacency(t_room **rooms, t_graph *graph)
         link = 0;
         while (x < graph->size)
         {
-            if (graph->flow[y][x] > 0)
+            if (graph->edge[y][x].capacity > 0)
             {
                 new[y].list[link] = (unsigned int)x;
                 ++link;

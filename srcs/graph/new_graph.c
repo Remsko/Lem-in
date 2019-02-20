@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:37:38 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:43:15 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 20:05:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_graph *new_graph(size_t size)
     if ((graph = (t_graph *)malloc(sizeof(t_graph))) == NULL)
         return (NULL);
     graph->size = size;
-    if ((graph->flow = (int **)ft_memalloc(sizeof(int *) * size)) == NULL)
+    if ((graph->edge = (t_edge **)ft_memalloc(sizeof(t_edge *) * size)) == NULL)
     {
         free_graph(graph);
         return (NULL);
@@ -31,7 +31,7 @@ t_graph *new_graph(size_t size)
     index = 0;
     while (index < size)
     {
-        if ((graph->flow[index] = (int *)ft_memalloc(sizeof(int) * size)) == NULL)
+        if ((graph->edge[index] = (t_edge *)ft_memalloc(sizeof(t_edge) * size)) == NULL)
         {
             free_graph(graph);
             return (NULL);

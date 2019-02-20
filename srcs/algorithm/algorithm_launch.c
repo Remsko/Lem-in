@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 18:23:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 13:05:29 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 16:40:54 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void algorithm_launch(t_env *env)
     max_flow = edmonds_karp(env->graph, env->adj, &karp);
     free_karp(&karp);
     (void)max_flow;
-    //printf("#max_flow = %d\n", max_flow);
+    printf("#max_flow = %d\n", max_flow);
     /* test */
     /*
     while (max_flow > 0)
