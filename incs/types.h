@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 20:03:06 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 21:39:46 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_room
     char *name;
     size_t pipes;
     unsigned int self_index;
+    unsigned int in;
+    unsigned int out;
     t_room_type type;
 } t_room;
 

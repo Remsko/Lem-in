@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 21:16:08 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 21:54:14 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ static int min(int a, int b)
 bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
     t_queue queue;
-    size_t link;
+    //size_t link;
     unsigned int u;
     unsigned int v;
 
+    (void)adj;
     ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)graph->size);
     ft_bzero((void *)&queue, sizeof(t_queue));
     en_queue(&queue, (int)karp->source);
@@ -40,17 +41,17 @@ bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
     while (is_queue(&queue))
     {
         u = (unsigned int)de_queue(&queue);
-        link = 0;
-        while (link < adj[u].length)
+        v = 0;//link = 0;
+        while (v/*link*/ < graph->size/*adj[u].length*/)
         {
-            v = adj[u].list[link];
+            //v = graph->edge[u][link];/*adj[u].list[link]*/;
             if (karp->visited[v] == false && graph->edge[u][v].capacity > graph->edge[u][v].flow)
             {
                 en_queue(&queue, (int)v);
                 karp->visited[v] = true;
                 karp->parent[v] = u;
             }
-            ++link;
+            v++/*++link*/;
         }
     }
     return (karp->visited[karp->sink]);
@@ -63,6 +64,7 @@ int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp)
     int path_flow;
     int max_flow;
 
+    (void)adj;
     max_flow = 0;
     while (bfs(graph, adj, karp))
     {

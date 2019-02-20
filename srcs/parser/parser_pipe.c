@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 20:06:52 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 21:59:08 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ void pipe_add(t_graph *graph, t_room *room1, t_room *room2)
 {
     if (room1 == NULL || room2 == NULL)
         return (ft_putstr("Warning: pipe_add fails.\n"));
-    graph->edge[room1->self_index][room2->self_index].capacity = 1;
-    graph->edge[room2->self_index][room1->self_index].capacity = 1;
+    graph->edge[room1->in][room2->out].capacity = 1;
+    graph->edge[room2->in][room1->out].capacity = 1;
+    graph->edge[room1->in][room1->out].capacity = 1;
+    graph->edge[room1->out][room1->in].capacity = 1;
+    graph->edge[room2->in][room2->out].capacity = 1;
+    graph->edge[room2->out][room2->in].capacity = 1;
     room1->pipes += 1;
     room2->pipes += 1;
 }
