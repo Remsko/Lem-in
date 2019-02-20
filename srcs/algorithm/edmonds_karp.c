@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 12:48:33 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/20 21:16:08 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 #include "types.h"
 #include "queue_42.h"
 #include "memory_42.h"
+#include "limits.h"
+/*
+#include <write_42.h>
+#include <stdio.h>*/
+#include "graph.h"
 
-int min(int a, int b)
+static int min(int a, int b)
 {
-    if (a < b)
-        return (a);
-    else
-        return (b);
+    return (a > b ? b : a);
 }
 
 bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
@@ -42,7 +44,7 @@ bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
         while (link < adj[u].length)
         {
             v = adj[u].list[link];
-            if (karp->visited[v] == false && graph->flow[u][v] > 0)
+            if (karp->visited[v] == false && graph->edge[u][v].capacity > graph->edge[u][v].flow)
             {
                 en_queue(&queue, (int)v);
                 karp->visited[v] = true;
@@ -61,24 +63,23 @@ int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp)
     int path_flow;
     int max_flow;
 
-    ft_memset(karp->parent, -1, sizeof(int) * (size_t)graph->size);
     max_flow = 0;
     while (bfs(graph, adj, karp))
     {
-        path_flow = 0x7FFFFFFF;
+        path_flow = INT_MAX;
         v = karp->sink;
         while (v != karp->source)
         {
             u = karp->parent[v];
-            path_flow = min(path_flow, graph->flow[u][v]);
+            path_flow = min(path_flow, graph->edge[u][v].capacity - graph->edge[u][v].flow);
             v = karp->parent[v];
         }
         v = karp->sink;
         while (v != karp->source)
         {
             u = karp->parent[v];
-            graph->flow[u][v] -= path_flow;
-            graph->flow[v][u] += path_flow;
+            graph->edge[v][u].flow -= path_flow;
+            graph->edge[u][v].flow += path_flow;
             v = karp->parent[v];
         }
         max_flow += path_flow;
