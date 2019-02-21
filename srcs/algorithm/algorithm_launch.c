@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 18:23:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 16:40:54 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/21 10:05:38 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void algorithm_launch(t_env *env)
     (void)max_flow;
     printf("#max_flow = %d\n", max_flow);
     /* test */
-    /*
     while (max_flow > 0)
     {
         printf("#");
@@ -69,5 +68,4 @@ void algorithm_launch(t_env *env)
         free_karp(&karp);
         --max_flow;
     }
-    */
 }
