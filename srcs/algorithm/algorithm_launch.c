@@ -6,13 +6,14 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 18:23:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/21 10:05:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/21 17:53:59 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "room.h"
 #include "types.h"
 #include "algorithm.h"
+#include "path.h"
 #include "write_42.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -51,21 +52,8 @@ void algorithm_launch(t_env *env)
     (void)max_flow;
     printf("#max_flow = %d\n", max_flow);
     /* test */
-    while (max_flow > 0)
-    {
-        printf("#");
-        if ((new_karp(env, &karp)) == false)
-            return (ft_putstr("Failed to init karp structure.\n"));
-        graph_consumer(env->graph, env->adj, &karp);
-
-        unsigned int v = karp.sink;
-        while (v != karp.source)
-        {
-            printf("%s<-", env->map->rooms[v]->name);
-            v = karp.parent[v];
-        }
-        printf("%s\n", env->map->rooms[v]->name);
-        free_karp(&karp);
-        --max_flow;
-    }
+    if ((new_karp(env, &karp)) == false)
+        return (ft_putstr("Failed to init karp structure.\n"));
+    graph_consumer(env, &karp);
+    path_print(env->run, env->map);
 }

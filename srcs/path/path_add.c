@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm.h                                        :+:      :+:    :+:   */
+/*   path_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/21 17:53:13 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/21 14:35:45 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/25 16:22:19 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHM_H
-#define ALGORITHM_H
-
+#include "array_42.h"
+#include "error_42.h"
 #include "types.h"
 
-void    algorithm_launch(t_env *env);
-
-int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp);
-
-void graph_consumer(t_env *e, t_karp *karp);
-
-#endif
+void    path_add(t_run *run, t_path *path)
+{
+    array_append((t_array *)run, (void *)&path);
+    if (run->paths == NULL)
+        error_malloc("anthill_add");
+}

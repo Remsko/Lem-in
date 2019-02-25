@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm.h                                        :+:      :+:    :+:   */
+/*   path.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/21 17:53:13 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/21 17:33:42 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/02/21 17:50:06 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHM_H
-#define ALGORITHM_H
+#ifndef PATH_H
+#define PATH_H
 
 #include "types.h"
 
-void    algorithm_launch(t_env *env);
+void    path_add(t_run *run, t_path *path);
 
-int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp);
+t_path *path_new(unsigned int *parent, size_t length, unsigned int source, unsigned int sink);
 
-void graph_consumer(t_env *e, t_karp *karp);
+void path_print(t_run *run, t_map *map);
 
 #endif

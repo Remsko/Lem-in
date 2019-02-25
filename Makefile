@@ -11,6 +11,7 @@ INC_NAME += room.h
 INC_NAME += graph.h
 INC_NAME += algorithm.h
 INC_NAME += adjacency.h
+INC_NAME += path.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
@@ -61,6 +62,11 @@ SRC_NAME += free_adjacency.c
 SRC_SUB += cycle
 SRC_NAME += cycle_print.c
 SRC_NAME += cycle_pattern_add.c
+
+SRC_SUB += path
+SRC_NAME += path_add.c
+SRC_NAME += path_new.c
+SRC_NAME += path_print.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 

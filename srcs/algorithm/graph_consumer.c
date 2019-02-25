@@ -6,17 +6,20 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:06:20 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/21 10:07:02 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/25 16:37:15 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include "types.h"
+#include "array_42.h"
 #include "queue_42.h"
 #include "memory_42.h"
 #include "write_42.h"
+#include "path.h"
+#include "types.h"
 
+#include <stdio.h>
 bool bfs_(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
     t_queue queue;
@@ -47,20 +50,28 @@ bool bfs_(t_graph *graph, t_adjacency *adj, t_karp *karp)
     return (karp->visited[karp->sink]);
 }
 
-void graph_consumer(t_graph *graph, t_adjacency *adj, t_karp *karp)
+void graph_consumer(t_env *e, t_karp *karp)
 {
+    t_path *new;
+    size_t path_length;
     unsigned int v;
     unsigned int u;
 
-    ft_memset(karp->parent, 0, sizeof(int) * (size_t)graph->size);
-    if (bfs_(graph, adj, karp) == false)
-        return (ft_putstr("No path found."));
-    v = karp->sink;
-    while (v != karp->source)
+    e->run = (t_run *)array_create(sizeof(t_path *));
+    ft_memset(karp->parent, 0, sizeof(int) * (size_t)e->graph->size);
+    while (bfs_(e->graph, e->adj, karp))
     {
-        u = karp->parent[v];
-        graph->edge[u][v].flow = 0;
-        graph->edge[v][u].flow = 0;
-        v = karp->parent[v];
+        path_length = 1;
+        v = karp->sink;
+        while (v != karp->source)
+        {
+            u = karp->parent[v];
+            e->graph->edge[u][v].flow = 0;
+            e->graph->edge[v][u].flow = 0;
+            v = karp->parent[v];
+            ++path_length;
+        }
+        new = path_new(karp->parent, path_length, karp->source, karp->sink);
+        path_add(e->run, new);
     }
 }

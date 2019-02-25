@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/21 09:53:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/02/21 15:14:11 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int		main(int ac, char **av)
 			return (1);
 		}
 		//room_print(env->map);
-		print_graph(env->graph);
+		//print_graph(env->graph);
 		algorithm_launch(env);
-		print_graph(env->graph);
-		//anthill_print(env->anthill);
+		//print_graph(env->graph);
+		anthill_print(env->anthill);
 		garbage_all(env);
 	}
 	else
