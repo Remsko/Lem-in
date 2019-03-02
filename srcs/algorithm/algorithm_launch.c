@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 18:23:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/21 17:53:59 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/02 10:54:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ void algorithm_launch(t_env *env)
     if ((new_karp(env, &karp)) == false)
         return (ft_putstr("Failed to init karp structure.\n"));
     graph_consumer(env, &karp);
-    path_print(env->run, env->map);
+    //path_print(env->run, env->map);
 }

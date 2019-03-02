@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 21:16:08 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/02 10:57:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 #include <write_42.h>
 #include <stdio.h>*/
 #include "graph.h"
-
+/*
 static int min(int a, int b)
 {
     return (a > b ? b : a);
-}
+}*/
 
 bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
@@ -60,29 +60,20 @@ int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
     unsigned int v;
     unsigned int u;
-    int path_flow;
     int max_flow;
 
     max_flow = 0;
     while (bfs(graph, adj, karp))
     {
-        path_flow = INT_MAX;
         v = karp->sink;
         while (v != karp->source)
         {
             u = karp->parent[v];
-            path_flow = min(path_flow, graph->edge[u][v].capacity - graph->edge[u][v].flow);
+            graph->edge[v][u].flow -= 1;
+            graph->edge[u][v].flow += 1;
             v = karp->parent[v];
         }
-        v = karp->sink;
-        while (v != karp->source)
-        {
-            u = karp->parent[v];
-            graph->edge[v][u].flow -= path_flow;
-            graph->edge[u][v].flow += path_flow;
-            v = karp->parent[v];
-        }
-        max_flow += path_flow;
+        max_flow += 1;
     }
     return (max_flow);
 }
