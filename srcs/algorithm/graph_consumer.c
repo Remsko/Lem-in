@@ -6,17 +6,17 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:06:20 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 11:29:58 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/02 16:31:03 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
+#include "array_42.h"
+#include "queue_42.h"
 #include "memory_42.h"
 #include "path.h"
 #include "algorithm.h"
 #include "types.h"
-
-#include <stdio.h>
 
 void graph_consumer(t_env *e, t_karp *karp)
 {
@@ -25,8 +25,9 @@ void graph_consumer(t_env *e, t_karp *karp)
     unsigned int v;
     unsigned int u;
 
+	e->run = (t_run *)array_create(sizeof(t_path *));
     ft_memset(karp->parent, 0, sizeof(int) * (size_t)e->graph->size);
-    while (bfs(e->graph, e->adj, karp))
+    while (bfs_flow(e->graph, e->adj, karp))
     {
         path_length = 1;
         v = karp->sink;

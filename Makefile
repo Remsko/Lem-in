@@ -36,6 +36,7 @@ SRC_NAME += garbage_all.c
 SRC_NAME += garbage_rooms.c
 
 SRC_SUB += graph
+SRC_NAME += graph_copy.c
 SRC_NAME += free_graph.c
 SRC_NAME += new_graph.c
 SRC_NAME += print_graph.c
@@ -53,6 +54,8 @@ SRC_NAME += room_free.c
 SRC_SUB += algorithm
 SRC_NAME += algorithm_launch.c
 SRC_NAME += edmonds_karp.c
+SRC_NAME += new_karp.c
+SRC_NAME += free_karp.c
 SRC_NAME += bfs.c
 SRC_NAME += graph_consumer.c
 
@@ -68,6 +71,8 @@ SRC_SUB += path
 SRC_NAME += path_add.c
 SRC_NAME += path_new.c
 SRC_NAME += path_print.c
+SRC_NAME += path_free.c
+SRC_NAME += path_build.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 
