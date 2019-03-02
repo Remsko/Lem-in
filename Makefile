@@ -53,6 +53,7 @@ SRC_NAME += room_free.c
 SRC_SUB += algorithm
 SRC_NAME += algorithm_launch.c
 SRC_NAME += edmonds_karp.c
+SRC_NAME += bfs.c
 SRC_NAME += graph_consumer.c
 
 SRC_SUB += adjacency

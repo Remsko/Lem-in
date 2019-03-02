@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 14:06:03 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/25 16:30:00 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/02 11:03:13 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "types.h"
 
 #include<stdio.h>
-t_path *path_new(unsigned int *parent, size_t length, unsigned int source, unsigned int sink)
+t_path *path_new(t_karp *karp, size_t length)
 {
     t_path *path;
-    unsigned int precedent;
+    unsigned int u;
 
     if ((path = (t_path *)malloc(sizeof(t_path))) != NULL)
     {
@@ -27,14 +27,14 @@ t_path *path_new(unsigned int *parent, size_t length, unsigned int source, unsig
             return (NULL);
         }
         path->length = length;
-        precedent = sink;
-        while (precedent != source)
+        u = karp->sink;
+        while (u != karp->source)
         {
-            path->next[length - 1] = precedent;
-            precedent = parent[precedent];
+            path->next[length - 1] = u;
+            u = karp->parent[u];
             --length;
         }
-        path->next[length - 1] = precedent;
+        path->next[length - 1] = u;
     }
     return (path);
 }

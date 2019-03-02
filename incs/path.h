@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 17:33:42 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/21 17:50:06 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/02 11:01:38 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void    path_add(t_run *run, t_path *path);
 
-t_path *path_new(unsigned int *parent, size_t length, unsigned int source, unsigned int sink);
+t_path *path_new(t_karp *karp, size_t length);
 
 void path_print(t_run *run, t_map *map);
 
