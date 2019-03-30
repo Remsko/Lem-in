@@ -6,10 +6,12 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/30 16:44:46 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/30 16:55:07 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <float.h>
 #include "array_42.h"
 #include "path.h"
 #include "algorithm.h"
@@ -34,15 +36,17 @@ void graph_augment_flow(t_graph *graph, t_karp *karp)
 float rentability_calcul(t_run *run, int ants)
 {
     size_t index;
-    int total;
+    size_t total;
 
     index = 0;
+    total = 0;
     while (index < run->length)
     {
         total += run->paths[index]->length;
         ++index;
     }
-    return ((float)((total + ants) / run->length));
+    printf("total = %zu ; run->length = %zu ; ants = %zu\n", total, run->length, (size_t)ants);
+    return ((float)((total + (size_t)ants) / run->length));
 }
 
 int edmonds_karp(t_env *e, t_karp *karp)
@@ -55,6 +59,7 @@ int edmonds_karp(t_env *e, t_karp *karp)
     int max_flow;
 
     max_flow = 0;
+    rentability_tmp = FLT_MAX;
     while (bfs_capacity(e->graph, e->adj, karp))
     {
         graph_augment_flow(e->graph, karp);
@@ -62,6 +67,7 @@ int edmonds_karp(t_env *e, t_karp *karp)
         copy = graph_copy(e->graph);
         run = path_build(copy, e->adj, karp_tmp);
         rentability = rentability_calcul(run, e->ants);
+        printf("rentability = %f\n", rentability);
         if (rentability < rentability_tmp)
         {
             rentability_tmp = rentability;
