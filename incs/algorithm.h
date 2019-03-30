@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 18:10:29 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/02 18:37:33 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void    algorithm_launch(t_env *env);
 
-int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp);
+int edmonds_karp(t_env *env, t_karp *karp);
 
 bool bfs_flow(t_graph *graph, t_adjacency *adj, t_karp *karp);
 

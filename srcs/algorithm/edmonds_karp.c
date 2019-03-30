@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 18:13:22 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/30 16:44:46 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,44 @@ void graph_augment_flow(t_graph *graph, t_karp *karp)
     }
 }
 
-int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp)
+float rentability_calcul(t_run *run, int ants)
+{
+    size_t index;
+    int total;
+
+    index = 0;
+    while (index < run->length)
+    {
+        total += run->paths[index]->length;
+        ++index;
+    }
+    return ((float)((total + ants) / run->length));
+}
+
+int edmonds_karp(t_env *e, t_karp *karp)
 {
     t_run *run;
     t_graph *copy;
     t_karp *karp_tmp;
+    float rentability;
+    float rentability_tmp;
     int max_flow;
-    //int cycles;
 
     max_flow = 0;
-    while (bfs_capacity(graph, adj, karp))
+    while (bfs_capacity(e->graph, e->adj, karp))
     {
-        graph_augment_flow(graph, karp);
-        karp_tmp = new_karp(karp->source, karp->sink, graph->size);
-        copy = graph_copy(graph);
-        run = path_build(copy, adj, karp_tmp);
-        /*
-        cycles = cycle_count(run, e->ants);
-        if (cycle < e->cycles)
-            snapshot();
-        */
-        array_dispose((t_array *)run, &path_free);
+        graph_augment_flow(e->graph, karp);
+        karp_tmp = new_karp(karp->source, karp->sink, e->graph->size);
+        copy = graph_copy(e->graph);
+        run = path_build(copy, e->adj, karp_tmp);
+        rentability = rentability_calcul(run, e->ants);
+        if (rentability < rentability_tmp)
+        {
+            rentability_tmp = rentability;
+            e->run = run;
+        }
+        else
+            array_dispose((t_array *)run, &path_free);
         free_karp(karp_tmp);
         free_graph(copy);
         max_flow += 1;
