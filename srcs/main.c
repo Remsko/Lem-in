@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 20:32:31 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:49:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		main(int ac, char **av)
 		if (err != NULL)
 		{
 			ft_putstr_fd("ERROR\n", 2);
-			error_throw(err, NULL, false);
+			//error_throw(err, NULL, false);
 			garbage_all(env);
 			return (1);
 		}

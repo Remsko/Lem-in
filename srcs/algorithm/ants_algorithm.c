@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 20:34:01 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:50:53 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,8 @@ void ants_algorithm(t_env *e)
     int ant_id;
     int cycle;
 
+    if (e->run == NULL)
+        return ;
     cycle = 0;
     ant_id = 0;
     head = NULL;
@@ -209,5 +211,5 @@ void ants_algorithm(t_env *e)
         if (ant_id < e->ants)
             new_turn(e->run, &head, &ant_id, e->ants);
     }
-    printf("\ncycle: %d\n", cycle);
+    //printf("\ncycle: %d\n", cycle);
 }
