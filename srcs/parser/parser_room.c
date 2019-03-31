@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:17:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 21:10:06 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 23:32:10 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_error *parser_room(t_env *e, char **line)
                 err = error_create("End is in double.", NULL, 13);
         }
         else if (*line[0] == 'L')
-            err = error_create("Room start with a L.", NULL, 3);
+            err = error_create("Room can't start with a L.", NULL, 3);
         else if (room_parse(e, *line, type))
             type = BASIC;
         else

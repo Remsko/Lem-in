@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 20:32:26 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 22:20:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int edmonds_karp(t_env *e, t_karp *karp)
         //printf("#rentability = %f\n", rentability);
         if (rentability < rentability_tmp)
         {
-            array_dispose((t_array *)e->run, &path_free);
+            if (e->run != NULL)
+                array_dispose((t_array *)e->run, &path_free);
             rentability_tmp = rentability;
             e->run = run;
             //path_print(e->run, e->map);

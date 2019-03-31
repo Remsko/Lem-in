@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 20:50:53 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 23:38:18 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <stdio.h>
 #include "types.h"
 #include "write_42.h"
-
-
 
 bool path_worth(t_path *path)
 {
@@ -196,6 +194,7 @@ void ants_algorithm(t_env *e)
 
     if (e->run == NULL)
         return ;
+    printf("\n");
     cycle = 0;
     ant_id = 0;
     head = NULL;
