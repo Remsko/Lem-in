@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 23:38:18 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 23:58:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_ant *ant_new(t_path *path, int *id)
 
 void ant_forward(t_map *map, t_ant *ant)
 {
-    //print move;
     char *name;
     unsigned int index;
 
@@ -192,9 +191,6 @@ void ants_algorithm(t_env *e)
     int ant_id;
     int cycle;
 
-    if (e->run == NULL)
-        return ;
-    printf("\n");
     cycle = 0;
     ant_id = 0;
     head = NULL;
