@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/30 16:40:00 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 13:58:42 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef enum e_room_type
 
 typedef struct s_path
 {
-    unsigned int *next;
+    unsigned int *list;
     size_t length;
 } t_path;
 
@@ -86,6 +86,13 @@ typedef struct s_map
     size_t capacity;
     size_t size;
 } t_map;
+
+typedef struct s_ant
+{
+    int id;
+    size_t index;
+    t_path *path;
+} t_ant;
 
 typedef struct s_env
 {

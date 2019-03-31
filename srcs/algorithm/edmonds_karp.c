@@ -45,7 +45,7 @@ float rentability_calcul(t_run *run, int ants)
         total += run->paths[index]->length;
         ++index;
     }
-    printf("total = %zu ; run->length = %zu ; ants = %zu\n", total, run->length, (size_t)ants);
+    printf("#total = %zu ; run->length = %zu ; ants = %zu\n", total, run->length, (size_t)ants);
     return ((float)((total + (size_t)ants) / run->length));
 }
 
@@ -67,7 +67,7 @@ int edmonds_karp(t_env *e, t_karp *karp)
         copy = graph_copy(e->graph);
         run = path_build(copy, e->adj, karp_tmp);
         rentability = rentability_calcul(run, e->ants);
-        printf("rentability = %f\n", rentability);
+        printf("#rentability = %f\n", rentability);
         if (rentability < rentability_tmp)
         {
             rentability_tmp = rentability;
@@ -76,7 +76,7 @@ int edmonds_karp(t_env *e, t_karp *karp)
         else
             array_dispose((t_array *)run, &path_free);
         free_karp(karp_tmp);
-        free_graph(copy);
+        graph_free(copy);
         max_flow += 1;
     }
     return (max_flow);

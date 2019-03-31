@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_graph.c                                      :+:      :+:    :+:   */
+/*   graph_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "write_42.h"
 #include "types.h"
 
-void    print_graph(t_graph *graph)
+void    graph_print(t_graph *graph)
 {
     size_t x;
     size_t y;

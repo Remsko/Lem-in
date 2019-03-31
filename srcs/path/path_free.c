@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:07:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 13:13:12 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 14:23:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void    path_free(void *ptr, size_t size)
         {
             if (paths[i] != NULL)
             {
-                if (paths[i]->next != NULL)
-                    free(paths[i]->next);
+                if (paths[i]->list != NULL)
+                    free(paths[i]->list);
                 free(paths[i]);
             }
             ++i;

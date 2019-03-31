@@ -20,7 +20,7 @@ t_graph *graph_copy(t_graph *graph)
     size_t index;
 
     index = 0;
-    copy = new_graph(graph->size);
+    copy = graph_new(graph->size);
     while (index < graph->size)
     {
         ft_memcpy(copy->edge[index], graph->edge[index], sizeof(t_edge) * graph->size);

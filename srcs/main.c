@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/30 16:49:00 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 15:43:05 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int		main(int ac, char **av)
 		algorithm_launch(env);
 		//print_graph(env->graph);
 		anthill_print(env->anthill);
+		ft_putstr("\n");
+		ants_algorithm(env);
 		garbage_all(env);
 	}
 	else

@@ -37,9 +37,9 @@ SRC_NAME += garbage_rooms.c
 
 SRC_SUB += graph
 SRC_NAME += graph_copy.c
-SRC_NAME += free_graph.c
-SRC_NAME += new_graph.c
-SRC_NAME += print_graph.c
+SRC_NAME += graph_free.c
+SRC_NAME += graph_new.c
+SRC_NAME += graph_print.c
 
 SRC_SUB += room
 SRC_NAME += room_parse.c
@@ -53,6 +53,7 @@ SRC_NAME += room_free.c
 
 SRC_SUB += algorithm
 SRC_NAME += algorithm_launch.c
+SRC_NAME += ants_algorithm.c
 SRC_NAME += edmonds_karp.c
 SRC_NAME += new_karp.c
 SRC_NAME += free_karp.c

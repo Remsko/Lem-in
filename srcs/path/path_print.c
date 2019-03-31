@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 17:40:48 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/25 16:37:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 14:22:59 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ void path_print(t_run *run, t_map *map)
     {
         path = run->paths[run_index];
         path_index = 0;
+        printf("#");
         while (path_index < path->length - 1)
         {
-            room = path->next[path_index];
+            room = path->list[path_index];
             printf("%s->", map->rooms[room]->name);
             ++path_index;
         }
-        room = path->next[path_index];
+        room = path->list[path_index];
         printf("%s\n", map->rooms[room]->name);
         ++run_index;
     }

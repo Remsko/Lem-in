@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 18:37:33 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 14:26:33 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void graph_consumer(t_env *e, t_karp *karp);
 t_karp *new_karp(unsigned int start, unsigned int end, size_t size);
 
 void free_karp(t_karp *karp);
+
+void ants_algorithm(t_env *e);
 
 #endif

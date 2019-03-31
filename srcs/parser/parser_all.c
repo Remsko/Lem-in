@@ -27,7 +27,7 @@ t_error *parser_all(t_env *e)
         return (err);
     if ((err = parser_room(e, &line)) != NULL)
         return (err);
-    if ((e->graph = new_graph(e->map->length)) == NULL)
+    if ((e->graph = graph_new(e->map->length)) == NULL)
         return (error_create("Graph malloc failed.", NULL, 9));
     if ((err = parser_pipe(e, &line)) != NULL)
         return (err);

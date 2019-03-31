@@ -15,11 +15,11 @@
 
 #include "types.h"
 
-t_graph *new_graph(size_t size);
+t_graph *graph_new(size_t size);
 
-void free_graph(t_graph *graph);
+void graph_free(t_graph *graph);
 
-void    print_graph(t_graph *graph);
+void    graph_print(t_graph *graph);
 
 t_graph *graph_copy(t_graph *graph);
 

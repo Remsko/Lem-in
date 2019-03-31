@@ -33,7 +33,7 @@ void    garbage_all(t_env *env)
             array_dispose((t_array *)env->run, &path_free);
         if (env->graph != NULL)
             free_adjacency(env->adj, env->graph->size);
-        free_graph(env->graph);
+        graph_free(env->graph);
         rb_tree_delete(env->root);
         free(env);
     }
