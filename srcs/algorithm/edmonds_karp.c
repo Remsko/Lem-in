@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/30 16:55:07 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 19:27:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ float rentability_calcul(t_run *run, int ants)
         total += run->paths[index]->length;
         ++index;
     }
-    printf("#total = %zu ; run->length = %zu ; ants = %zu\n", total, run->length, (size_t)ants);
+    //("#total = %zu ; run->length = %zu ; ants = %zu\n", total, run->length, (size_t)ants);
     return ((float)((total + (size_t)ants) / run->length));
 }
 
@@ -67,9 +67,10 @@ int edmonds_karp(t_env *e, t_karp *karp)
         copy = graph_copy(e->graph);
         run = path_build(copy, e->adj, karp_tmp);
         rentability = rentability_calcul(run, e->ants);
-        printf("#rentability = %f\n", rentability);
+        //printf("#rentability = %f\n", rentability);
         if (rentability < rentability_tmp)
         {
+            array_dispose((t_array *)e->run, &path_free);
             rentability_tmp = rentability;
             e->run = run;
         }

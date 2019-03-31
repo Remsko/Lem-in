@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 16:44:24 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 19:20:32 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "types.h"
+#include "write_42.h"
+
+bool path_worth(t_path *path)
+{
+    (void)path;
+    return (true);
+}
 
 typedef struct s_list
 {
-	struct s_list	*next;
-	t_ant *individual;
-} t_list;
+    struct s_list *next;
+    t_ant *ant;
+}   t_list;
 
 void list_add(t_list **head, t_list *new)
 {
@@ -30,18 +37,6 @@ void list_add(t_list **head, t_list *new)
 	}
 }
 
-void list_delete_one(t_list **list)
-{
-    t_list *tmp;
-
-    if (list == NULL || *list == NULL)
-        return ;
-    tmp = *list;
-	*list = (*list)->next;
-    free(tmp->individual);
-    free(tmp);
-}
-
 t_list *list_new(t_ant *ant)
 {
 	t_list *new;
@@ -49,7 +44,7 @@ t_list *list_new(t_ant *ant)
 	if ((new = (t_list *)malloc(sizeof(t_list))) != NULL)
 	{
 		new->next = NULL;
-		new->individual = ant;
+		new->ant = ant;
 	}
 	return (new);
 }
@@ -73,12 +68,7 @@ void ant_forward(t_map *map, t_ant *ant)
     char *name;
     unsigned int index;
 
-    if (ant->index + 1 < ant->path->length)
-        ant->index++;
-    else
-    {
-        printf("\nerror\n");
-    }
+    ant->index++;
     index = ant->path->list[ant->index];
     name = map->rooms[index]->name;
     printf("L%d-%s ", ant->id, name);
@@ -94,34 +84,59 @@ bool ant_arrived(t_map *map, t_ant *ant)
     return (false);
 }
 
-void    ants_forward(t_map *map, t_list **ant_list)
+void list_delete_one(t_list **head, t_list *node)
 {
-    t_list *list;
+    t_list *tmp;
+    t_list *prev;
+
+    if (head == NULL || *head == NULL || node == NULL)
+        return ;
+    if (*head == node)
+    {
+        *head = (*head)->next;
+        free(node->ant);
+        free(node);
+    }
+    tmp = *head;
+    prev = *head;
+    while (tmp != NULL && tmp != node)
+    {
+        prev = tmp;
+        tmp = prev->next;
+    }
+    if (tmp == NULL)
+        return ;
+    prev->next = tmp->next;
+    free(tmp->ant);
+    free(tmp);
+}
+
+void    ants_forward(t_map *map, t_list **head)
+{
+    t_list *node;
     t_ant *ant;
 
-    list = *ant_list;
-    while (list != NULL)
+    node = *head;
+    while (node != NULL)
     {
-        ant = list->individual;
+        ant = node->ant;
         ant_forward(map, ant);
         if (ant_arrived(map, ant))
-            list_delete_one(&list);
-        if (list == NULL)
-            break ;
-        list = list->next;
+        {
+            t_list *tmp = node;
+            node = node->next;
+            list_delete_one(head, tmp);
+            if (*head == NULL || node == NULL)
+                break ;
+        }
+        node = node->next;
     }
     printf("\n");
 }
 
-bool path_worth(t_path *path)
+void new_turn(t_run *run, t_list **head, int *ant_id, int ant_number)
 {
-    (void)path;
-    return (true);
-}
-
-void new_turn(t_run *run, t_list **ant_list_ptr, int *ant_id, int ants)
-{
-    t_list *list;
+    t_list *node;
     t_ant *ant;
     t_path *path;
     size_t index;
@@ -130,11 +145,13 @@ void new_turn(t_run *run, t_list **ant_list_ptr, int *ant_id, int ants)
     while (index < run->length)
     {
         path = run->paths[index];
-        if (path_worth(path) && *ant_id < ants)
+        if (path_worth(path) && *ant_id < ant_number)
         {
             ant = ant_new(path, ant_id);
-            list = list_new(ant);
-            list_add(ant_list_ptr, list);
+            node = list_new(ant);
+            list_add(head, node);
+            /* ajouter vers l'avant ou vers l'arriere peut rendre coherent l'ordre d'affichage
+            du mouvement des fourmis lors dans tour */
         }
         ++index;
     }
@@ -142,21 +159,21 @@ void new_turn(t_run *run, t_list **ant_list_ptr, int *ant_id, int ants)
 
 void ants_algorithm(t_env *e)
 {
-    t_list **list_ptr;
-    t_list *ant_list;
+    t_list *head;
     int ant_id;
     int cycle;
 
     cycle = 0;
     ant_id = 0;
-    ant_list = NULL;
-    list_ptr = &ant_list;
-    new_turn(e->run, list_ptr, &ant_id, e->ants);
-    while (ant_list != NULL)
+    head = NULL;
+    new_turn(e->run, &head, &ant_id, e->ants);
+    while (head != NULL)
     {
-        ants_forward(e->map, list_ptr);
-        if (ant_id < e->ants)
-            new_turn(e->run, list_ptr, &ant_id, e->ants);
         ++cycle;
+        //ft_putnbr(cycle);
+        //ft_putstr(" : ");
+        ants_forward(e->map, &head);
+        if (ant_id < e->ants)
+            new_turn(e->run, &head, &ant_id, e->ants);
     }
 }
