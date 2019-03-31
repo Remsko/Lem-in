@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 19:27:30 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:32:26 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ float rentability_calcul(t_run *run, int ants)
         ++index;
     }
     //("#total = %zu ; run->length = %zu ; ants = %zu\n", total, run->length, (size_t)ants);
-    return ((float)((total + (size_t)ants) / run->length));
+    return ((float)(((float)total + (float)ants) / (float)run->length));
 }
 
 int edmonds_karp(t_env *e, t_karp *karp)
@@ -65,7 +65,9 @@ int edmonds_karp(t_env *e, t_karp *karp)
         graph_augment_flow(e->graph, karp);
         karp_tmp = new_karp(karp->source, karp->sink, e->graph->size);
         copy = graph_copy(e->graph);
+        //graph_print(copy);
         run = path_build(copy, e->adj, karp_tmp);
+        //graph_print(copy);
         rentability = rentability_calcul(run, e->ants);
         //printf("#rentability = %f\n", rentability);
         if (rentability < rentability_tmp)
@@ -73,6 +75,7 @@ int edmonds_karp(t_env *e, t_karp *karp)
             array_dispose((t_array *)e->run, &path_free);
             rentability_tmp = rentability;
             e->run = run;
+            //path_print(e->run, e->map);
         }
         else
             array_dispose((t_array *)run, &path_free);

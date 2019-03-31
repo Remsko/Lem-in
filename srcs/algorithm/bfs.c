@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 11:19:43 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 15:10:52 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:29:17 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ bool bfs_flow(t_graph *graph, t_adjacency *adj, t_karp *karp)
     unsigned int u;
     unsigned int v;
 
-    ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)graph->size);
     ft_bzero((void *)&queue, sizeof(t_queue));
     en_queue(&queue, (int)karp->source);
     karp->visited[karp->source] = true;

@@ -6,13 +6,13 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 17:40:48 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 18:51:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 19:58:34 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
+#include "write_42.h"
 
-#include <stdio.h>
 void path_print(t_run *run, t_map *map)
 {
     t_path *path;
@@ -25,15 +25,16 @@ void path_print(t_run *run, t_map *map)
     {
         path = run->paths[run_index];
         path_index = 0;
-        printf("#");
+        ft_putstr("#");
         while (path_index < path->length - 1)
         {
             room = path->list[path_index];
-            printf("%s->", map->rooms[room]->name);
+            ft_putstr(map->rooms[room]->name);
+            ft_putstr("->");
             ++path_index;
         }
         room = path->list[path_index];
-        printf("%s\n", map->rooms[room]->name);
+        ft_putendl(map->rooms[room]->name);
         ++run_index;
     }
 }

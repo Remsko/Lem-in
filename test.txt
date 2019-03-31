@@ -1,4 +1,6 @@
-5
+#b->e->g->j->m
+#b->c->f->g->k->m
+3
 a 0 0
 ##start
 b 0 4
@@ -33,9 +35,12 @@ l-n
 n-m
 g-k
 k-m
+#rentability = 8.000000
+#rentability = 7.000000
+#rentability = 7.000000
 
-L3-e L2-c L1-a
-L5-c L4-a L3-h L2-f L1-d
-L5-f L4-d L3-l L2-g L1-i
-L5-g L4-i L3-n L2-k L1-j
-L5-k L4-j L3-m L2-m L1-m
+L2-c L1-e 
+L3-e L2-f L1-g 
+L3-g L2-g L1-j 
+L3-j L2-k L1-m 
+L3-m L2-m 

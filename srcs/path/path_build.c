@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:14:31 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 16:21:29 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:30:51 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ size_t graph_reduce_flow(t_graph *graph, t_karp *karp)
     while (v != karp->source)
     {
         u = karp->parent[v];
+        karp->visited[u] = true;
         graph->edge[v][u].flow = 0;
         graph->edge[u][v].flow = 0;
         v = karp->parent[v];
@@ -43,10 +44,13 @@ t_run *path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
     size_t path_length;
     
     run = (t_run *)array_create(sizeof(t_path *));
-    ft_memset(karp->parent, 0, sizeof(int) * (size_t)graph->size);
+    ft_bzero(karp->parent, sizeof(int) * (size_t)graph->size);
+    ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)graph->size);
     while (bfs_flow(graph, adj, karp))
     {
+        ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)graph->size);
         path_length = graph_reduce_flow(graph, karp);
+        //print_graph();
         new = path_new(karp, path_length);
         path_add(run, new);
     }

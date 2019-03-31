@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 15:43:05 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:32:31 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	print_usage(char *bin)
 	ft_putstr(bin);
 	ft_putstr(" < map\n");
 }
-
+#include <stdio.h>
 int		main(int ac, char **av)
 {
 	t_env	*env;
@@ -64,11 +64,11 @@ int		main(int ac, char **av)
 			return (1);
 		}
 		//room_print(env->map);
-		//print_graph(env->graph);
-		algorithm_launch(env);
-		//print_graph(env->graph);
+		//graph_print(env->graph);
 		anthill_print(env->anthill);
-		ft_putstr("\n");
+		algorithm_launch(env);
+		//graph_print(env->graph);
+		printf("\n");
 		ants_algorithm(env);
 		garbage_all(env);
 	}

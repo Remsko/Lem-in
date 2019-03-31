@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:54:28 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/12/13 17:06:32 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:05:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "types.h"
 
+#include <stdio.h>
 void anthill_print(t_anthill *anthill)
 {
     size_t i;
@@ -22,7 +23,7 @@ void anthill_print(t_anthill *anthill)
     while (i < anthill->length)
     {
         if (anthill->lines[i] != NULL)
-            ft_putendl(anthill->lines[i]);
+            printf("%s\n", anthill->lines[i]);
         ++i;
     }
 }

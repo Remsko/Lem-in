@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 19:20:32 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:34:01 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include "types.h"
 #include "write_42.h"
+
+
 
 bool path_worth(t_path *path)
 {
@@ -27,6 +29,23 @@ typedef struct s_list
     struct s_list *next;
     t_ant *ant;
 }   t_list;
+
+void print_list(t_list *head, bool add)
+{
+    printf("\nlist %s: ", add ? "add" : "delete");
+    if (head == NULL)
+    {
+        printf("empty");
+        return ;
+    }
+    while (head->next != NULL)
+    {
+        printf("%d->", head->ant->id);
+        head = head->next;
+    }
+    printf("%d", head->ant->id);
+    printf("\n");
+}
 
 void list_add(t_list **head, t_list *new)
 {
@@ -121,17 +140,28 @@ void    ants_forward(t_map *map, t_list **head)
     {
         ant = node->ant;
         ant_forward(map, ant);
-        if (ant_arrived(map, ant))
-        {
-            t_list *tmp = node;
-            node = node->next;
-            list_delete_one(head, tmp);
-            if (*head == NULL || node == NULL)
-                break ;
-        }
         node = node->next;
     }
     printf("\n");
+}
+
+bool    ants_delete(t_map *map, t_list **head)
+{
+    t_list *node;
+    t_ant *ant;
+
+    node = *head;
+    while (node != NULL)
+    {
+        ant = node->ant;
+        if (ant_arrived(map, ant))
+        {
+            list_delete_one(head, node);
+            return (true);
+        }
+        node = node->next;
+    }
+    return (false);
 }
 
 void new_turn(t_run *run, t_list **head, int *ant_id, int ant_number)
@@ -150,6 +180,7 @@ void new_turn(t_run *run, t_list **head, int *ant_id, int ant_number)
             ant = ant_new(path, ant_id);
             node = list_new(ant);
             list_add(head, node);
+            //print_list(*head, true);
             /* ajouter vers l'avant ou vers l'arriere peut rendre coherent l'ordre d'affichage
             du mouvement des fourmis lors dans tour */
         }
@@ -173,7 +204,10 @@ void ants_algorithm(t_env *e)
         //ft_putnbr(cycle);
         //ft_putstr(" : ");
         ants_forward(e->map, &head);
+        while (ants_delete(e->map, &head))
+            ;
         if (ant_id < e->ants)
             new_turn(e->run, &head, &ant_id, e->ants);
     }
+    printf("\ncycle: %d\n", cycle);
 }
