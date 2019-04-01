@@ -6,16 +6,15 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:14:31 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:16:46 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 19:24:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
-#include "algorithm.h"
 #include "path.h"
-#include "memory_42.h"
+#include "algorithm.h"
 #include "array_42.h"
-#include "queue_42.h"
+#include "memory_42.h"
 
 static size_t	consume_path(t_graph *graph, t_karp *karp)
 {
@@ -37,12 +36,12 @@ static size_t	consume_path(t_graph *graph, t_karp *karp)
 	return (path_length);
 }
 
-static bool condition_flow(t_edge *edge)
+static bool		condition_flow(t_edge *edge)
 {
 	return (edge->flow > 0);
 }
 
-t_run	*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
+t_run			*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
 	t_run	*run;
 	t_path	*new;

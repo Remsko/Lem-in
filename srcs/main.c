@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 17:30:27 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 19:26:34 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "array_42.h"
 #include "error_42.h"
 
-t_env	*env_new(void)
+static t_env	*env_new(void)
 {
 	t_env *env;
 
@@ -37,14 +37,14 @@ t_env	*env_new(void)
 	return (env);
 }
 
-static void	print_usage(char *bin)
+static void		print_usage(char *bin)
 {
 	ft_putstr("usage: ");
 	ft_putstr(bin);
 	ft_putstr(" < map\n");
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_env	*env;
 	t_error	*err;
@@ -64,7 +64,6 @@ int		main(int ac, char **av)
 		if (env->run != NULL)
 		{
 			anthill_print(env->anthill);
-			ft_putstr("\n");
 			algorithm_ants(env);
 		}
 		garbage_all(env);

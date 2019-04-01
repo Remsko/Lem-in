@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:25:41 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 15:16:47 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 19:25:46 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	cycle_pattern_add(t_cycle *cycle, char *name, int ant)
 	char	*n;
 	int		index;
 
-	if (cycle->length != 0 && cycle->line[cycle->length - 1] != '\n')
+	if (cycle->line[cycle->length - 1] != '\n')
 		cycle_add(cycle, ' ');
 	cycle_add(cycle, 'L');
 	if ((n = ft_itoa(ant)) == NULL)

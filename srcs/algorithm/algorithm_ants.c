@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 14:27:20 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 19:25:58 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,8 @@ void algorithm_ants(t_env *e)
     ant_id = 0;
     head = NULL;
     cycle = (t_cycle *)array_create(sizeof(char));
-    new_turn(e->run, &head, &ant_id, e->ants);
+    cycle_add(cycle, '\n');
+	new_turn(e->run, &head, &ant_id, e->ants);
     while (head != NULL)
     {
         ++lines;
