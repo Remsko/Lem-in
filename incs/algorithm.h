@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 14:26:33 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 11:17:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "types.h"
 
-void    algorithm_launch(t_env *env);
+void algorithm_paths(t_env *env);
 
 int edmonds_karp(t_env *env, t_karp *karp);
 
@@ -23,12 +23,10 @@ bool bfs_flow(t_graph *graph, t_adjacency *adj, t_karp *karp);
 
 bool bfs_capacity(t_graph *graph, t_adjacency *adj, t_karp *karp);
 
-void graph_consumer(t_env *e, t_karp *karp);
-
 t_karp *new_karp(unsigned int start, unsigned int end, size_t size);
 
 void free_karp(t_karp *karp);
 
-void ants_algorithm(t_env *e);
+void algorithm_ants(t_env *e);
 
 #endif

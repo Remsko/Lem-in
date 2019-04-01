@@ -52,13 +52,12 @@ SRC_NAME += room_search.c
 SRC_NAME += room_free.c
 
 SRC_SUB += algorithm
-SRC_NAME += algorithm_launch.c
-SRC_NAME += ants_algorithm.c
+SRC_NAME += algorithm_paths.c
+SRC_NAME += algorithm_ants.c
 SRC_NAME += edmonds_karp.c
 SRC_NAME += new_karp.c
 SRC_NAME += free_karp.c
 SRC_NAME += bfs.c
-SRC_NAME += graph_consumer.c
 
 SRC_SUB += adjacency
 SRC_NAME += adjacency_new.c

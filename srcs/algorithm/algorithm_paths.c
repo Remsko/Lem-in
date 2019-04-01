@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm_launch.c                                 :+:      :+:    :+:   */
+/*   algorithm_paths.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,7 +20,7 @@
 #include "array_42.h"
 #include <stdio.h>
 
-void algorithm_launch(t_env *env)
+void algorithm_paths(t_env *env)
 {
     t_karp *karp;
     int max_flow;
