@@ -20,27 +20,35 @@
 #include "array_42.h"
 #include <stdio.h>
 
-void algorithm_paths(t_env *env)
+void start_end(t_env *env)
 {
-    t_karp *karp;
-    int max_flow;
+    t_path *new;
 
-    if (env->map->length == 2)
+    if ((env->run = (t_run *)array_create(sizeof(t_path *))) != NULL)
     {
-        env->run = (t_run *)array_create(sizeof(t_path *));
-        t_path *new = malloc(sizeof(t_path));
-        new->list = malloc(sizeof(size_t) * 2);
+        if ((new = (t_path *)malloc(sizeof(t_path))) == NULL
+            || (new->list = (size_t *)malloc(sizeof(size_t) * 2)) == NULL)
+        {
+            if (new != NULL)
+                free(new);
+            free(env->run);
+        }
         new->list[0] = env->start;
         new->list[1] = env->end;
         new->length = 2;
         path_add(env->run, new);
-        return ;
     }
+}
+
+void algorithm_paths(t_env *env)
+{
+    t_karp *karp;
+
+    if (env->map->length == 2)
+        return (start_end(env));
     karp = new_karp(env->start, env->end, env->graph->size);
-    max_flow = edmonds_karp(env, karp);
+    edmonds_karp(env, karp);
     free_karp(karp);
-    (void)max_flow;
-    //printf("#max_flow = %d\n", max_flow);
     if (env->run == NULL)
         return (ft_putstr("ERROR\nNo path were found."));
 }

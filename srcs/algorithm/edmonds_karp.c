@@ -6,17 +6,18 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 14:25:48 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 18:45:36 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <float.h>
-#include "array_42.h"
 #include "path.h"
 #include "algorithm.h"
 #include "graph.h"
 #include "types.h"
+#include "array_42.h"
+#include "memory_42.h"
 
 void graph_augment_flow(t_graph *graph, t_karp *karp)
 {
@@ -33,7 +34,7 @@ void graph_augment_flow(t_graph *graph, t_karp *karp)
     }
 }
 
-float rentability_calcul(t_run *run, int ants)
+double rentability_calcul(t_run *run, size_t ants)
 {
     size_t index;
     size_t total;
@@ -45,44 +46,42 @@ float rentability_calcul(t_run *run, int ants)
         total += run->paths[index]->length;
         ++index;
     }
-    //("#total = %zu ; run->length = %zu ; ants = %zu\n", total, run->length, (size_t)ants);
-    return ((float)(((float)total + (float)ants) / (float)run->length));
+    return ((double)(total + ants) / (double)run->length);
 }
 
-int edmonds_karp(t_env *e, t_karp *karp)
+bool edge_condidition_capacity(t_edge *edge)
+{
+    return (edge->capacity > edge->flow);
+}
+
+void    edmonds_karp(t_env *e, t_karp *karp)
 {
     t_run *run;
     t_graph *copy;
     t_karp *karp_tmp;
-    float rentability;
-    float rentability_tmp;
-    int max_flow;
+    double rentability;
+    double rentability_tmp;
 
-    max_flow = 0;
     rentability_tmp = FLT_MAX;
-    while (bfs_capacity(e->graph, e->adj, karp))
+    ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)e->graph->size);
+    while (bfs(e->graph, e->adj, karp, &edge_condidition_capacity))
     {
         graph_augment_flow(e->graph, karp);
         karp_tmp = new_karp(karp->source, karp->sink, e->graph->size);
         copy = graph_copy(e->graph);
-        //graph_print(copy);
         run = path_build(copy, e->adj, karp_tmp);
-        //graph_print(copy);
-        rentability = rentability_calcul(run, e->ants);
-        //printf("#rentability = %f\n", rentability);
+        rentability = rentability_calcul(run, (size_t)e->ants);
         if (rentability < rentability_tmp)
         {
             if (e->run != NULL)
                 array_dispose((t_array *)e->run, &path_free);
             rentability_tmp = rentability;
             e->run = run;
-            //path_print(e->run, e->map);
         }
         else
             array_dispose((t_array *)run, &path_free);
         free_karp(karp_tmp);
         graph_free(copy);
-        max_flow += 1;
+        ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)e->graph->size);
     }
-    return (max_flow);
 }
