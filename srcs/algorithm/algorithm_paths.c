@@ -29,7 +29,7 @@ void algorithm_paths(t_env *env)
     {
         env->run = (t_run *)array_create(sizeof(t_path *));
         t_path *new = malloc(sizeof(t_path));
-        new->list = malloc(sizeof(unsigned int) * 2);
+        new->list = malloc(sizeof(size_t) * 2);
         new->list[0] = env->start;
         new->list[1] = env->end;
         new->length = 2;

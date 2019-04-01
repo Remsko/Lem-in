@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 19:28:25 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 14:27:43 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ typedef enum e_room_type
 
 typedef struct s_path
 {
-    unsigned int *list;
+    size_t *list;
     size_t length;
 } t_path;
 
-typedef struct s_adjacency
+typedef struct  s_adjacency
 {
-    unsigned int *list;
+    size_t *list;
     size_t length;
-} t_adjacency;
+}   t_adjacency;
 
 typedef struct s_edge
 {
-    int flow;
-    int capacity;
+    short flow;
+    short capacity;
 } t_edge;
 
 typedef struct s_graph
@@ -51,7 +51,7 @@ typedef struct s_room
 {
     char *name;
     size_t pipes;
-    unsigned int self_index;
+    size_t self_index;
     t_room_type type;
 } t_room;
 
@@ -102,17 +102,17 @@ typedef struct s_env
     t_adjacency *adj;
     t_anthill *anthill;
     t_run *run;
-    unsigned int start;
-    unsigned int end;
+    size_t start;
+    size_t end;
     int ants;
 } t_env;
 
 typedef struct s_karp
 {
     bool *visited;
-    unsigned int *parent;
-    unsigned int source;
-    unsigned int sink;
+    size_t *parent;
+    size_t source;
+    size_t sink;
 } t_karp;
 
 #endif

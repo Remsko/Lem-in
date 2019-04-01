@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 12:45:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 14:33:13 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_env	*env_new(void)
 	env->map = (t_map *)array_create(sizeof(t_room *));
 	if (env->map == NULL)
 		error_malloc("main");
-	env->start = (unsigned int)-1;
-	env->end = (unsigned int)-1;
+	env->start = (size_t)-1;
+	env->end = (size_t)-1;
 	return (env);
 }
 

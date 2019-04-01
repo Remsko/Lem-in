@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 18:08:43 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 18:15:00 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 14:26:32 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "algorithm.h"
 #include "types.h"
 
-t_karp *new_karp(unsigned int start, unsigned int end, size_t size)
+t_karp *new_karp(size_t start, size_t end, size_t size)
 {
     t_karp *karp;
     
@@ -23,7 +23,7 @@ t_karp *new_karp(unsigned int start, unsigned int end, size_t size)
         return (NULL);
     if ((karp->visited = (bool *)malloc(sizeof(bool) * size)) == NULL)
         return (NULL);
-    if ((karp->parent = (unsigned int *)malloc(sizeof(int) * size)) == NULL)
+    if ((karp->parent = (size_t *)malloc(sizeof(size_t) * size)) == NULL)
     {
         free_karp(karp);
         return (NULL);

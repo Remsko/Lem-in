@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_add.c                                      :+:      :+:    :+:   */
+/*   cycle_add.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpinoit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/07 17:23:52 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 14:51:01 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/04/01 15:08:40 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/04/01 15:17:07 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "array_42.h"
-#include "error_42.h"
 #include "types.h"
+#include "error_42.h"
+#include "array_42.h"
 
-void	anthill_add(t_anthill *anthill, char **line)
+void	cycle_add(t_cycle *cycle, char c)
 {
-	array_append((t_array *)anthill, (void *)line);
-	if (anthill->lines == NULL)
-		error_malloc("anthill_add");
+	array_append((t_array *)cycle, (void *)&c);
+	if (cycle->line == NULL)
+		error_malloc("cycle_add");
 }

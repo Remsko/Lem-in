@@ -65,6 +65,7 @@ SRC_NAME += adjacency_new.c
 SRC_NAME += adjacency_free.c
 
 SRC_SUB += cycle
+SRC_NAME += cycle_add.c
 SRC_NAME += cycle_print.c
 SRC_NAME += cycle_pattern_add.c
 

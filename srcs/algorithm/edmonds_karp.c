@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 22:20:30 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 14:25:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 void graph_augment_flow(t_graph *graph, t_karp *karp)
 {
-    unsigned int v;
-    unsigned int u;
+    size_t v;
+    size_t u;
 
     v = karp->sink;
     while (v != karp->source)

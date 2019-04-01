@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 13:48:36 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 14:27:20 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_ant *ant_new(t_path *path, int *id)
 void ant_forward(t_map *map, t_ant *ant, t_cycle *cycle)
 {
     char *name;
-    unsigned int index;
+    size_t index;
 
     ant->index++;
     index = ant->path->list[ant->index];
@@ -77,7 +77,7 @@ void ant_forward(t_map *map, t_ant *ant, t_cycle *cycle)
 
 bool ant_arrived(t_map *map, t_ant *ant)
 {
-    unsigned int index;
+    size_t index;
 
     index = ant->path->list[ant->index];
     if (map->rooms[index]->type == END)

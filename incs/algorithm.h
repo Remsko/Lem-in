@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 11:17:50 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 14:26:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool bfs_flow(t_graph *graph, t_adjacency *adj, t_karp *karp);
 
 bool bfs_capacity(t_graph *graph, t_adjacency *adj, t_karp *karp);
 
-t_karp *new_karp(unsigned int start, unsigned int end, size_t size);
+t_karp *new_karp(size_t start, size_t end, size_t size);
 
 void free_karp(t_karp *karp);
 
