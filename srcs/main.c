@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 11:15:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 12:45:39 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		main(int ac, char **av)
 		if (env->run != NULL)
 		{
 			anthill_print(env->anthill);
-			printf("\n");
+			ft_putstr("\n");
 			algorithm_ants(env);
 		}
 		garbage_all(env);

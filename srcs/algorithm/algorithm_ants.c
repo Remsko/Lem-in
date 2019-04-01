@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 11:16:22 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 13:48:36 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "types.h"
+#include "cycle.h"
 #include "write_42.h"
+#include "array_42.h"
 
 bool path_worth(t_path *path)
 {
@@ -27,23 +29,6 @@ typedef struct s_list
     struct s_list *next;
     t_ant *ant;
 }   t_list;
-
-void print_list(t_list *head, bool add)
-{
-    printf("\nlist %s: ", add ? "add" : "delete");
-    if (head == NULL)
-    {
-        printf("empty");
-        return ;
-    }
-    while (head->next != NULL)
-    {
-        printf("%d->", head->ant->id);
-        head = head->next;
-    }
-    printf("%d", head->ant->id);
-    printf("\n");
-}
 
 void list_add(t_list **head, t_list *new)
 {
@@ -79,7 +64,7 @@ t_ant *ant_new(t_path *path, int *id)
 	return (new);
 }
 
-void ant_forward(t_map *map, t_ant *ant)
+void ant_forward(t_map *map, t_ant *ant, t_cycle *cycle)
 {
     char *name;
     unsigned int index;
@@ -87,7 +72,7 @@ void ant_forward(t_map *map, t_ant *ant)
     ant->index++;
     index = ant->path->list[ant->index];
     name = map->rooms[index]->name;
-    printf("L%d-%s ", ant->id, name);
+    cycle_pattern_add(cycle, name, ant->id);
 }
 
 bool ant_arrived(t_map *map, t_ant *ant)
@@ -127,7 +112,7 @@ void list_delete_one(t_list **head, t_list *node)
     free(tmp);
 }
 
-void    ants_forward(t_map *map, t_list **head)
+void    ants_forward(t_map *map, t_list **head, t_cycle *cycle)
 {
     t_list *node;
     t_ant *ant;
@@ -136,10 +121,10 @@ void    ants_forward(t_map *map, t_list **head)
     while (node != NULL)
     {
         ant = node->ant;
-        ant_forward(map, ant);
+        ant_forward(map, ant, cycle);
         node = node->next;
     }
-    printf("\n");
+    array_append((t_array *)cycle, (void *)"\n");
 }
 
 bool    ants_delete(t_map *map, t_list **head)
@@ -177,9 +162,6 @@ void new_turn(t_run *run, t_list **head, int *ant_id, int ant_number)
             ant = ant_new(path, ant_id);
             node = list_new(ant);
             list_add(head, node);
-            //print_list(*head, true);
-            /* ajouter vers l'avant ou vers l'arriere peut rendre coherent l'ordre d'affichage
-            du mouvement des fourmis lors dans tour */
         }
         ++index;
     }
@@ -187,24 +169,26 @@ void new_turn(t_run *run, t_list **head, int *ant_id, int ant_number)
 
 void algorithm_ants(t_env *e)
 {
+    t_cycle *cycle;
     t_list *head;
     int ant_id;
-    int cycle;
+    int lines;
 
-    cycle = 0;
+    lines = 0;
     ant_id = 0;
     head = NULL;
+    cycle = (t_cycle *)array_create(sizeof(char));
     new_turn(e->run, &head, &ant_id, e->ants);
     while (head != NULL)
     {
-        ++cycle;
-        //ft_putnbr(cycle);
-        //ft_putstr(" : ");
-        ants_forward(e->map, &head);
+        ++lines;
+        ants_forward(e->map, &head, cycle);
         while (ants_delete(e->map, &head))
             ;
         if (ant_id < e->ants)
             new_turn(e->run, &head, &ant_id, e->ants);
     }
-    //printf("\ncycle: %d\n", cycle);
+    cycle_print(cycle);
+    free(cycle->line);
+    free(cycle);
 }

@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_print.c                                    :+:      :+:    :+:   */
+/*   cycle.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:54:28 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 12:45:17 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/04/01 13:47:43 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/04/01 13:48:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "write_42.h"
+#ifndef CYCLE_H
+#define CYCLE_H
+
 #include "types.h"
 
-void anthill_print(t_anthill *anthill)
-{
-    size_t i;
+void cycle_pattern_add(t_cycle *cycle, char *name, int ant);
 
-    i = 0;
-    while (i < anthill->length)
-    {
-        if (anthill->lines[i] != NULL)
-            ft_putendl(anthill->lines[i]);
-        ++i;
-    }
-}
+void cycle_print(t_cycle *cycle);
+
+#endif

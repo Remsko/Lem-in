@@ -12,6 +12,7 @@ INC_NAME += graph.h
 INC_NAME += algorithm.h
 INC_NAME += adjacency.h
 INC_NAME += path.h
+INC_NAME += cycle.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 

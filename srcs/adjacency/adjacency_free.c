@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 10:45:54 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 13:58:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 void adjacency_free(t_adjacency *adj, size_t size)
 {
-    size_t index;
+	size_t index;
 
-    if (adj == NULL)
-        return ;
-    index = 0;
-    while (index < size)
-    {
-        if (adj[index].list != NULL)
-            free(adj[index].list);
-        ++index;
-    }
-    free(adj);
+	if (adj == NULL)
+		return ;
+	index = 0;
+	while (index < size)
+	{
+		if (adj[index].list != NULL)
+			free(adj[index].list);
+		++index;
+	}
+	free(adj);
 }
