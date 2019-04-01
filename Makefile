@@ -61,8 +61,8 @@ SRC_NAME += bfs.c
 SRC_NAME += graph_consumer.c
 
 SRC_SUB += adjacency
-SRC_NAME += new_adjacency.c
-SRC_NAME += free_adjacency.c
+SRC_NAME += adjacency_new.c
+SRC_NAME += adjacency_free.c
 
 SRC_SUB += cycle
 SRC_NAME += cycle_print.c
