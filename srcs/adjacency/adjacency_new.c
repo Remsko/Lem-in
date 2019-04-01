@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_adjacency.c                                    :+:      :+:    :+:   */
+/*   adjacency_new.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:13:25 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 20:45:12 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 10:46:28 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "types.h"
 #include "adjacency.h"
 
-t_adjacency *new_adjacency(t_room **rooms, t_graph *graph)
+t_adjacency *adjacency_new(t_room **rooms, t_graph *graph)
 {
     t_adjacency *new;
     size_t x;
@@ -29,7 +29,7 @@ t_adjacency *new_adjacency(t_room **rooms, t_graph *graph)
     {
         if ((new[y].list = (unsigned int *)malloc(sizeof(int) * rooms[y]->pipes)) == NULL)
         {
-            free_adjacency(new, graph->size);
+            adjacency_free(new, graph->size);
             return (NULL);
         }
         new[y].length = rooms[y]->pipes;

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:17:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/18 21:30:14 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 23:32:10 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,26 @@ t_error *parser_room(t_env *e, char **line)
     int     ret;
     t_room_type type;
 
+    err = NULL;
     type = BASIC;
-    while ((ret = get_next_line(0, line)) == 1)
+    while ((ret = get_next_line(0, line)) == 1 && err == NULL)
     {
         anthill_add(e->anthill, line);
         if (*line[0] == '#')
+        {
             type_change(*line, &type);
+            if (type == START && e->start != (unsigned int)-1)
+                err = error_create("Start is in double.", NULL, 12);
+            if (type == END && e->end != (unsigned int)-1)
+                err = error_create("End is in double.", NULL, 13);
+        }
+        else if (*line[0] == 'L')
+            err = error_create("Room can't start with a L.", NULL, 3);
         else if (room_parse(e, *line, type))
             type = BASIC;
         else
             break ;
     }
-    err = NULL;
     if (ret != 1)
     {
         if (ret == 0)

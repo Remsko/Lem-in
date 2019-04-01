@@ -28,10 +28,16 @@ void cycle_pattern_add(t_cycle *cycle, char *name, int ant)
         error_malloc("cycle_pattern_add");
     index = 0;
     while (n[index] != '\0')
+    {
         array_append((t_array *)cycle, (void *)&n[index]);
+        ++index;
+    }
     free(n);
     array_append((t_array *)cycle, (void *)"-");
     index = 0;
     while (name[index] != '\0')
+    {
         array_append((t_array *)cycle, (void *)&name[index]);
+        ++index;
+    }
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_graph.c                                       :+:      :+:    :+:   */
+/*   graph_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "types.h"
 
-void free_graph(t_graph *graph)
+void graph_free(t_graph *graph)
 {
     size_t index;
 

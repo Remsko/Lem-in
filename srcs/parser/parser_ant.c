@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:26:55 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/18 21:21:20 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 23:29:52 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "read_42.h"
 #include "conv_42.h"
 #include "error_42.h"
+#include "string_42.h"
 
 #include "types.h"
 #include "anthill.h"
@@ -31,6 +32,8 @@ t_error	*parser_ant(t_env *e, char **line)
 		anthill_add(e->anthill, line);
 		if (*line[0] != '#')
 			break ;
+		if (ft_strnequ(*line, "##", 2))
+			return (error_create("Command before number of ants.", NULL, 0));
 	}
 	if (ret != 1)
 	{
@@ -38,7 +41,7 @@ t_error	*parser_ant(t_env *e, char **line)
 			ft_strdel(line);
 		err = error_create("File doesn't exist or is empty.", NULL, 1);
 	}
-	else if (ft_isatoi(*line, &e->ants) == false)
+	else if (ft_isatoi(*line, &e->ants) == false || e->ants < 1)
 		err = error_create("Wrong number of ants.", NULL, 2);
 	return (err);
 }

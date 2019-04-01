@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 20:06:52 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 10:38:37 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@
 
 
 #include <stdio.h>
-void pipe_add(t_graph *graph, t_room *room1, t_room *room2)
+bool pipe_add(t_graph *graph, t_room *room1, t_room *room2)
 {
     if (room1 == NULL || room2 == NULL)
-        return (ft_putstr("Warning: pipe_add fails.\n"));
+        return (false);
     graph->edge[room1->self_index][room2->self_index].capacity = 1;
     graph->edge[room2->self_index][room1->self_index].capacity = 1;
     room1->pipes += 1;
     room2->pipes += 1;
+    return (true);
 }
 
 bool    pipe_check(char **split, size_t length)
@@ -55,8 +56,7 @@ bool    pipe_parse(t_rb_tree *root, t_graph *graph, t_map *map, char **line)
     length = ft_splitlen(split);
     if ((pass = pipe_check(split, length)))
     {
-        pipe_add(graph, room_search(root, split[0]), room_search(root, split[1]));
-        //printf("%s pipe with %s\n", map->rooms[room_index(map, split[0])]->name, map->rooms[room_index(map, split[1])]->name);
+        pass = pipe_add(graph, room_search(root, split[0]), room_search(root, split[1]));
     }
     free_2d_char(split, length);
     return (pass);

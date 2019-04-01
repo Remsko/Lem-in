@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 21:17:41 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 23:56:07 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_env	*env_new(void)
 	env->map = (t_map *)array_create(sizeof(t_room *));
 	if (env->map == NULL)
 		error_malloc("main");
+	env->start = (unsigned int)-1;
+	env->end = (unsigned int)-1;
 	return (env);
 }
 
@@ -44,7 +46,7 @@ static void	print_usage(char *bin)
 	ft_putstr(bin);
 	ft_putstr(" < map\n");
 }
-
+#include <stdio.h>
 int		main(int ac, char **av)
 {
 	t_env	*env;
@@ -62,10 +64,15 @@ int		main(int ac, char **av)
 			return (1);
 		}
 		//room_print(env->map);
-		//print_graph(env->graph);
+		//graph_print(env->graph);
 		algorithm_launch(env);
-		//print_graph(env->graph);
-		//anthill_print(env->anthill);
+		if (env->run != NULL)
+		{
+			anthill_print(env->anthill);
+			printf("\n");
+			ants_algorithm(env);
+		}
+		//graph_print(env->graph);
 		garbage_all(env);
 	}
 	else

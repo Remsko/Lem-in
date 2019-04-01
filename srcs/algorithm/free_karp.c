@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_print.c                                    :+:      :+:    :+:   */
+/*   free_karp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:54:28 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 23:56:00 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/03/02 18:10:38 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/03/02 18:15:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "write_42.h"
-
+#include <stdlib.h>
 #include "types.h"
 
-#include <stdio.h>
-void anthill_print(t_anthill *anthill)
+void free_karp(t_karp *karp)
 {
-    size_t i;
-
-    i = 0;
-    while (i < anthill->length)
+    if (karp != NULL)
     {
-        if (anthill->lines[i] != NULL)
-            printf("%s\n", anthill->lines[i]);
-        ++i;
+        if (karp->visited != NULL)
+            free(karp->visited);
+        if (karp->parent != NULL)
+            free(karp->parent);
+        free(karp);
     }
 }

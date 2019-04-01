@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_print.c                                    :+:      :+:    :+:   */
+/*   path.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:54:28 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 23:56:00 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/21 17:33:42 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/03/02 13:39:24 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "write_42.h"
+#ifndef PATH_H
+#define PATH_H
 
 #include "types.h"
 
-#include <stdio.h>
-void anthill_print(t_anthill *anthill)
-{
-    size_t i;
+void    path_add(t_run *run, t_path *path);
 
-    i = 0;
-    while (i < anthill->length)
-    {
-        if (anthill->lines[i] != NULL)
-            printf("%s\n", anthill->lines[i]);
-        ++i;
-    }
-}
+t_path *path_new(t_karp *karp, size_t length);
+
+void    path_free(void *ptr, size_t size);
+
+void path_print(t_run *run, t_map *map);
+
+t_run *path_build(t_graph *graph, t_adjacency *adj, t_karp *karp);
+
+#endif

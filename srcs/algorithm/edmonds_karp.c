@@ -6,83 +6,83 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 21:16:08 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 22:20:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include "types.h"
-#include "queue_42.h"
-#include "memory_42.h"
-#include "limits.h"
-/*
-#include <write_42.h>
-#include <stdio.h>*/
+#include <stdio.h>
+#include <float.h>
+#include "array_42.h"
+#include "path.h"
+#include "algorithm.h"
 #include "graph.h"
+#include "types.h"
 
-static int min(int a, int b)
+void graph_augment_flow(t_graph *graph, t_karp *karp)
 {
-    return (a > b ? b : a);
-}
-
-bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
-{
-    t_queue queue;
-    size_t link;
-    unsigned int u;
     unsigned int v;
+    unsigned int u;
 
-    ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)graph->size);
-    ft_bzero((void *)&queue, sizeof(t_queue));
-    en_queue(&queue, (int)karp->source);
-    karp->visited[karp->source] = true;
-    while (is_queue(&queue))
+    v = karp->sink;
+    while (v != karp->source)
     {
-        u = (unsigned int)de_queue(&queue);
-        link = 0;
-        while (link < adj[u].length)
-        {
-            v = adj[u].list[link];
-            if (karp->visited[v] == false && graph->edge[u][v].capacity > graph->edge[u][v].flow)
-            {
-                en_queue(&queue, (int)v);
-                karp->visited[v] = true;
-                karp->parent[v] = u;
-            }
-            ++link;
-        }
+        u = karp->parent[v];
+        graph->edge[v][u].flow -= 1;
+        graph->edge[u][v].flow += 1;
+        v = karp->parent[v];
     }
-    return (karp->visited[karp->sink]);
 }
 
-int edmonds_karp(t_graph *graph, t_adjacency *adj, t_karp *karp)
+float rentability_calcul(t_run *run, int ants)
 {
-    unsigned int v;
-    unsigned int u;
-    int path_flow;
+    size_t index;
+    size_t total;
+
+    index = 0;
+    total = 0;
+    while (index < run->length)
+    {
+        total += run->paths[index]->length;
+        ++index;
+    }
+    //("#total = %zu ; run->length = %zu ; ants = %zu\n", total, run->length, (size_t)ants);
+    return ((float)(((float)total + (float)ants) / (float)run->length));
+}
+
+int edmonds_karp(t_env *e, t_karp *karp)
+{
+    t_run *run;
+    t_graph *copy;
+    t_karp *karp_tmp;
+    float rentability;
+    float rentability_tmp;
     int max_flow;
 
     max_flow = 0;
-    while (bfs(graph, adj, karp))
+    rentability_tmp = FLT_MAX;
+    while (bfs_capacity(e->graph, e->adj, karp))
     {
-        path_flow = INT_MAX;
-        v = karp->sink;
-        while (v != karp->source)
+        graph_augment_flow(e->graph, karp);
+        karp_tmp = new_karp(karp->source, karp->sink, e->graph->size);
+        copy = graph_copy(e->graph);
+        //graph_print(copy);
+        run = path_build(copy, e->adj, karp_tmp);
+        //graph_print(copy);
+        rentability = rentability_calcul(run, e->ants);
+        //printf("#rentability = %f\n", rentability);
+        if (rentability < rentability_tmp)
         {
-            u = karp->parent[v];
-            path_flow = min(path_flow, graph->edge[u][v].capacity - graph->edge[u][v].flow);
-            v = karp->parent[v];
+            if (e->run != NULL)
+                array_dispose((t_array *)e->run, &path_free);
+            rentability_tmp = rentability;
+            e->run = run;
+            //path_print(e->run, e->map);
         }
-        v = karp->sink;
-        while (v != karp->source)
-        {
-            u = karp->parent[v];
-            graph->edge[v][u].flow -= path_flow;
-            graph->edge[u][v].flow += path_flow;
-            v = karp->parent[v];
-        }
-        max_flow += path_flow;
+        else
+            array_dispose((t_array *)run, &path_free);
+        free_karp(karp_tmp);
+        graph_free(copy);
+        max_flow += 1;
     }
     return (max_flow);
 }

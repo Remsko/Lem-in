@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_print.c                                    :+:      :+:    :+:   */
+/*   graph_copy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:54:28 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 23:56:00 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/03/02 12:43:03 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/03/02 13:05:31 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "write_42.h"
-
+#include "memory_42.h"
+#include "graph.h"
 #include "types.h"
 
-#include <stdio.h>
-void anthill_print(t_anthill *anthill)
+t_graph *graph_copy(t_graph *graph)
 {
-    size_t i;
+    t_graph *copy;
+    size_t index;
 
-    i = 0;
-    while (i < anthill->length)
+    index = 0;
+    copy = graph_new(graph->size);
+    while (index < graph->size)
     {
-        if (anthill->lines[i] != NULL)
-            printf("%s\n", anthill->lines[i]);
-        ++i;
+        ft_memcpy(copy->edge[index], graph->edge[index], sizeof(t_edge) * graph->size);
+        ++index;
     }
+    return (copy);
 }

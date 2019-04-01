@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:21:47 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 20:03:06 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/03/31 19:28:25 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef enum e_room_type
     START = 1,
     END = 2,
 } t_room_type;
+
+typedef struct s_path
+{
+    unsigned int *list;
+    size_t length;
+} t_path;
 
 typedef struct s_adjacency
 {
@@ -65,6 +71,14 @@ typedef struct s_cycle
     size_t size;
 } t_cycle;
 
+typedef struct s_run
+{
+    t_path **paths;
+    size_t length;
+    size_t capacity;
+    size_t size;
+} t_run;
+
 typedef struct s_map
 {
     t_room **rooms;
@@ -73,6 +87,13 @@ typedef struct s_map
     size_t size;
 } t_map;
 
+typedef struct s_ant
+{
+    int id;
+    size_t index;
+    t_path *path;
+} t_ant;
+
 typedef struct s_env
 {
     t_rb_tree *root;
@@ -80,6 +101,7 @@ typedef struct s_env
     t_graph *graph;
     t_adjacency *adj;
     t_anthill *anthill;
+    t_run *run;
     unsigned int start;
     unsigned int end;
     int ants;

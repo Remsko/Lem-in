@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_print.c                                    :+:      :+:    :+:   */
+/*   path_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:54:28 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 23:56:00 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/03/02 13:07:09 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/03/31 14:23:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "write_42.h"
-
+#include <stdlib.h>
 #include "types.h"
 
-#include <stdio.h>
-void anthill_print(t_anthill *anthill)
+void    path_free(void *ptr, size_t size)
 {
-    size_t i;
+    t_path **paths;
+    size_t  i;
 
     i = 0;
-    while (i < anthill->length)
+    paths = (t_path **)ptr;
+    if (paths != NULL)
     {
-        if (anthill->lines[i] != NULL)
-            printf("%s\n", anthill->lines[i]);
-        ++i;
+        while (i < size)
+        {
+            if (paths[i] != NULL)
+            {
+                if (paths[i]->list != NULL)
+                    free(paths[i]->list);
+                free(paths[i]);
+            }
+            ++i;
+        }
+        free(paths);
     }
 }

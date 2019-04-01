@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_graph.c                                        :+:      :+:    :+:   */
+/*   graph_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 #include "types.h"
 #include "memory_42.h"
 
-t_graph *new_graph(size_t size)
+t_graph *graph_new(size_t size)
 {
     t_graph *graph;
     size_t index;
@@ -25,7 +25,7 @@ t_graph *new_graph(size_t size)
     graph->size = size;
     if ((graph->edge = (t_edge **)ft_memalloc(sizeof(t_edge *) * size)) == NULL)
     {
-        free_graph(graph);
+        graph_free(graph);
         return (NULL);
     }
     index = 0;
@@ -33,7 +33,7 @@ t_graph *new_graph(size_t size)
     {
         if ((graph->edge[index] = (t_edge *)ft_memalloc(sizeof(t_edge) * size)) == NULL)
         {
-            free_graph(graph);
+            graph_free(graph);
             return (NULL);
         }
         ++index;

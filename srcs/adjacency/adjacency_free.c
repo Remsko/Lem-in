@@ -6,14 +6,14 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/19 10:42:12 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 10:45:54 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "types.h"
 
-void free_adjacency(t_adjacency *adj, size_t size)
+void adjacency_free(t_adjacency *adj, size_t size)
 {
     size_t index;
 

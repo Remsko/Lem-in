@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_print.c                                    :+:      :+:    :+:   */
+/*   path_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:54:28 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/31 23:56:00 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/02/21 14:35:45 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/03/02 11:30:54 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "write_42.h"
-
+#include "array_42.h"
+#include "error_42.h"
 #include "types.h"
 
-#include <stdio.h>
-void anthill_print(t_anthill *anthill)
+void    path_add(t_run *run, t_path *path)
 {
-    size_t i;
-
-    i = 0;
-    while (i < anthill->length)
-    {
-        if (anthill->lines[i] != NULL)
-            printf("%s\n", anthill->lines[i]);
-        ++i;
-    }
+    array_append((t_array *)run, (void *)&path);
+    if (run->paths == NULL)
+        error_malloc("path_add");
 }

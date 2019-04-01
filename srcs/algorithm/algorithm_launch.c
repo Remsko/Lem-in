@@ -6,68 +6,41 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 18:23:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/20 16:40:54 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 00:09:05 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "room.h"
 #include "types.h"
 #include "algorithm.h"
+#include "path.h"
 #include "write_42.h"
+
 #include <stdlib.h>
+#include "array_42.h"
 #include <stdio.h>
-
-static void free_karp(t_karp *karp)
-{
-    if (karp->visited != NULL)
-        free(karp->visited);
-    if (karp->parent != NULL)
-        free(karp->parent);
-}
-
-static bool new_karp(t_env *e, t_karp *karp)
-{
-    if ((karp->visited = (bool *)malloc(sizeof(bool) * e->graph->size)) == NULL)
-        return (false);
-    if ((karp->parent = (unsigned int *)malloc(sizeof(int) * e->graph->size)) == NULL)
-    {
-        free_karp(karp);
-        return (false);
-    }
-    karp->source = e->start;
-    karp->sink = e->end;
-    return (true);
-}
 
 void algorithm_launch(t_env *env)
 {
-    t_karp karp;
+    t_karp *karp;
     int max_flow;
 
-    if (new_karp(env, &karp) == false)
-        return (ft_putstr("Failed to init karp structure.\n"));
-    max_flow = edmonds_karp(env->graph, env->adj, &karp);
-    free_karp(&karp);
-    (void)max_flow;
-    printf("#max_flow = %d\n", max_flow);
-    /* test */
-    /*
-    while (max_flow > 0)
+    if (env->map->length == 2)
     {
-        printf("#");
-        if ((new_karp(env, &karp)) == false)
-            return (ft_putstr("Failed to init karp structure.\n"));
-        graph_consumer(env->graph, env->adj, &karp);
-
-        unsigned int v = karp.sink;
-        while (v != karp.source)
-        {
-            printf("%s<-", env->map->rooms[v]->name);
-            v = karp.parent[v];
-        }
-        printf("%s\n", env->map->rooms[v]->name);
-        free_karp(&karp);
-        --max_flow;
+        env->run = (t_run *)array_create(sizeof(t_path *));
+        t_path *new = malloc(sizeof(t_path));
+        new->list = malloc(sizeof(unsigned int) * 2);
+        new->list[0] = env->start;
+        new->list[1] = env->end;
+        new->length = 2;
+        path_add(env->run, new);
+        return ;
     }
-    */
+    karp = new_karp(env->start, env->end, env->graph->size);
+    max_flow = edmonds_karp(env, karp);
+    free_karp(karp);
+    (void)max_flow;
+    //printf("#max_flow = %d\n", max_flow);
+    if (env->run == NULL)
+        return (ft_putstr("ERROR\nNo path were found."));
 }

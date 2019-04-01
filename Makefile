@@ -11,6 +11,7 @@ INC_NAME += room.h
 INC_NAME += graph.h
 INC_NAME += algorithm.h
 INC_NAME += adjacency.h
+INC_NAME += path.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
@@ -35,9 +36,10 @@ SRC_NAME += garbage_all.c
 SRC_NAME += garbage_rooms.c
 
 SRC_SUB += graph
-SRC_NAME += free_graph.c
-SRC_NAME += new_graph.c
-SRC_NAME += print_graph.c
+SRC_NAME += graph_copy.c
+SRC_NAME += graph_free.c
+SRC_NAME += graph_new.c
+SRC_NAME += graph_print.c
 
 SRC_SUB += room
 SRC_NAME += room_parse.c
@@ -51,15 +53,27 @@ SRC_NAME += room_free.c
 
 SRC_SUB += algorithm
 SRC_NAME += algorithm_launch.c
+SRC_NAME += ants_algorithm.c
 SRC_NAME += edmonds_karp.c
+SRC_NAME += new_karp.c
+SRC_NAME += free_karp.c
+SRC_NAME += bfs.c
+SRC_NAME += graph_consumer.c
 
 SRC_SUB += adjacency
-SRC_NAME += new_adjacency.c
-SRC_NAME += free_adjacency.c
+SRC_NAME += adjacency_new.c
+SRC_NAME += adjacency_free.c
 
 SRC_SUB += cycle
 SRC_NAME += cycle_print.c
 SRC_NAME += cycle_pattern_add.c
+
+SRC_SUB += path
+SRC_NAME += path_add.c
+SRC_NAME += path_new.c
+SRC_NAME += path_print.c
+SRC_NAME += path_free.c
+SRC_NAME += path_build.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 
