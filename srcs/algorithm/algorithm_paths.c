@@ -10,34 +10,54 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "room.h"
 #include "types.h"
 #include "algorithm.h"
 #include "path.h"
+#include "graph.h"
 #include "write_42.h"
-
-#include <stdlib.h>
 #include "array_42.h"
-#include <stdio.h>
 
-void start_end(t_env *env)
+static double rentability_calcul(t_run *run, size_t ants)
 {
-    t_path *new;
+    size_t index;
+    size_t total;
 
-    if ((env->run = (t_run *)array_create(sizeof(t_path *))) != NULL)
+    index = 0;
+    total = 0;
+    while (index < run->length)
     {
-        if ((new = (t_path *)malloc(sizeof(t_path))) == NULL
-            || (new->list = (size_t *)malloc(sizeof(size_t) * 2)) == NULL)
-        {
-            if (new != NULL)
-                free(new);
-            free(env->run);
-        }
-        new->list[0] = env->start;
-        new->list[1] = env->end;
-        new->length = 2;
-        path_add(env->run, new);
+        total += run->paths[index]->length;
+        ++index;
     }
+    return ((double)(total + ants) / (double)run->length);
+}
+
+/* protect malloc plz */
+static void run_saver(t_env *e, t_karp *karp, double *rentability)
+{
+    t_run *run;
+    t_graph *copy;
+    t_karp *karp_tmp;
+    double tmp;
+
+    karp_tmp = new_karp(karp->source, karp->sink, e->graph->size);
+    copy = graph_copy(e->graph);
+    run = path_build(copy, e->adj, karp_tmp);
+    tmp = rentability_calcul(run, (size_t)e->ants);
+    if (tmp < *rentability)
+    {
+        if (e->run != NULL)
+            array_dispose((t_array *)e->run, &path_free);
+        *rentability = tmp;
+        e->run = run;
+    }
+    else
+        array_dispose((t_array *)run, &path_free);
+    free_karp(karp_tmp);
+    graph_free(copy);
 }
 
 void algorithm_paths(t_env *env)
@@ -45,10 +65,11 @@ void algorithm_paths(t_env *env)
     t_karp *karp;
 
     if (env->map->length == 2)
-        return (start_end(env));
+        return (path_start_end(env));
     karp = new_karp(env->start, env->end, env->graph->size);
     edmonds_karp(env, karp, &run_saver);
     free_karp(karp);
     if (env->run == NULL)
         return (ft_putstr("ERROR\nNo path were found."));
 }
+/*                  */

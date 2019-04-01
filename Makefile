@@ -75,6 +75,7 @@ SRC_NAME += path_new.c
 SRC_NAME += path_print.c
 SRC_NAME += path_free.c
 SRC_NAME += path_build.c
+SRC_NAME += path_start_end.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 

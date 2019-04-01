@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 12:55:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:04:03 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 19:12:49 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void free_karp(t_karp *karp);
 
 void algorithm_ants(t_env *e);
 
-void run_saver(t_env *e, t_karp *karp, double *rentability);
-//void edmonds_karp(t_env *e, t_karp *karp);
 void edmonds_karp(t_env *e, t_karp *karp, void (*saver)(t_env *, t_karp *, double *));
 
 bool bfs(t_graph *graph, t_adjacency *adj, t_karp *karp, bool (*c)(t_edge *));

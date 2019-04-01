@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 17:33:42 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/03/02 13:39:24 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 19:14:57 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define PATH_H
 
 #include "types.h"
+
+void path_start_end(t_env *env);
 
 void    path_add(t_run *run, t_path *path);
 

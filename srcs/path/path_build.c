@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:14:31 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:08:47 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 19:16:46 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "array_42.h"
 #include "queue_42.h"
 
-size_t	consume_path(t_graph *graph, t_karp *karp)
+static size_t	consume_path(t_graph *graph, t_karp *karp)
 {
 	size_t path_length;
 	size_t v;
@@ -37,7 +37,7 @@ size_t	consume_path(t_graph *graph, t_karp *karp)
 	return (path_length);
 }
 
-bool condition_flow(t_edge *edge)
+static bool condition_flow(t_edge *edge)
 {
 	return (edge->flow > 0);
 }
@@ -50,7 +50,7 @@ t_run	*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
 
 	if ((run = (t_run *)array_create(sizeof(t_path *))) == NULL)
 		return (NULL);
-	ft_bzero(karp->parent, sizeof(size_t) * graph->size);
+	ft_bzero((void *)karp->parent, sizeof(size_t) * graph->size);
 	ft_bzero((void *)karp->visited, sizeof(bool) * graph->size);
 	while (bfs(graph, adj, karp, &condition_flow))
 	{
