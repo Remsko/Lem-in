@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:09:37 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 15:29:59 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 22:57:54 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ static void	print_flow(t_graph *graph)
 
 void		graph_print(t_graph *graph)
 {
-	size_t y;
-
-	y = 0;
 	if (graph == NULL)
 		return (ft_putstr("Graph is empty.\n"));
 	if (graph->edge == NULL)

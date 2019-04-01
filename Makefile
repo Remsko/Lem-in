@@ -84,9 +84,9 @@ OBJ_NAME = $(SRC_NAME:%.c=%.o)
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME)) 
 
 LIB_PATH = Libc
-LIB = $(LIB_PATH)/libft.a
-CFLAGS += -I$(LIB_PATH)/incs
-LDFLAGS += -L $(LIB_PATH) -lft
+LIB = $(LIB_PATH)/libft.a Liblst/liblst.a
+CFLAGS += -I$(LIB_PATH)/incs -ILiblst/incs
+LDFLAGS += -L $(LIB_PATH) -lft -L Liblst -llst
 
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 11:12:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:16:58 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 23:16:41 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,21 @@ static bool condidition_capacity(t_edge *edge)
     return (edge->capacity > edge->flow);
 }
 
+static void reset_visited(bool *visited, size_t size)
+{
+    ft_bzero((void *)visited, sizeof(bool) * size);
+}
+
 void    edmonds_karp(t_env *e, t_karp *karp, void (*saver)(t_env *, t_karp *, double *))
 {
     double rentability;
 
     rentability = FLT_MAX;
-    ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)e->graph->size);
+    reset_visited(karp->visited, e->graph->size);
     while (bfs(e->graph, e->adj, karp, &condidition_capacity))
     {
         graph_augment_flow(e->graph, karp);
         saver(e, karp, &rentability);
-        ft_bzero((void *)karp->visited, sizeof(bool) * (size_t)e->graph->size);
+        reset_visited(karp->visited, e->graph->size);
     }
 }

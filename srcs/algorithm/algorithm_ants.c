@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:25:58 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/02 00:34:31 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "cycle.h"
 #include "write_42.h"
 #include "array_42.h"
+#include "liblst.h"
 
 bool path_worth(t_path *path)
 {
@@ -24,31 +25,18 @@ bool path_worth(t_path *path)
     return (true);
 }
 
-typedef struct s_list
+void dlist_delete_one(t_dlist **head, t_dlist *delete, void (ft_free)(void *))
 {
-    struct s_list *next;
-    t_ant *ant;
-}   t_list;
-
-void list_add(t_list **head, t_list *new)
-{
-	if (head != NULL && new != NULL)
-	{
-		new->next = *head;
-		*head = new;
-	}
-}
-
-t_list *list_new(t_ant *ant)
-{
-	t_list *new;
-
-	if ((new = (t_list *)malloc(sizeof(t_list))) != NULL)
-	{
-		new->next = NULL;
-		new->ant = ant;
-	}
-	return (new);
+    if (head == NULL || *head == NULL || delete == NULL)
+        return ;
+    if (*head == delete)
+        *head = delete->next;
+    if (delete->next != NULL)
+        delete->next->prev = delete->prev;
+    if (delete->prev != NULL)
+        delete->prev->next = delete->next;
+    ft_free(delete->content);
+    free(delete);
 }
 
 t_ant *ant_new(t_path *path, int *id)
@@ -85,70 +73,28 @@ bool ant_arrived(t_map *map, t_ant *ant)
     return (false);
 }
 
-void list_delete_one(t_list **head, t_list *node)
+void    ants_forward(t_map *map, t_dlist **head, t_cycle *cycle)
 {
-    t_list *tmp;
-    t_list *prev;
-
-    if (head == NULL || *head == NULL || node == NULL)
-        return ;
-    if (*head == node)
-    {
-        *head = (*head)->next;
-        free(node->ant);
-        free(node);
-    }
-    tmp = *head;
-    prev = *head;
-    while (tmp != NULL && tmp != node)
-    {
-        prev = tmp;
-        tmp = prev->next;
-    }
-    if (tmp == NULL)
-        return ;
-    prev->next = tmp->next;
-    free(tmp->ant);
-    free(tmp);
-}
-
-void    ants_forward(t_map *map, t_list **head, t_cycle *cycle)
-{
-    t_list *node;
+    t_dlist *forwarded;
+    t_dlist *node;
     t_ant *ant;
 
     node = *head;
     while (node != NULL)
     {
-        ant = node->ant;
+        forwarded = node;
+        ant = (t_ant *)forwarded->content;
         ant_forward(map, ant, cycle);
         node = node->next;
+        if (ant_arrived(map, ant))
+            dlist_delete_one(head, forwarded, &free);
     }
     array_append((t_array *)cycle, (void *)"\n");
 }
 
-bool    ants_delete(t_map *map, t_list **head)
+void new_turn(t_run *run, t_dlist **head, int *ant_id, int ant_number)
 {
-    t_list *node;
-    t_ant *ant;
-
-    node = *head;
-    while (node != NULL)
-    {
-        ant = node->ant;
-        if (ant_arrived(map, ant))
-        {
-            list_delete_one(head, node);
-            return (true);
-        }
-        node = node->next;
-    }
-    return (false);
-}
-
-void new_turn(t_run *run, t_list **head, int *ant_id, int ant_number)
-{
-    t_list *node;
+    t_dlist *node;
     t_ant *ant;
     t_path *path;
     size_t index;
@@ -160,8 +106,8 @@ void new_turn(t_run *run, t_list **head, int *ant_id, int ant_number)
         if (path_worth(path) && *ant_id < ant_number)
         {
             ant = ant_new(path, ant_id);
-            node = list_new(ant);
-            list_add(head, node);
+            node = dlist_new(ant);
+            dlist_add_start(head, node);
         }
         ++index;
     }
@@ -170,7 +116,7 @@ void new_turn(t_run *run, t_list **head, int *ant_id, int ant_number)
 void algorithm_ants(t_env *e)
 {
     t_cycle *cycle;
-    t_list *head;
+    t_dlist *head;
     int ant_id;
     int lines;
 
@@ -184,8 +130,6 @@ void algorithm_ants(t_env *e)
     {
         ++lines;
         ants_forward(e->map, &head, cycle);
-        while (ants_delete(e->map, &head))
-            ;
         if (ant_id < e->ants)
             new_turn(e->run, &head, &ant_id, e->ants);
     }
