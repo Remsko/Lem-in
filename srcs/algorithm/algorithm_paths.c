@@ -47,7 +47,7 @@ void algorithm_paths(t_env *env)
     if (env->map->length == 2)
         return (start_end(env));
     karp = new_karp(env->start, env->end, env->graph->size);
-    edmonds_karp(env, karp);
+    edmonds_karp(env, karp, &run_saver);
     free_karp(karp);
     if (env->run == NULL)
         return (ft_putstr("ERROR\nNo path were found."));
