@@ -6,25 +6,23 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 12:39:29 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/02/18 19:09:24 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 16:11:19 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-
+#include "types.h"
 #include "conv_42.h"
 #include "error_42.h"
 
-#include "types.h"
-
-bool room_check(char **split, size_t length)
+bool	room_check(char **split, size_t length)
 {
-    int useless;
+	int useless;
 
-    if (length != 3)
-        return (false);
-    else if (ft_isatoi(split[1], &useless) == false
-        || ft_isatoi(split[2], &useless) == false)
-        return (false);
-    return (true);
+	if (length != 3)
+		return (false);
+	else if (ft_isatoi(split[1], &useless) == false
+		|| ft_isatoi(split[2], &useless) == false)
+		return (false);
+	return (true);
 }

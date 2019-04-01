@@ -6,22 +6,19 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 14:33:13 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 16:55:53 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-
+#include "types.h"
+#include "parser.h"
+#include "algorithm.h"
+#include "garbage.h"
+#include "anthill.h"
+#include "write_42.h"
 #include "memory_42.h"
 #include "array_42.h"
-#include "write_42.h"
 #include "error_42.h"
-
-#include "parser.h"
-#include "anthill.h"
-#include "garbage.h"
-#include "algorithm.h"
-#include "graph.h"
 
 t_env	*env_new(void)
 {
@@ -46,7 +43,7 @@ static void	print_usage(char *bin)
 	ft_putstr(bin);
 	ft_putstr(" < map\n");
 }
-#include <stdio.h>
+
 int		main(int ac, char **av)
 {
 	t_env	*env;

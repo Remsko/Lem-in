@@ -6,14 +6,14 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 21:27:45 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 14:54:40 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/01 16:12:37 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "types.h"
 
-void room_free(t_room *room)
+void	room_free(t_room *room)
 {
 	if (room != NULL)
 	{
