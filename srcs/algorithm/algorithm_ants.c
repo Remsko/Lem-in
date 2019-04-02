@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/02 01:38:07 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/02 02:21:39 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,41 +17,12 @@
 #include "cycle.h"
 #include "write_42.h"
 #include "array_42.h"
-#include "liblst.h"
+#include "dll_42.h"
 
 bool path_worth(t_path *path)
 {
 	(void)path;
 	return (true);
-}
-
-void dlist_push(t_dlist **head, void *content)  
-{
-	t_dlist *new;
-
-	if ((new = malloc(sizeof(t_dlist))) == NULL)
-		return ;
-	new->content = content;  
-	new->prev = NULL;  
-	new->next = *head;  
-	if (*head != NULL)  
-		(*head)->prev = new;  
-	*head = new;  
-} 
-
-void dlist_cut(t_dlist **head_ref, t_dlist *delete, void (free_content)(void *))
-{
-	if (*head_ref == NULL || delete == NULL)  
-		return ;
-	if (*head_ref == delete)  
-		*head_ref = delete->next;  
-	if (delete->next != NULL)  
-		delete->next->prev = delete->prev;  
-	if (delete->prev != NULL)  
-		delete->prev->next = delete->next;  
-	free_content(delete->content);
-	free(delete);  
-	return; 
 }
 
 t_ant *ant_new(t_path *path, int *id)
@@ -88,10 +59,10 @@ bool ant_arrived(t_map *map, t_ant *ant)
 	return (false);
 }
 
-void    ants_forward(t_map *map, t_dlist **head, t_cycle *cycle)
+void ants_forward(t_map *map, t_dll **head, t_cycle *cycle)
 {
-	t_dlist *forwarded;
-	t_dlist *node;
+	t_dll *forwarded;
+	t_dll *node;
 	t_ant *ant;
 
 	node = *head;
@@ -102,12 +73,12 @@ void    ants_forward(t_map *map, t_dlist **head, t_cycle *cycle)
 		ant_forward(map, ant, cycle);
 		node = node->next;
 		if (ant_arrived(map, ant))
-			dlist_cut(head, forwarded, &free);
+			dll_delete(head, forwarded, &free);
 	}
-	array_append((t_array *)cycle, (void *)"\n");
+	cycle_add(cycle, '\n');
 }
 
-void new_turn(t_run *run, t_dlist **head, int *ant_id, int ant_number)
+void new_turn(t_run *run, t_dll **head, int *ant_id, int ant_number)
 {
 	t_ant *ant;
 	t_path *path;
@@ -119,8 +90,10 @@ void new_turn(t_run *run, t_dlist **head, int *ant_id, int ant_number)
 		path = run->paths[index];
 		if (path_worth(path) && *ant_id < ant_number)
 		{
-			ant = ant_new(path, ant_id);
-			dlist_push(head, ant);
+			if ((ant = ant_new(path, ant_id)) != NULL)
+			    dll_push_front(head, ant);
+            else
+                ft_putstr("Warning: Failed to malloc ant.\n");
 		}
 		++index;
 	}
@@ -129,14 +102,15 @@ void new_turn(t_run *run, t_dlist **head, int *ant_id, int ant_number)
 void algorithm_ants(t_env *e)
 {
 	t_cycle *cycle;
-	t_dlist *head;
+	t_dll *head;
 	int ant_id;
 	int lines;
 
 	lines = 0;
 	ant_id = 0;
 	head = NULL;
-	cycle = (t_cycle *)array_create(sizeof(char));
+	if ((cycle = (t_cycle *)array_create(sizeof(char))) == NULL)
+        return (ft_putstr("Error: Failed to malloc cycle.\n"));
 	cycle_add(cycle, '\n');
 	new_turn(e->run, &head, &ant_id, e->ants);
 	while (head != NULL)
@@ -147,6 +121,5 @@ void algorithm_ants(t_env *e)
 			new_turn(e->run, &head, &ant_id, e->ants);
 	}
 	cycle_print(cycle);
-	free(cycle->line);
-	free(cycle);
+    array_dispose((t_array *)cycle, &free_1dchar);
 }
