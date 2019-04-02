@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/02 02:21:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/02 02:34:25 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "types.h"
 #include "cycle.h"
+#include "free_42.h"
 #include "write_42.h"
 #include "array_42.h"
 #include "dll_42.h"
@@ -43,8 +44,7 @@ void ant_forward(t_map *map, t_ant *ant, t_cycle *cycle)
 	char *name;
 	size_t index;
 
-	ant->index++;
-	index = ant->path->list[ant->index];
+	index = ant->path->list[ant->index++];
 	name = map->rooms[index]->name;
 	cycle_pattern_add(cycle, name, ant->id);
 }
@@ -121,5 +121,5 @@ void algorithm_ants(t_env *e)
 			new_turn(e->run, &head, &ant_id, e->ants);
 	}
 	cycle_print(cycle);
-    array_dispose((t_array *)cycle, &free_1dchar);
+    array_dispose((t_array *)cycle, &free_1d_char);
 }
