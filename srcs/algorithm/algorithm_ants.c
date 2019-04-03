@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/02 02:34:25 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/03 13:06:34 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void ant_forward(t_map *map, t_ant *ant, t_cycle *cycle)
 	char *name;
 	size_t index;
 
-	index = ant->path->list[ant->index++];
+	index = ant->path->list[++ant->index];
 	name = map->rooms[index]->name;
 	cycle_pattern_add(cycle, name, ant->id);
 }

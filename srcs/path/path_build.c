@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:14:31 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:24:12 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/03 13:00:15 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static bool		condition_flow(t_edge *edge)
 	return (edge->flow > 0);
 }
 
+static void reset_visited(bool *visited, size_t size)
+{
+    ft_bzero((void *)visited, sizeof(bool) * size);
+}
+
 t_run			*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
 	t_run	*run;
@@ -50,10 +55,10 @@ t_run			*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
 	if ((run = (t_run *)array_create(sizeof(t_path *))) == NULL)
 		return (NULL);
 	ft_bzero((void *)karp->parent, sizeof(size_t) * graph->size);
-	ft_bzero((void *)karp->visited, sizeof(bool) * graph->size);
+    reset_visited(karp->visited, graph->size);
 	while (bfs(graph, adj, karp, &condition_flow))
 	{
-		ft_bzero((void *)karp->visited, sizeof(bool) * graph->size);
+        reset_visited(karp->visited, graph->size);
 		path_length = consume_path(graph, karp);
 		if ((new = path_new(karp, path_length)) == NULL)
 		{
