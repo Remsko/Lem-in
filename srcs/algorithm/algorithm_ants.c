@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/03 13:06:34 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/04 22:26:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "types.h"
 #include "cycle.h"
+#include "ant.h"
 #include "free_42.h"
 #include "write_42.h"
 #include "array_42.h"
@@ -24,39 +25,6 @@ bool path_worth(t_path *path)
 {
 	(void)path;
 	return (true);
-}
-
-t_ant *ant_new(t_path *path, int *id)
-{
-	t_ant *new;
-
-	if ((new = (t_ant *)malloc(sizeof(t_ant))) != NULL)
-	{
-		new->id = ++(*id);
-		new->index = 0;
-		new->path = path;
-	}
-	return (new);
-}
-
-void ant_forward(t_map *map, t_ant *ant, t_cycle *cycle)
-{
-	char *name;
-	size_t index;
-
-	index = ant->path->list[++ant->index];
-	name = map->rooms[index]->name;
-	cycle_pattern_add(cycle, name, ant->id);
-}
-
-bool ant_arrived(t_map *map, t_ant *ant)
-{
-	size_t index;
-
-	index = ant->path->list[ant->index];
-	if (map->rooms[index]->type == END)
-		return (true);
-	return (false);
 }
 
 void ants_forward(t_map *map, t_dll **head, t_cycle *cycle)

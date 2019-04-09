@@ -13,6 +13,7 @@ INC_NAME += algorithm.h
 INC_NAME += adjacency.h
 INC_NAME += path.h
 INC_NAME += cycle.h
+INC_NAME += ant.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
@@ -76,6 +77,11 @@ SRC_NAME += path_print.c
 SRC_NAME += path_free.c
 SRC_NAME += path_build.c
 SRC_NAME += path_start_end.c
+
+SRC_SUB += ant
+SRC_NAME += ant_new.c
+SRC_NAME += ant_forward.c
+SRC_NAME += ant_arrived.c
 
 vpath %.c $(SRC_PATH) $(addprefix $(SRC_PATH)/, $(SRC_SUB))
 
