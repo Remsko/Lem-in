@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:24:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/04 22:20:19 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/11 16:08:49 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ t_error	*parser_all(t_env *e)
 	if ((err = parser_room(e, &line)) != NULL)
 		return (err);
 	if (e->start == (size_t)-1 || e->end == (size_t)-1)
-		return (error_create("Start and End command are needed.", NULL, 15));
+		return (parser_error("Both ##start and ##end command are needed."));
 	if ((e->graph = graph_new(e->map->length)) == NULL)
-		return (error_create("Graph malloc failed.", NULL, 9));
+		return (parser_error("Graph malloc failed."));
 	if ((err = parser_pipe(e, &line)) != NULL)
 		return (err);
 	if ((e->adj = adjacency_new(e->map->rooms, e->graph)) == NULL)
-		return (error_create("Adjacency-list malloc failed.", NULL, 10));
+		return (parser_error("Adjacency-list malloc failed."));
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:25:41 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:25:46 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/11 16:13:24 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	cycle_pattern_add(t_cycle *cycle, char *name, int ant)
 		cycle_add(cycle, ' ');
 	cycle_add(cycle, 'L');
 	if ((n = ft_itoa(ant)) == NULL)
-		error_malloc("cycle_pattern_add");
+		error_malloc_exit("cycle_pattern_add");
 	index = 0;
 	while (n[index] != '\0')
 	{

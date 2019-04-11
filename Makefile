@@ -24,6 +24,7 @@ SRC_PATH = srcs
 SRC_NAME += main.c
 
 SRC_SUB += parser
+SRC_NAME += parser_error.c
 SRC_NAME += parser_all.c
 SRC_NAME += parser_ant.c
 SRC_NAME += parser_room.c

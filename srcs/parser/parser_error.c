@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ant.h                                              :+:      :+:    :+:   */
+/*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 22:24:15 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/11 17:36:08 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/04/11 16:01:00 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/04/11 17:37:35 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANT_H
-# define ANT_H
+#include <stdlib.h>
+#include "error_42.h"
+#include "write_42.h"
 
-# include "types.h"
+static void	msg_printf(void *msg)
+{
+	ft_putendl((char *)msg);
+}
 
-t_ant	*ant_new(t_path *path, int *id);
+static void	msg_free(void *msg)
+{
+	free(msg);
+}
 
-void	ant_forward(t_map *map, t_ant *ant, t_cycle *cycle);
-
-bool	ant_arrived(t_map *map, t_ant *ant);
-
-#endif
+t_error		*parser_error(char *msg)
+{
+	return (error_create(msg, &msg_printf, &msg_free, 1));
+}

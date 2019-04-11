@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:26:34 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/11 16:05:26 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static t_env	*env_new(void)
 	ft_bzero((void *)env, sizeof(t_env));
 	env->anthill = (t_anthill *)array_create(sizeof(char *));
 	if (env->anthill == NULL)
-		error_malloc("main");
+		error_malloc_exit("main");
 	env->map = (t_map *)array_create(sizeof(t_room *));
 	if (env->map == NULL)
-		error_malloc("main");
+		error_malloc_exit("main");
 	env->start = (size_t)-1;
 	env->end = (size_t)-1;
 	return (env);
@@ -56,9 +56,8 @@ int				main(int ac, char **av)
 		if (err != NULL)
 		{
 			ft_putstr_fd("ERROR\n", 2);
-			error_throw(err, NULL, false);
 			garbage_all(env);
-			return (1);
+			return (error_throw(err));
 		}
 		algorithm_paths(env);
 		if (env->run != NULL)

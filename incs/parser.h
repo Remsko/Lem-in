@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:20:42 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:34:15 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/11 16:07:21 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ t_error	*parser_ant(t_env *e, char **line);
 t_error	*parser_room(t_env *e, char **line);
 
 t_error	*parser_pipe(t_env *e, char **line);
+
+t_error	*parser_error(char *msg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:17:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 15:54:30 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/11 16:12:33 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "types.h"
 #include "anthill.h"
 #include "room.h"
+#include "parser.h"
 #include "error_42.h"
 #include "read_42.h"
 #include "string_42.h"
@@ -48,7 +49,7 @@ t_error		*parser_room(t_env *e, char **line)
 		{
 			type_change(*line, &type);
 			if (type_check(e, type) == false)
-				return (error_create("Doublon start or end.", NULL, 3));
+				return (parser_error("Doublon start or end."));
 		}
 		else if (*line[0] != 'L' && room_parse(e, *line, type))
 			type = BASIC;
@@ -59,7 +60,7 @@ t_error		*parser_room(t_env *e, char **line)
 	{
 		if (ret == 0)
 			ft_strdel(line);
-		return (error_create("No rooms, no pipes: no solution.", NULL, 3));
+		return (parser_error("No rooms, no pipes: no solution."));
 	}
 	return (NULL);
 }

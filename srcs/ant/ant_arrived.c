@@ -6,14 +6,14 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 22:23:12 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/04 22:23:25 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/11 17:36:31 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include "types.h"
 
-bool ant_arrived(t_map *map, t_ant *ant)
+bool	ant_arrived(t_map *map, t_ant *ant)
 {
 	size_t index;
 

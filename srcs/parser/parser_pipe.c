@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 16:05:36 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/04/11 16:12:44 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "types.h"
 #include "room.h"
 #include "anthill.h"
+#include "parser.h"
 #include "string_42.h"
 #include "read_42.h"
 #include "free_42.h"
@@ -61,7 +62,7 @@ t_error	*parser_pipe(t_env *e, char **line)
 	int ret;
 
 	if (pipe_parse(e->root, e->graph, line) == false)
-		return (error_create("No pipes: no solution.", NULL, 3));
+		return (parser_error("No pipes: no solution."));
 	while ((ret = get_next_line(0, line)) == 1)
 	{
 		anthill_add(e->anthill, line);
