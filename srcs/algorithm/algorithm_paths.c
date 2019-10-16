@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:50:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/15 14:52:24 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/16 13:26:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "write_42.h"
 #include "array_42.h"
 
-static double	rentability_calcul(t_run *run, size_t ants)
+static double rentability_calcul(t_run *run, size_t ants)
 {
 	size_t index;
 	size_t total;
@@ -36,22 +36,22 @@ static double	rentability_calcul(t_run *run, size_t ants)
 }
 
 /* protect malloc plz */
-static void		run_saver(t_env *e, t_karp *karp, double *rentability)
+static void run_saver(t_env *e, t_karp *karp)
 {
-	t_run	*run;
-	t_graph	*copy;
-	t_karp	*karp_tmp;
-	double	tmp;
+	t_run *run;
+	t_graph *copy;
+	t_karp *karp_tmp;
+	double tmp;
 
 	karp_tmp = new_karp(karp->source, karp->sink, e->graph->size);
 	copy = graph_copy(e->graph);
 	run = path_build(copy, e->adj, karp_tmp);
 	tmp = rentability_calcul(run, (size_t)e->ants);
-	if (tmp < *rentability)
+	if (tmp < e->average)
 	{
 		if (e->run != NULL)
 			array_dispose((t_array *)e->run, &path_free);
-		*rentability = tmp;
+		e->average = tmp;
 		e->run = run;
 	}
 	else
@@ -60,7 +60,7 @@ static void		run_saver(t_env *e, t_karp *karp, double *rentability)
 	graph_free(copy);
 }
 
-void			algorithm_paths(t_env *env)
+void algorithm_paths(t_env *env)
 {
 	t_karp *karp;
 
