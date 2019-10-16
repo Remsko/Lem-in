@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/10/16 13:35:48 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/16 13:46:37 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ bool path_worth(size_t length, int lines, double average)
 	(void)length;
 	(void)lines;
 	(void)average;
-	//return (average - (double)length > (double)lines - 1.0);
-	return true;
+	return (average - (double)length > (double)lines);
+	//return true;
 }
 
 void ants_forward(t_map *map, t_dll **head, t_cycle *cycle)

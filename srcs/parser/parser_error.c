@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 16:01:00 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/11 17:51:45 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/16 14:00:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 static void	msg_printf(void *msg)
 {
-	ft_putendl((char *)msg);
+	(void)msg;
+	//ft_putendl((char *)msg);
 }
 
 static void	msg_free(void *msg)

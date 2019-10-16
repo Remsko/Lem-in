@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:50:07 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/10/16 13:26:23 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/16 14:06:51 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void algorithm_paths(t_env *env)
 	edmonds_karp(env, karp, &run_saver);
 	free_karp(karp);
 	if (env->run == NULL)
-		return (ft_putstr("ERROR\nNo path were found."));
+		ft_putstr_fd("ERROR\n", 2);
 }
 /*                  */

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:17:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/11 16:12:33 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/16 14:09:38 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	type_change(char *line, t_room_type *type)
 		*type = START;
 	else if (ft_strequ(line, "##end"))
 		*type = END;
+	else
+		*type = BASIC;
 }
 
 static bool	type_check(t_env *e, t_room_type type)
