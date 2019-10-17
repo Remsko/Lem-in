@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/10/16 13:46:37 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/17 21:10:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void algorithm_ants(t_env *e)
 		if (ant_id < e->ants)
 			new_turn(e, &head, &ant_id, lines);
 	}
-	cycle_print(cycle);
+	//cycle_print(cycle);
+	printf("\n%d\n", lines);
 	array_dispose((t_array *)cycle, &free_1d_char);
 }

@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:14:31 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/05 20:46:36 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/17 21:13:08 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 #include "array_42.h"
 #include "memory_42.h"
 
-static size_t	consume_path(t_graph *graph, t_karp *karp)
+#include "graph.h"
+
+static size_t consume_path(t_graph *graph, t_karp *karp)
 {
 	size_t path_length;
 	size_t v;
@@ -36,21 +38,21 @@ static size_t	consume_path(t_graph *graph, t_karp *karp)
 	return (path_length);
 }
 
-static bool		condition_flow(t_edge *edge)
+static bool condition_flow(t_edge *edge)
 {
 	return (edge->flow > 0);
 }
 
-static void		reset_visited(bool *visited, size_t size)
+static void reset_visited(bool *visited, size_t size)
 {
 	ft_bzero((void *)visited, sizeof(bool) * size);
 }
 
-t_run			*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
+t_run *path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
 {
-	t_run	*run;
-	t_path	*new;
-	size_t	path_length;
+	t_run *run;
+	t_path *new;
+	size_t path_length;
 
 	if ((run = (t_run *)array_create(sizeof(t_path *))) == NULL)
 		return (NULL);

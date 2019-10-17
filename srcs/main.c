@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/11 16:05:26 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/17 21:08:21 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 #include "array_42.h"
 #include "error_42.h"
 
-static t_env	*env_new(void)
+#include "graph.h"
+#include "path.h"
+
+static t_env *env_new(void)
 {
 	t_env *env;
 
@@ -37,17 +40,17 @@ static t_env	*env_new(void)
 	return (env);
 }
 
-static void		print_usage(char *bin)
+static void print_usage(char *bin)
 {
 	ft_putstr("usage: ");
 	ft_putstr(bin);
 	ft_putstr(" < map\n");
 }
 
-int				main(int ac, char **av)
+int main(int ac, char **av)
 {
-	t_env	*env;
-	t_error	*err;
+	t_env *env;
+	t_error *err;
 
 	if (ac == 1)
 	{
@@ -59,10 +62,13 @@ int				main(int ac, char **av)
 			garbage_all(env);
 			return (error_throw(err));
 		}
+		//graph_print(env->graph);
 		algorithm_paths(env);
+		//graph_print(env->graph);
+		path_print(env->run, env->map);
 		if (env->run != NULL)
 		{
-			anthill_print(env->anthill);
+			//anthill_print(env->anthill);
 			algorithm_ants(env);
 		}
 		garbage_all(env);
