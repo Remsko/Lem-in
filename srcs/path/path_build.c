@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 13:14:31 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/05 20:46:36 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/18 14:52:07 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "array_42.h"
 #include "memory_42.h"
 
-static size_t	consume_path(t_graph *graph, t_karp *karp)
+static size_t	consume_path(t_karp *karp, bool *used)
 {
 	size_t path_length;
 	size_t v;
@@ -27,23 +27,11 @@ static size_t	consume_path(t_graph *graph, t_karp *karp)
 	while (v != karp->source)
 	{
 		u = karp->parent[v];
-		karp->visited[u] = true;
-		graph->edge[v][u].flow = 0;
-		graph->edge[u][v].flow = 0;
+		used[u] = true;
 		v = karp->parent[v];
 		++path_length;
 	}
 	return (path_length);
-}
-
-static bool		condition_flow(t_edge *edge)
-{
-	return (edge->flow > 0);
-}
-
-static void		reset_visited(bool *visited, size_t size)
-{
-	ft_bzero((void *)visited, sizeof(bool) * size);
 }
 
 t_run			*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
@@ -51,15 +39,19 @@ t_run			*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
 	t_run	*run;
 	t_path	*new;
 	size_t	path_length;
+	bool	*used;
 
-	if ((run = (t_run *)array_create(sizeof(t_path *))) == NULL)
+	if ((used = (bool *)ft_memalloc(sizeof(bool) * graph->size)) == NULL)
 		return (NULL);
-	ft_bzero((void *)karp->parent, sizeof(size_t) * graph->size);
-	reset_visited(karp->visited, graph->size);
-	while (bfs(graph, adj, karp, &condition_flow))
+	if ((run = (t_run *)array_create(sizeof(t_path *))) == NULL)
 	{
-		reset_visited(karp->visited, graph->size);
-		path_length = consume_path(graph, karp);
+		free(used);
+		return (NULL);
+	}
+	while (bfs_superposition(graph, adj, karp, used))
+	{
+		ft_bzero((void *)karp->visited, sizeof(bool) * graph->size);
+		path_length = consume_path(karp, used);
 		if ((new = path_new(karp, path_length)) == NULL)
 		{
 			array_dispose((t_array *)run, &path_free);
@@ -67,5 +59,6 @@ t_run			*path_build(t_graph *graph, t_adjacency *adj, t_karp *karp)
 		}
 		path_add(run, new);
 	}
+	free(used);
 	return (run);
 }

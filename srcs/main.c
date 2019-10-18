@@ -6,10 +6,11 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 17:06:33 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/11 16:05:26 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/18 14:09:08 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <float.h>
 #include "types.h"
 #include "parser.h"
 #include "algorithm.h"
@@ -34,6 +35,7 @@ static t_env	*env_new(void)
 		error_malloc_exit("main");
 	env->start = (size_t)-1;
 	env->end = (size_t)-1;
+	env->average = FLT_MAX;
 	return (env);
 }
 

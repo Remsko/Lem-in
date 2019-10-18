@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:50:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/10/16 13:46:37 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/18 14:33:39 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@
 #include "array_42.h"
 #include "dll_42.h"
 
-bool path_worth(size_t length, int lines, double average)
+static inline bool	path_worth(size_t length, int lines, double average)
 {
-	(void)length;
-	(void)lines;
-	(void)average;
 	return (average - (double)length > (double)lines);
-	//return true;
 }
 
-void ants_forward(t_map *map, t_dll **head, t_cycle *cycle)
+static void			ants_forward(t_map *map, t_dll **head, t_cycle *cycle)
 {
 	t_dll *forwarded;
 	t_dll *node;
@@ -49,13 +45,12 @@ void ants_forward(t_map *map, t_dll **head, t_cycle *cycle)
 	cycle_add(cycle, '\n');
 }
 
-void new_turn(t_env *e, t_dll **head, int *ant_id, int lines)
+static void			new_turn(t_env *e, t_dll **head, int *ant_id, int lines)
 {
-	t_ant *ant;
-	t_path *path;
-	size_t index;
+	t_ant	*ant;
+	t_path	*path;
+	size_t	index;
 
-	(void)lines;
 	index = 0;
 	while (index < e->run->length)
 	{
@@ -71,12 +66,12 @@ void new_turn(t_env *e, t_dll **head, int *ant_id, int lines)
 	}
 }
 
-void algorithm_ants(t_env *e)
+void				algorithm_ants(t_env *e)
 {
-	t_cycle *cycle;
-	t_dll *head;
-	int ant_id;
-	int lines;
+	t_cycle	*cycle;
+	t_dll	*head;
+	int		ant_id;
+	int		lines;
 
 	lines = 0;
 	ant_id = 0;

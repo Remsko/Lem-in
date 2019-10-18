@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:13:57 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/04/01 19:28:49 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/18 14:05:58 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "types.h"
 #include "path.h"
 #include "array_42.h"
+#include "memory_42.h"
 
 void	path_start_end(t_env *env)
 {
@@ -21,7 +22,7 @@ void	path_start_end(t_env *env)
 
 	if ((env->run = (t_run *)array_create(sizeof(t_path *))) != NULL)
 	{
-		if ((new = (t_path *)malloc(sizeof(t_path))) == NULL
+		if ((new = (t_path *)ft_memalloc(sizeof(t_path))) == NULL
 				|| (new->list = (size_t *)malloc(sizeof(size_t) * 2)) == NULL)
 		{
 			if (new != NULL)

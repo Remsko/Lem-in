@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 12:27:49 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/10/16 14:42:03 by rpinoit          ###   ########.fr       */
+/*   Updated: 2019/10/18 14:27:53 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include <stdio.h>
 
-bool pipe_add(t_graph *graph, t_room *room1, t_room *room2)
+static bool	pipe_add(t_graph *graph, t_room *room1, t_room *room2)
 {
 	if (room1 == NULL || room2 == NULL)
 		return (false);
@@ -33,7 +33,7 @@ bool pipe_add(t_graph *graph, t_room *room1, t_room *room2)
 	return (true);
 }
 
-bool pipe_check(char **split, size_t length)
+static bool	pipe_check(char **split, size_t length)
 {
 	if (length != 2)
 		return (false);
@@ -42,11 +42,11 @@ bool pipe_check(char **split, size_t length)
 	return (true);
 }
 
-bool pipe_parse(t_rb_tree *root, t_graph *graph, char **line)
+static bool	pipe_parse(t_rb_tree *root, t_graph *graph, char **line)
 {
-	char **split;
-	size_t length;
-	bool pass;
+	char	**split;
+	size_t	length;
+	bool	pass;
 
 	split = ft_strsplit(*line, '-');
 	length = ft_splitlen(split);
@@ -59,7 +59,7 @@ bool pipe_parse(t_rb_tree *root, t_graph *graph, char **line)
 	return (pass);
 }
 
-t_error *parser_pipe(t_env *e, char **line)
+t_error		*parser_pipe(t_env *e, char **line)
 {
 	int ret;
 
@@ -69,9 +69,9 @@ t_error *parser_pipe(t_env *e, char **line)
 	{
 		anthill_add(e->anthill, line);
 		if (*line[0] == '#')
-			continue;
+			continue ;
 		else if (pipe_parse(e->root, e->graph, line) == false)
-			break;
+			break ;
 	}
 	if (ret == 0)
 		ft_strdel(line);

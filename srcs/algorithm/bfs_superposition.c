@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bfs.c                                              :+:      :+:    :+:   */
+/*   bfs_superposition.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 11:19:43 by rpinoit           #+#    #+#             */
-/*   Updated: 2019/10/18 13:41:27 by rpinoit          ###   ########.fr       */
+/*   Created: 2019/10/18 14:52:26 by rpinoit           #+#    #+#             */
+/*   Updated: 2019/10/18 14:57:01 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include "memory_42.h"
+#include "adjacency.h"
 #include "queue_42.h"
-#include "types.h"
+#include "memory_42.h"
 
-static inline bool	check_flow(t_edge *edge)
-{
-	return (edge->capacity > edge->flow);
-}
-
-bool				bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
+bool	bfs_superposition(t_graph *graph, t_adjacency *adj, t_karp *karp,
+			bool *used)
 {
 	t_queue	queue;
 	size_t	link;
@@ -37,7 +32,7 @@ bool				bfs(t_graph *graph, t_adjacency *adj, t_karp *karp)
 		while (link < adj[u].length)
 		{
 			v = adj[u].list[link];
-			if (karp->visited[v] == false && check_flow(&graph->edge[u][v]))
+			if (!karp->visited[v] && !used[v] && graph->edge[u][v].flow > 0)
 			{
 				en_queue(&queue, v);
 				karp->visited[v] = true;

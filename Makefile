@@ -17,7 +17,7 @@ INC_NAME += ant.h
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
-CFLAGS = -Wall -Werror -Wextra -Wconversion -g3
+CFLAGS = -Wall -Werror -Wextra -Wconversion
 CPPFLAGS = $(addprefix -I,$(INC_PATH))
 
 SRC_PATH = srcs
@@ -61,6 +61,7 @@ SRC_NAME += edmonds_karp.c
 SRC_NAME += new_karp.c
 SRC_NAME += free_karp.c
 SRC_NAME += bfs.c
+SRC_NAME += bfs_superposition.c
 
 SRC_SUB += adjacency
 SRC_NAME += adjacency_new.c
